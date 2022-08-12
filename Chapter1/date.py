@@ -46,10 +46,10 @@ class Date:
         return self._julianDay == otherDate._julianDay
 
     def __lt__(self, otherDate):
-        return self._julianDay == otherDate._julianDay
+        return self._julianDay < otherDate._julianDay
 
     def __le__(self, otherDate):
-        return self._julianDay == otherDate._julianDay
+        return self._julianDay <= otherDate._julianDay
 
     def _toGregorian(self):
         """Returns the Gregorian date as a tuple: (month, day, year)."""
@@ -69,7 +69,7 @@ class Date:
     def _isValidGregorian(month, day, year) -> bool:
         """Validates the Gregorian date based on user input constructed by ``Date(month, day, year)``."""
         m_valid = month in range(1, 12 + 1)
-        y_valid = len(str(year)) == 4 and year >= 0     # or 0 < year < 9999
+        y_valid = -1 < year < 10000  # or len(str(year)) == 4 and year >= 0
         thirty_days = [9, 4, 6, 11]
         if month == 2:
             d_valid = day in range(1, 29 + 1) if year % 4 == 0 else day in range(1, 28 + 1)

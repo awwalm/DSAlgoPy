@@ -23,7 +23,7 @@ def promptAndExtractDate():
     Date object or None when the user has finished entering dates."""
 
     print("Enter a birth date.")
-    month = int(input("month (0 to quit)"))
+    month = int(input("month (0 to quit): "))
     if month == 0:
         return None
     else:
