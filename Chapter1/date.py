@@ -34,7 +34,10 @@ class Date:
         if month < 3:
             month += 12
             year -= 1
-        return ((13 * month + 3) // 5 + day + year + year // 4 - year // 400) % 7
+        # Cheers to GitHub user Ithebe for this fix (https://github.com/lthebe/PythonDS)
+        return ((13 * month + 3) // 5 +
+                day + year + year // 4 -
+                year // 100 + year // 400) % 7
 
     def __str__(self):
         """Returns the date as string in Gregorian format."""
@@ -65,8 +68,21 @@ class Date:
         year = 100 * (B - 49) + year + A
         return month, day, year
 
-    @staticmethod
-    def _isValidGregorian(month, day, year) -> bool:
+    def monthName(self) -> str:
+        """Returns a string containing the name of the month."""
+        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed."
+        month_names = {1: "January", 2: "February", 3: "March", 4: "April",
+                       5: "May", 6: "June", 7: "July", 8: "August",
+                       9: "September", 10: "October", 11: "November", 12: "December"}
+        return month_names[self.month()]
+
+    def isLeapYear(self) -> bool:
+        """Determines if this date falls in a leap year and returns the appropriate boolean value."""
+        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed."
+        return self.year() % 4 == 0
+
+    # noinspection PyMethodMayBeStatic
+    def _isValidGregorian(self, month, day, year) -> bool:
         """Validates the Gregorian date based on user input constructed by ``Date(month, day, year)``."""
         m_valid = month in range(1, 12 + 1)
         y_valid = -1 < year < 10000  # or len(str(year)) == 4 and year >= 0
@@ -78,3 +94,10 @@ class Date:
         else:
             d_valid = day in range(1, 31 + 1)
         return m_valid and d_valid and y_valid
+
+    def dayOfWeekName(self) -> str:
+        """Returns a string containing the name of the day."""
+        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed."
+        day_names = {0: "Monday", 1: "Tuesday", 2: "Wednesday", 3: "Thursday",
+                     4: "Friday", 5: "Saturday", 6: "Sunday"}
+        return day_names[self.dayOfWeek()]
