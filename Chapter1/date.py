@@ -2,6 +2,9 @@
 
 
 # noinspection PyProtectedMember
+import math
+
+
 class Date:
     """Creates an object instance for the specified Gregorian date."""
 
@@ -70,7 +73,7 @@ class Date:
 
     def monthName(self) -> str:
         """Returns a string containing the name of the month."""
-        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed."
+        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed"
         month_names = {1: "January", 2: "February", 3: "March", 4: "April",
                        5: "May", 6: "June", 7: "July", 8: "August",
                        9: "September", 10: "October", 11: "November", 12: "December"}
@@ -78,14 +81,25 @@ class Date:
 
     def isLeapYear(self) -> bool:
         """Determines if this date falls in a leap year and returns the appropriate boolean value."""
-        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed."
+        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed"
         return self.year() % 4 == 0
+
+    def numDays(self, otherDate) -> int:
+        """Returns the number of days as a positive integer between
+        this date and the ``otherDate``."""
+        assert self._isValidGregorian(self.month(), self.day(), self.year()) and \
+            self._isValidGregorian(otherDate.month(), otherDate.day(), otherDate.year()), \
+            "Invalid date parsed"
+        return abs(self.day() - otherDate.day())
 
     # noinspection PyMethodMayBeStatic
     def _isValidGregorian(self, month, day, year) -> bool:
         """Validates the Gregorian date based on user input constructed by ``Date(month, day, year)``."""
-        m_valid = month in range(1, 12 + 1)
-        y_valid = -1 < year < 10000  # or len(str(year)) == 4 and year >= 0
+
+        # Validate year
+        y_valid = -4714 < year < +math.inf
+
+        # Validate day
         thirty_days = [9, 4, 6, 11]
         if month == 2:
             d_valid = day in range(1, 29 + 1) if year % 4 == 0 else day in range(1, 28 + 1)
@@ -93,11 +107,19 @@ class Date:
             d_valid = day in range(1, 30 + 1)
         else:
             d_valid = day in range(1, 31 + 1)
+
+        # Validate month
+        m_valid = month in range(1, 12 + 1)
+        if year == -4713:
+            m_valid = month in range(1, 11 + 1)
+            if month == 11:
+                d_valid = day in range(1, 24 + 1)
+
         return m_valid and d_valid and y_valid
 
     def dayOfWeekName(self) -> str:
         """Returns a string containing the name of the day."""
-        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed."
+        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed"
         day_names = {0: "Monday", 1: "Tuesday", 2: "Wednesday", 3: "Thursday",
                      4: "Friday", 5: "Saturday", 6: "Sunday"}
         return day_names[self.dayOfWeek()]
