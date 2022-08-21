@@ -18,7 +18,7 @@ class Date:
     """
 
     def __init__(self, month, day, year):
-        self._julianDay = 0
+        self._julianDay = 0  # Number of days elapsed since Julian era (January 1, 4713 B.C.)
         assert self._isValidGregorian(month, day, year), f"Invalid Gregorian Day: {month, day, year}"
 
         # The first line of the equation, T = (M-14)/12, has to be changed
@@ -128,44 +128,24 @@ class Date:
                      4: "Friday", 5: "Saturday", 6: "Sunday"}
         return day_names[self.dayOfWeek()]
 
+    # Credits for fix: https://github.com/fedeweit-2/Programming/problemset_01_weithaler/date.py
     def advanceBy(self, days: int):
-        """Advances the date by the given number of days.
-         The date is incremented if days is positive and decremented if days is negative."""
-
+        """
+        Advances the date by the given number of days.
+        The date is incremented if days is positive and decremented if days is negative.
+        """
         assert isinstance(days, int), "Day parameter must be integer type"
+        self._julianDay += days
+        return self._toGregorian()
 
+    def dayOfYear(self):
+        """
+        Returns an integer indicating the day of the year. For example,
+        the first day of February is day 32 of the year.
+        """
         # {1:31, 2:[28,29], 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
-        accum_days = {1: [31, 31, 31, 31], 2: [59, 60, 28, 29], 3: [90, 91, 31, 31],
-                      4: [120, 121, 30, 30], 5: [151, 152, 31, 31], 6: [181, 182, 30, 30],
-                      7: [212, 213, 31, 31], 8: [243, 244, 31, 31], 9: [273, 274, 30, 30],
-                      10: [304, 305, 31, 31], 11: [334, 335, 30, 30], 12: [365, 366, 31, 31]}
-        the_day, the_month, the_year = self.day(), self.month(), self.year()
-        the_accum_days = accum_days[the_month-1][0 if self.isLeapYear() else 1] + the_day
-        logging.info(f"advanceBy(): Initial accummulated days: {the_accum_days}")
-
-        # If we're handling A.D./C.E. years and not negative (B.C./B.C.E.) years.
-        if the_year > 0 and days > 0:
-            while days != 0:
-                # Ensure the DAY is not incremented past the allowed limit.
-                if the_day < accum_days[the_month][2 if the_year % 4 == 0 else 3]:
-                    the_day += 1
-                    the_accum_days += 1
-                if the_day >= accum_days[the_month][2 if the_year % 4 == 0 else 3]:
-                    the_day = 1
-                    the_month = the_month + 1 if the_month <= 11 else 1
-                # If we are on the last day of the given MONTH, progress to the next one.
-                days_in_month = accum_days[the_month][2 if the_year % 4 == 0 else 3]
-                if the_day == days_in_month:
-                    the_month = the_month + 1 if the_month < 11 else 1
-                # If we are on the last day of the YEAR, reset accum_days (for leap/normal years).
-                if the_year % 4 == 0:
-                    the_year = the_year + 1 if the_accum_days == 366 else the_year
-                    the_accum_days = 0 if the_accum_days == 366 else the_accum_days
-                if the_year % 4 != 0:
-                    the_year = the_year + 1 if the_accum_days == 365 else the_year
-                    the_accum_days = 0 if the_accum_days == 365 else the_accum_days
-                # Decrease the count of days
-                days -= 1
-
-        logging.info(f"advanceBy(): Total accummulated days: {the_accum_days + days}")
-        return Date(the_month, the_day, the_year)
+        accum_days = {1: [31, 31], 2: [59, 60], 3: [90, 91], 4: [120, 121],
+                      5: [151, 152], 6: [181, 182], 7: [212, 213], 8: [243, 244],
+                      9: [273, 274], 10: [304, 305], 11: [334, 335], 12: [365, 366]}
+        the_accum_days = accum_days[self.month() - 1][0 if self.isLeapYear() else 1] + self.day()
+        return the_accum_days
