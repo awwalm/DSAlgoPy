@@ -13,7 +13,8 @@ def main():
 
     other_date = Date(8, 25, 2022)
     bc_date = Date(11, 24, 4713)
-    print(f"DIFFERENCE BETWEEN TODAY and other_date: {bc_date.numDays(other_date)}")
+    print(f"OTHER DATE: {other_date}")
+    print(f"DIFFERENCE BETWEEN TODAY and other_date: {the_date.numDays(other_date)}")
 
     print(f"NUMBER OF DAYS ELAPSED IN YEAR: {the_date.dayOfYear()}")
     print(f"ADVANCE TODAY'S DATE BY 365 DAYS: {the_date.advanceBy(365)}")

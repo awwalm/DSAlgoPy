@@ -93,9 +93,7 @@ class Date:
 
     def numDays(self, otherDate):
         """Returns the number of days as a positive integer between this date and the ``otherDate``."""
-        if self.year() == otherDate.year() and self.month() == otherDate.month():
-            return abs(self.day() - otherDate.day())
-        logging.warning("numDays(): Only compatible with dates within same year at the moment.")
+        return abs(self._julianDay - otherDate._julianDay)
 
     # noinspection PyMethodMayBeStatic
     def _isValidGregorian(self, month, day, year) -> bool:
@@ -134,7 +132,7 @@ class Date:
         Advances the date by the given number of days.
         The date is incremented if days is positive and decremented if days is negative.
         """
-        assert isinstance(days, int), "Day parameter must be integer type"
+        assert isinstance(days, int), "Parameter `days` must be integer type"
         self._julianDay += days
         return self._toGregorian()
 
