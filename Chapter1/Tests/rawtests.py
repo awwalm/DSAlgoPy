@@ -11,6 +11,12 @@ def main():
     print(the_date.dayOfWeekName())
     print(the_date.monthName())
 
+    other_date = Date(8, 25, 2022)
+    print(the_date.numDays(other_date))
+
+    bc_date = Date(11, 24, -4713)
+    print(bc_date.numDays(other_date))
+
 
 if __name__ == "__main__":
     main()
