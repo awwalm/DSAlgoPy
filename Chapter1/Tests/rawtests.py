@@ -7,15 +7,15 @@ def main():
     the_date = Date(datetime.date.today().month,
                     datetime.date.today().day,
                     datetime.date.today().year)
-    print(the_date)
-    print(the_date.dayOfWeekName())
-    print(the_date.monthName())
+    print(f"TODAY'S DATE: {the_date}")
+    print(f"DAY OF WEEK: {the_date.dayOfWeekName()}")
+    print(f"NAME OF MONTH: {the_date.monthName()}")
 
     other_date = Date(8, 25, 2022)
-    print(the_date.numDays(other_date))
+    bc_date = Date(11, 24, 4713)
+    print(f"DIFFERENCE BETWEEN TODAY and other_date: {bc_date.numDays(other_date)}")
 
-    bc_date = Date(11, 24, -4713)
-    print(bc_date.numDays(other_date))
+    print(f"ADVANCE TODAY'S DATE BY 365 DAYS: {the_date.advanceBy(365)}")
 
 
 if __name__ == "__main__":

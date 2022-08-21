@@ -1,4 +1,4 @@
-"""Implementation od the StudentFileReader ADT using a text file as the input source
+"""Implementation of the StudentFileReader ADT using a text file as the input source
 in which each field is stored on a separate line."""
 
 

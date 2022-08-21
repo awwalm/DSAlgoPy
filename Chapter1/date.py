@@ -2,15 +2,24 @@
 
 
 # noinspection PyProtectedMember
+import logging
 import math
 
+# Configuring default logging behaviour
+logging.basicConfig()
+logging.root.setLevel(logging.NOTSET)
 
+
+# noinspection PyProtectedMember
 class Date:
-    """Creates an object instance for the specified Gregorian date."""
+    """
+    Creates an object instance for the specified Gregorian date.
+    B.C. dates are created with years expressed in negative integers.
+    """
 
     def __init__(self, month, day, year):
         self._julianDay = 0
-        assert self._isValidGregorian(month, day, year), "Invalid Gregorian Day"
+        assert self._isValidGregorian(month, day, year), f"Invalid Gregorian Day: {month, day, year}"
 
         # The first line of the equation, T = (M-14)/12, has to be changed
         # since Python's implementation of integer division is not the same
@@ -73,7 +82,6 @@ class Date:
 
     def monthName(self) -> str:
         """Returns a string containing the name of the month."""
-        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed"
         month_names = {1: "January", 2: "February", 3: "March", 4: "April",
                        5: "May", 6: "June", 7: "July", 8: "August",
                        9: "September", 10: "October", 11: "November", 12: "December"}
@@ -81,16 +89,13 @@ class Date:
 
     def isLeapYear(self) -> bool:
         """Determines if this date falls in a leap year and returns the appropriate boolean value."""
-        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed"
         return self.year() % 4 == 0
 
-    def numDays(self, otherDate) -> int:
-        """Returns the number of days as a positive integer between
-        this date and the ``otherDate``."""
-        assert self._isValidGregorian(self.month(), self.day(), self.year()) and \
-            self._isValidGregorian(otherDate.month(), otherDate.day(), otherDate.year()), \
-            "Invalid date parsed"
-        return abs(self.day() - otherDate.day())
+    def numDays(self, otherDate):
+        """Returns the number of days as a positive integer between this date and the ``otherDate``."""
+        if self.year() == otherDate.year() and self.month() == otherDate.month():
+            return abs(self.day() - otherDate.day())
+        logging.warning("numDays(): Only compatible with dates within same year at the moment.")
 
     # noinspection PyMethodMayBeStatic
     def _isValidGregorian(self, month, day, year) -> bool:
@@ -119,7 +124,48 @@ class Date:
 
     def dayOfWeekName(self) -> str:
         """Returns a string containing the name of the day."""
-        assert self._isValidGregorian(self.month(), self.day(), self.year()), "Invalid date parsed"
         day_names = {0: "Monday", 1: "Tuesday", 2: "Wednesday", 3: "Thursday",
                      4: "Friday", 5: "Saturday", 6: "Sunday"}
         return day_names[self.dayOfWeek()]
+
+    def advanceBy(self, days: int):
+        """Advances the date by the given number of days.
+         The date is incremented if days is positive and decremented if days is negative."""
+
+        assert isinstance(days, int), "Day parameter must be integer type"
+
+        # {1:31, 2:[28,29], 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
+        accum_days = {1: [31, 31, 31, 31], 2: [59, 60, 28, 29], 3: [90, 91, 31, 31],
+                      4: [120, 121, 30, 30], 5: [151, 152, 31, 31], 6: [181, 182, 30, 30],
+                      7: [212, 213, 31, 31], 8: [243, 244, 31, 31], 9: [273, 274, 30, 30],
+                      10: [304, 305, 31, 31], 11: [334, 335, 30, 30], 12: [365, 366, 31, 31]}
+        the_day, the_month, the_year = self.day(), self.month(), self.year()
+        the_accum_days = accum_days[the_month-1][0 if self.isLeapYear() else 1] + the_day
+        logging.info(f"advanceBy(): Initial accummulated days: {the_accum_days}")
+
+        # If we're handling A.D./C.E. years and not negative (B.C./B.C.E.) years.
+        if the_year > 0 and days > 0:
+            while days != 0:
+                # Ensure the DAY is not incremented past the allowed limit.
+                if the_day < accum_days[the_month][2 if the_year % 4 == 0 else 3]:
+                    the_day += 1
+                    the_accum_days += 1
+                if the_day >= accum_days[the_month][2 if the_year % 4 == 0 else 3]:
+                    the_day = 1
+                    the_month = the_month + 1 if the_month <= 11 else 1
+                # If we are on the last day of the given MONTH, progress to the next one.
+                days_in_month = accum_days[the_month][2 if the_year % 4 == 0 else 3]
+                if the_day == days_in_month:
+                    the_month = the_month + 1 if the_month < 11 else 1
+                # If we are on the last day of the YEAR, reset accum_days (for leap/normal years).
+                if the_year % 4 == 0:
+                    the_year = the_year + 1 if the_accum_days == 366 else the_year
+                    the_accum_days = 0 if the_accum_days == 366 else the_accum_days
+                if the_year % 4 != 0:
+                    the_year = the_year + 1 if the_accum_days == 365 else the_year
+                    the_accum_days = 0 if the_accum_days == 365 else the_accum_days
+                # Decrease the count of days
+                days -= 1
+
+        logging.info(f"advanceBy(): Total accummulated days: {the_accum_days + days}")
+        return Date(the_month, the_day, the_year)
