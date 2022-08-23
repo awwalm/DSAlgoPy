@@ -51,6 +51,10 @@ class Date:
                 day + year + year // 4 -
                 year // 100 + year // 400) % 7
 
+    def isWeekDay(self):
+        """Determines if the date is a weekday."""
+        return self.dayOfWeek() not in (5, 6)
+
     def __str__(self):
         """Returns the date as string in Gregorian format."""
         month, day, year = self._toGregorian()
