@@ -60,6 +60,13 @@ class Date:
         month, day, year = self._toGregorian()
         return "%02d/%02d/%04d" % (month, day, year)
 
+    def asGregorian(self, divchar):
+        """
+        Similar to the str() method but uses the optional argument divchar as the dividing character
+        between the three components of the Gregorian date.
+        """
+        return self.__str__().replace("/", divchar)
+
     def __eq__(self, otherDate):
         """Logically compares the two dates (operator overloading)."""
         return self._julianDay == otherDate._julianDay
