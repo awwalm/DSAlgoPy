@@ -4,7 +4,7 @@ import ctypes
 class Array2D:
     """
     Implements the ``Array2D`` ADT using `array of arrays` approach.
-    Creates a 2-D array of size numRows x numCols.
+    Creates a 2-D array of size ``numRows`` x ``numCols``.
     """
 
     def __init__(self, numRows, numCols):
@@ -33,7 +33,7 @@ class Array2D:
         assert len(ndxTuple) == 2, "Invalid number of array subscripts."
         row = ndxTuple[0]
         col = ndxTuple[1]
-        assert 0 <= row < self.numRows() and 0 <= col < self.numCols(), "Array subscript out of range."
+        assert 0 <= row < self.numRows() and 0 <= col < self.numCols(), "Array subscript out of range"
         the1dArray = self._theRows[row]
         return the1dArray[col]
 
@@ -70,12 +70,12 @@ class Array:
 
     def __getitem__(self, index):
         """Gets the contents of the index element."""
-        assert 0 <= index < len(self), "Array subscript out of range."
+        assert 0 <= index < len(self), "Array subscript out of range"
         return self._elements[index]
 
     def __setitem__(self, index, value):
         """Puts the value in the array element at index position."""
-        assert 0 <= index < len(self), "Array subscript out of range."
+        assert 0 <= index < len(self), "Array subscript out of range"
         self._elements[index] = value
 
     def clear(self, value):
