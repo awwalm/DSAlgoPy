@@ -19,7 +19,7 @@ def main():
     print(f"NUMBER OF DAYS ELAPSED IN YEAR: {the_date.dayOfYear()}")
     print(f"ADVANCE TODAY'S DATE BY 365 DAYS: {the_date.advanceBy(365)}")
 
-    print(f"AS GREGORIAN: {the_date.asGregorian('-')}")
+    print(f"AS GREGORIAN: {the_date.asGregorian(divchar='-')}")
 
 
 if __name__ == "__main__":
