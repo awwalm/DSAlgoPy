@@ -8,7 +8,7 @@ After cloning the repository, you may run the programs using **PyCharm** or an I
 
 ### Prerequisites
 
-- **Python**: At the moment of writing, the source code was written with Python . Should you wish to use a higher/up-to-date version, be sure to account for compatibility makeshifts.
+- **Python**: At the moment of writing, the source code was written with Python 3.6. Should you wish to use a higher/up-to-date version, be sure to account for compatibility makeshifts.
 
 ## Contributing
 
