@@ -1,6 +1,6 @@
-# Data Structures and Algorithms using Python
+# Data Structures and Algorithms (Python)
 
-A repository for practicing Rance D. Necaise's titular book.
+A repository for practicing DS/Algo in Python using resources from Rance D. Necaise, as well as Michael T. Goodrich et al.
 
 ## Getting Started
 
@@ -17,6 +17,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## References
 
 * **Rance D. Necaise** - [Data Structures and Algorithms using Python](https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/0470618299)
+* **Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser** - [Data Structures & Algorithms in Python](https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python-p-9781118290279)
 
 ## License
 

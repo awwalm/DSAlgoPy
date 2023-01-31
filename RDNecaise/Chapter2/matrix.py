@@ -38,7 +38,7 @@ class Matrix:
     def __add__(self, rhsMatrix):
         """Creates and returns a new Matrix that results from matrix addition."""
         assert rhsMatrix.numRows() == self.numRows() and rhsMatrix.numCols() == self.numCols(), \
-            "Matrix sizes not compatible for the add operation."
+            "Matrix sizes not compatible for the add operation"
         # Create the new matrix.
         newMatrix = Matrix(self.numRows(), self.numCols())
         # Add the corresponding elements in the two matrices.
