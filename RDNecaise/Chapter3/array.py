@@ -1,5 +1,5 @@
 """Implementation of the ``MultiArray`` ADT using a 1-D array."""
-from Chapter2.array import Array
+from RDNecaise.Chapter2.array import Array
 
 
 class MultiArray:
@@ -33,6 +33,10 @@ class MultiArray:
         """Clears the array by setting all elements to the given value."""
         self._elements.clear(value)
 
+    def factors(self):
+        """Returns an array of the computed factors."""
+        return self._factors
+
     def __getitem__(self, ndxTuple):
         """Returns the contents of element (i_1, i_2, ..., i_n)."""
         assert len(ndxTuple) == self.numDims(), "Invalid # of array subscripts."
@@ -62,5 +66,29 @@ class MultiArray:
         return offset
 
     def _computeFactors(self):
-        """Computes the factor values used in the index equation."""
-        ...
+        """
+        Computes the factor values used in the index equation.
+        Factors are the number of elements to be skipped within the corresponding dimension.
+        This should execute prior to calling ``_computeIndex()`` which is called from ``__init__()``.
+        This method should populate the factors array with the corresponding factors.
+
+        Recall that given an n-dimensional array:
+            * Let F be the collection of Factors and D the collection of numerated Dimensions.
+            * f_n = 1, f_n ∈ F
+            * F = ∏ d_k ∀ 0<j<n & ∀ d ∈ D
+            * ⊨ j+1<=k<= n (i.e the value of k ranges from j+1 to n)
+        For example, given a 4-dimensional array:
+            * index4(i1, i2, i3, i4) = i1 × (f1 = d2 × d3 × d4) +
+                                       i2 × (f2 = d3 × d4) +
+                                       i3 × (f3 = d4) +
+                                       i4 × (f4 = 1)
+        """
+        #  -----------------CODE--------------- + --------------------ALGORITHM------------------------
+        self._factors[self.numDims()-1] = 1     # As established above, last factor is a constant of 1
+        for i in range(self.numDims()-1):       # Initiate index iteration
+            temp_dims = self._dims[i+1:]        # Skip the first given dimension
+            while len(temp_dims) > 1:           # Make sure we have more than 1 dimension
+                temp_dims[0] *= temp_dims[1]    # Multiply by next dimension and store product in [0]
+                temp_dims[1] = temp_dims[0]     # Move product from position [0] to [1]
+                temp_dims = temp_dims[1:]       # Truncate forwards and repeat until only final product
+            self._factors[i] = temp_dims[0]     # Store the current final factor
