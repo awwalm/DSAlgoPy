@@ -1,16 +1,19 @@
-# This is a sample Python script.
+# NOTE TO VIEWERS: Other code snippets have been skipped as I found them too basic.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Generators
+
+# Traditional function that computes factors
+def factors(n):                 # traditional function that computes factors
+    results = []                # store factors in a new list
+    for k in range(1, n + 1):
+        if n % k == 0:          # divides evenly, thus k is a factor
+            results.append(k)   # add k to the list of factors
+    return results              # return the entire list
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Generator version of the same function
+# noinspection PyRedeclaration
+def factors(n):                 # generator that computes factors
+    for k in range(1, n + 1):
+        if n % k == 0:          # divides evenly, thus k is a factor
+            yield k             # yield this factor as next result
