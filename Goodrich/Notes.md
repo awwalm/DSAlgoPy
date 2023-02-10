@@ -2,8 +2,7 @@
 
 ## Chpater 2: Object-Oriented Programming
 
-- Design Pattern:
-
+- Design Pattern:<br>
 A pattern provides a general template for a solution that can be applied in many situations. 
 It describes the **main elements** of a solution in an abstract way that can be specialized 
 for a specific problem at hand. It consists of a **name**, which identifies the pattern; 
