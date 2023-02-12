@@ -13,7 +13,7 @@ class CreditCard:
         :param acnt:        The account identifier (e.g. (e.g. `5391 0375 9387 5309`).
         :type acnt:         str
         :param limit:       Credit limit (measured in dollars)
-        :type limit:        double
+        :type limit:        float
         """
         self._customer = customer
         self._bank = bank
