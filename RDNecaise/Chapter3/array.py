@@ -25,7 +25,7 @@ class MultiArray:
         return len(self._dims)
 
     def length(self, dim):
-        """Returns the length of the given dimension."""
+        """Returns the length of the given dimension. Recall that users parses in n>0 values."""
         assert 1 <= dim < len(self._dims), "Dimension component out of range."
         return self._dims[dim - 1]
 
