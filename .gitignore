@@ -2,6 +2,9 @@
 linearmap.py
 linearset.py
 
+*.sublime-project
+*.sublime-workspace
+
 *.bin
 *.csv
 
