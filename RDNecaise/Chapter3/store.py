@@ -1,5 +1,5 @@
 """Drafts for the Sales Store program."""
-
+from RDNecaise.Chapter2.array import Array
 from RDNecaise.Chapter3.array import MultiArray
 
 
@@ -13,26 +13,40 @@ class Store(MultiArray):
 
     def totalSalesByStore(self: MultiArray, store):
         """Compute the total sales of all items for all months in a given store."""
-        # Subtract 1 from the store number since the array indices are 1 less than the given store.
-        s = store - 1
-        # Accumulate the total sales for the given store.
-        total = 0.0
-        # Iterate over the items (recall that the second dimension correlates with the ITEMS data).
-        for i in range(self.length(2)):
-            # Iterate over each month of the i item (third dimension correlates to MONTHS).
-            for m in range(self.length(3)):
+        s = store - 1                         # Subtract 1 from the store number [index = n-1].
+        total = 0.0                           # Accumulate the total sales for the given store.
+        for i in range(self.length(2)):       # Iterate over the items.
+            for m in range(self.length(3)):   # Iterate over each month of the i item.
                 total += self[s, i, m]
         return total
 
     def totalSalesByMonth(self, month):
         """Compute the total sales of all items in all stores for a given month."""
-        # The months number must be offset by 1.
-        m = month-1
-        # Accumulate the total sales for the given month.
-        total = 0.0
-        # Iterate over each store.
-        for s in range(self.length(1)):
-            # Iterate over each item of the s store.
-            for i in range(self.length(2)):
+        m = month - 1                         # The months number must be offset by 1.
+        total = 0.0                           # Accumulate the total sales for the given month.
+        for s in range(self.length(1)):       # Iterate over each store.
+            for i in range(self.length(2)):   # Iterate over each item of the s store.
                 total += self[s, i, m]
         return total
+
+    def totalSalesByItem(self, item):
+        """Compute the total sales of a single item in all stores over all months."""
+        i = item - 1                          # The item number must be offset by 1.
+        total = 0                             # Accumulate the total sales for the given month.
+        for s in range(self.length(1)):       # Iterate over each store.
+            for m in range(self.length(3)):   # Iterate over each month of the s store.
+                total += self[s, i, m]
+        return total
+
+    def totalSalesPerMonth(self, store):
+        """Compute the total sales per month for a given store.
+        A 1-D array is returned that contains totals for each month.
+        """
+        s = store - 1                         # The store number must be offset by 1.
+        totals = Array(12)                    # The totals will be returned in a 1-D array.
+        for m in range(self.length(3)):       # Iterate over the sales of each month.
+            subtotal = 0.0
+            for i in range(self.length(2)):   # Iterate over the sales of each item sold during the m month.
+                subtotal += self[s, i, m]
+            totals[m] = subtotal              # Store the result in the month of the totals array.
+        return totals
