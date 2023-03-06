@@ -7,13 +7,9 @@ class CreditCard:
         """Create a new credit card instance. The initial balance is zero.
 
         :param customer:    The name of the customer (e.g. `John Bowman`).
-        :type customer:     str
         :param bank:        The name of the bank (e.g. `California Savings`).
-        :type bank:         str
         :param acnt:        The account identifier (e.g. (e.g. `5391 0375 9387 5309`).
-        :type acnt:         str
         :param limit:       Credit limit (measured in dollars)
-        :type limit:        float
         """
         self._customer = customer
         self._bank = bank
@@ -56,3 +52,35 @@ class CreditCard:
     def make_payment(self, amount):
         """Process customer payment that reduces balance."""
         self._balance -= amount
+
+
+class PredatoryCreditCard(CreditCard):
+    """An extension to :class:`CreditCard` that compounds interest and fees."""
+
+    def __int__(self, customer, bank, acnt, limit, apr):
+        """Create a new predatory credit card transfer with initial zero balance.
+
+        :param customer:    The name of the customer (e.g. `John Bowman`).
+        :param bank:        The name of the bank (e.g. `California Savings`).
+        :param acnt:        The account identifier (e.g. `5391 0375 9387 5309`).
+        :param limit:       Credit card limit (measured in USD).
+        :param apr:         Annual percentage rate (e.g., 0.0825 for 8.25% APR).
+        """
+        super().__init__(customer, bank, acnt, limit)   # Call constructor.
+        self._apr = apr
+
+    def charge(self, price):
+        """Charge given price to the card, assuming sufficient credit limit.
+
+        :returns: True if charge was processed. False and assess $5 fee if charge is denied.
+        """
+        success = super().charge(price)   # Call inherited method.
+        if not success:
+            self._balance += 5            # Assess penalty.
+        return success
+
+    def process_month(self):
+        """Assess monthly interest on outstanding balance."""
+        if self._balance > 0:
+            monthly_factor = pow(1 + self._apr, 1/12)
+            self._balance *= monthly_factor
