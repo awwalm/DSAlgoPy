@@ -17,6 +17,21 @@ class Sequence(metaclass=ABCMeta):
     def __contains__(self, val):
         """Return ``True`` if val found in the sequence; ``False`` otherwise."""
         for j in range(len(self)):
-            if self[j] == val:
+            if self[j] == val:                       # Found match.
                 return True
         return False
+
+    def index(self, val):
+        """Return leftmost index at which val is found (or rasie ``ValueError``)."""
+        for j in range(len(self)):
+            if self[j] == val:                      # Leftmost match.
+                return j
+        raise ValueError("Value not in sequence")   # Never found a match.
+
+    def count(self, val):
+        """Return the number of elements equal to the given value."""
+        k = 0
+        for j in range(len(self)):
+            if self[j] == val:
+                k += 1                              # Found a match.
+        return k
