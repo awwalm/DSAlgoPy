@@ -8,8 +8,8 @@ A repository for practicing DS/Algo in Python using resources from Rance D. Neca
 |:-----------|:------------------------------------------|-----|:-------------------------------------------------|
 | Chapter 1  | [Abstract Data Types](RDNecaise/Chapter1) |     | [Python Primer](Goodrich/Chapter1)               |
 | Chapter 2  | [Arrays](RDNecaise/Chapter2)              |     | [Object-Oriented Programming](Goodrich/Chapter2) |
-| Chapter 3  | [Sets and Maps](RDNecaise/Chapter3)       |     | Algorithm Analysis                               |
-| Chapter 4  | Algorithm Analysis                        |     | Recursion                                        |
+| Chapter 3  | [Sets and Maps](RDNecaise/Chapter3)       |     | [Algorithm Analysis](Goodrich/Chapter3)          |
+| Chapter 4  | Algorithm Analysis                        |     | [Recursion](Goodrich/Chapter4)                   |
 | Chapter 5  | Searching and Sorting                     |     | Array-Based Sequences                            |
 | Chapter 6  | Linked Structures                         |     | Stacks, Queues, and Deques                       |
 | Chapter 7  | Stacks                                    |     | Linked Lists                                     |
