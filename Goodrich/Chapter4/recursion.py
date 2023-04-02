@@ -63,8 +63,7 @@ def disk_usage(path):  									# File system
     total = os.path.getsize(path)  						# Account for direct usage.
     if os.path.isdir(path):  							# If this is a directory...
         for filename in os.listdir(path):  				# then for each child...
-            childpath = os.path.join(  					# compose full path to child.
-                path, filename)
+            childpath = os.path.join(path, filename)    # compose full path to child.
             total += disk_usage(childpath)  			# Add child's usage to total.
 
     print("{0:<7}".format(total), path)  				# Descriptive output (optional).
