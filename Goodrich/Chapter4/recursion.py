@@ -61,10 +61,18 @@ def binary_search(data, target, low, high):  			# Binary search
 def disk_usage(path):  									# File system
     """Return the number of bytes used by a file/folder and any descendants."""
     total = os.path.getsize(path)  						# Account for direct usage.
-    if os.path.isdir(path):  							# If this is a directory...
+    if os.path.isdir(path):  							# If this is a directory (super-folder?)...
         for filename in os.listdir(path):  				# then for each child...
             childpath = os.path.join(path, filename)    # compose full path to child.
             total += disk_usage(childpath)  			# Add child's usage to total.
 
     print("{0:<7}".format(total), path)  				# Descriptive output (optional).
     return total
+
+
+def bad_fibonacci(n):
+    """Return the nth Fibonacci number."""
+    if n <= 1:
+        return n
+    else:
+        return bad_fibonacci(n-2) + bad_fibonacci(n-1)
