@@ -1,4 +1,5 @@
 from recursion import *
+from recursion_amok import *
 import os
 
 bad_fibonacci(8)
