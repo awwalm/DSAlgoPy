@@ -24,6 +24,18 @@ def power_trivial(x, n):                            # Executes in O(n) time.
         return x * power_trivial(x, n-1)
 
 
+def power_linear(x, n):                             # Precisely O(n + 1) time.
+    """My personal take using the logic in ``linear_sum(S, n)``."""
+    nums = [x] * n
+
+    def power_mul(A, L):
+        if L == 0:
+            return 1
+        else:
+            return power_mul(A, L-1) * A[L-1]
+    return power_mul(nums, len(nums))
+
+
 def power_repeat_sq(x, n):                          # Cuts n in half upon each recursive call [O(log n)].
     """Compute the value x**n for integer n."""
     if n == 0:
