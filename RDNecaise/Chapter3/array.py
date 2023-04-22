@@ -82,13 +82,26 @@ class MultiArray:
                                        i2 × (f2 = d3 × d4) +
                                        i3 × (f3 = d4) +
                                        i4 × (f4 = 1)
+        A recursive O(n) time algorithm is given as:
+            ALGORITHM ComputeFactors(curfact, lencustdims):
+                curfact:        Current/temporary factor, initial value MUST be instantiated as 1.\n
+                lcustdims:       Array of dimensions without first dimension stated.\n
+                encustdims:    Index iterator used to traverse custdims by length.\n
+
+                curfact *= custdims[lencustdims - 1]        # Multiply current factor by current dimension.
+                self._factors[lencustdims - 1] = curfact    # Add current factor to the end of factors array.
+                if lencustdims < 2:                         # [IMPORTANT: Base case] If only one item left...
+                    return                                  # Exit and terminate function.
+                ComputeFactors(curfact, lencustdims-1)      # Else, recursively compute next factor until base case.
         """
-        #  -----------------CODE--------------- + --------------------ALGORITHM------------------------
-        self._factors[self.numDims()-1] = 1     # As established above, last factor is a constant of 1
-        for i in range(self.numDims()-1):       # Initiate index iteration
-            temp_dims = self._dims[i+1:]        # Skip the first given dimension
-            while len(temp_dims) > 1:           # Make sure we have more than 1 dimension
-                temp_dims[0] *= temp_dims[1]    # Multiply by next dimension and store product in [0]
-                temp_dims[1] = temp_dims[0]     # Move product from position [0] to [1]
-                temp_dims = temp_dims[1:]       # Truncate forwards and repeat until only final product
-            self._factors[i] = temp_dims[0]     # Store the current final factor
+        custdims = self._dims[1:]
+        self._factors[len(self._factors)-1] = 1
+
+        def _recursiveComputeFactors(curfact, lencustdims):
+            curfact *= custdims[lencustdims - 1]
+            self._factors[lencustdims - 1] = curfact
+            if lencustdims < 2:
+                return
+            _recursiveComputeFactors(curfact, lencustdims-1)
+
+        _recursiveComputeFactors(1, len(custdims))
