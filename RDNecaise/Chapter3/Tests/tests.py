@@ -23,16 +23,15 @@ m_array = MultiArray(3, 3, 3)
 m_array.clear(10)
 print("Factors: ", *m_array.factors())  # Should produce (9, 3, 1)
 d1, d2, d3, i = 0, 0, 0, 0
-while i < 9:
-    print(f"Element #{i}: {m_array[d1, d2, d3]}")
+while i < 27:
+    print(f"Element #{i} calculated by m_array[{d1, d2, d3}]: {m_array[d1, d2, d3]}")
     i += 1
     d3 += 1
-    if d2 > 2 and d3 > 2:
-        d1 += 1
     if d3 > 2:
         d3 = 0
         d2 += 1
     if d2 > 2:
         d2 = 0
+        d1 += 1
     if d1 > 2:
         d1 = 0
