@@ -51,24 +51,13 @@ class HanoiTowers:
             elif i.tower == "C":
                 c = i
 
-        # @TODO: Replace exception handling clauses with dynamic index tracking mechanism.
         for i in range(max(disks)-1, -1, -1):
-            x, y, z = "", "", ""
-            try:
-                x = a.items[i]
-            except IndexError:
-                x = ""
-            try:
-                y = b.items[i]
-            except IndexError:
-                y = ""
-            try:
-                z = c.items[i]
-            except IndexError:
-                z = ""
-
+            x = "" if i > len(a.items)-1 else a.items[i]
+            y = "" if i > len(b.items)-1 else b.items[i]
+            z = "" if i > len(c.items)-1 else c.items[i]
             print("\t%+6s %+6s %+6s" % (x, y, z))
-        base = "-"*24
+
+        base = "-" * 24
         tower_names = "\t%+6s %+6s %+6s" % ("A", "B", "C")
         print(f"\t{base}\n{tower_names}\n")
 
@@ -92,4 +81,4 @@ class HanoiTowers:
 
 
 # Prints (2^disk)-1 moves, i.e. 15 moves when n=4.
-HanoiTowers(disk=3, source="A", intermediate="B", destination="C")
+HanoiTowers(disk=2, source="A", intermediate="B", destination="C")
