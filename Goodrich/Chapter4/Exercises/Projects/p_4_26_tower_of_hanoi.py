@@ -12,17 +12,27 @@ class TowerStack:
     def __init__(self, size: int, tower: str):
         self.tower = tower
         if size < 1:
-            self.items = []
+            self._items = []
         else:
-            self.items = [i for i in range(size, 0, -1)]
+            self._items = [i for i in range(size, 0, -1)]
+        self._length = size
+
+    def __len__(self):
+        return self._length
+
+    def __getitem__(self, index):
+        assert 0 <= index < len(self), "Stack subscript not in range"
+        return self._items[index]
 
     def pop(self):
-        popped = self.items[-1]
-        self.items = self.items[:-1]
+        popped = self._items[-1]
+        self._items = self._items[:-1]
+        self._length -= 1
         return popped
 
     def push(self, item):
-        self.items.append(item)
+        self._items.append(item)
+        self._length += 1
 
 
 class HanoiTowers:
@@ -41,7 +51,7 @@ class HanoiTowers:
         to the longest stack. This implies disks from stacks smaller than the biggest stack
         are padded with empty strings across the iteration or traversal when the index is illegal.
         """
-        disks = [len(a.items), len(b.items), len(c.items)]
+        disks = [len(a), len(b), len(c)]
         towers = [a, b, c]
         for i in towers:
             if i.tower == "A":
@@ -52,9 +62,9 @@ class HanoiTowers:
                 c = i
 
         for i in range(max(disks)-1, -1, -1):
-            x = "" if i > len(a.items)-1 else a.items[i]
-            y = "" if i > len(b.items)-1 else b.items[i]
-            z = "" if i > len(c.items)-1 else c.items[i]
+            x = "" if i > len(a)-1 else a[i]
+            y = "" if i > len(b)-1 else b[i]
+            z = "" if i > len(c)-1 else c[i]
             print("\t%+6s %+6s %+6s" % (x, y, z))
 
         base = "-" * 24
@@ -81,4 +91,4 @@ class HanoiTowers:
 
 
 # Prints (2^disk)-1 moves, i.e. 15 moves when n=4.
-HanoiTowers(disk=2, source="A", intermediate="B", destination="C")
+HanoiTowers(disk=4, source="A", intermediate="B", destination="C")
