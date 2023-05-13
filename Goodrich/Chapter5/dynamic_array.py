@@ -46,3 +46,25 @@ class DynamicArray:
     def _make_array(self, c):
         """Return new array with capacity ``c``."""
         return (c * ctypes.py_object)()
+
+    def insert(self, k, value):
+        """Insert value at index k, shifting subsequent values rightward.\
+        For simplicity, we assume 0 <= k <= n in this version."""
+        if self._n == self._capacity:                           # Not enough room.
+            self._resize(2 * self._capacity)                    # So double capacity.
+        for j in range(self._n, k, -1):                         # Shift rightmost first.
+            self._A[j] = self._A[j-1]
+        self._A[k] = value                                      # Store newest element.
+        self._n += 1
+
+    def remove(self, value):
+        """Remove first occurrence of ``value``.\n
+        :raises ValueError: if value is not found."""
+        for k in range(self._n):
+            if self._A[k] == value:                             # Found a match (k; index of value).
+                for j in range(k, self._n - 1):                 # Shift others to fill gap.
+                    self._A[j] = self._A[j+1]
+                self._A[self._n - 1] = None                     # Help garbage collection.
+                self._n -= 1                                    # We have one less item.
+                return                                          # Exit immediately.
+        raise ValueError("Value not found")                     # Only reached if no match.
