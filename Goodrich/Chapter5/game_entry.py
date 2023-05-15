@@ -6,7 +6,7 @@ Code Fragment 5.8: Python code for a ``Scoreboard`` class that maintains
 an ordered series of scores as GameEntry objects.
 """
 
-from typing import List
+from typing import List, Union
 
 
 class GameEntry:
@@ -30,8 +30,8 @@ class Scoreboard:
 	"""Fixed-length sequence of high scores in nondecreasing order."""
 	def __init__(self, capacity=10):
 		""" All enteries are initially None."""
-		# self._board = [None] * capacity
-		self._board: List[GameEntry] = [GameEntry(None, None)] * capacity  # Takes care of linter warning
+		# Elaborate type hinting takes care of potentially distracting linter warning
+		self._board: Union[List[GameEntry], List[None]] = [None] * capacity
 		self._n = 0
 
 	def __getitem__(self, k):
