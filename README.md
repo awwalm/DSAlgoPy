@@ -11,7 +11,7 @@ A repository for practicing DS/Algo in Python using resources from Rance D. Neca
 | Chapter 3  | [Sets and Maps](RDNecaise/Chapter3)       |     | [Algorithm Analysis](Goodrich/Chapter3)          |
 | Chapter 4  | Algorithm Analysis                        |     | [Recursion](Goodrich/Chapter4)                   |
 | Chapter 5  | Searching and Sorting                     |     | [Array-Based Sequences](Goodrich/Chapter5)       |
-| Chapter 6  | Linked Structures                         |     | Stacks, Queues, and Deques                       |
+| Chapter 6  | Linked Structures                         |     | [Stacks, Queues, and Deques](Goodrich/Chapter6)  |
 | Chapter 7  | Stacks                                    |     | Linked Lists                                     |
 | Chapter 8  | Queues                                    |     | Trees                                            |
 | Chapter 9  | Advanced Linked Lists                     |     | Priority Queues                                  |
