@@ -1,4 +1,15 @@
-"""Code Fragment 6.6: Array-based implementation of a queue (continued in Code Fragment 6.7)."""
+"""Code Fragment 6.6: Array-based implementation of a queue (continued in Code Fragment 6.7).
+The ``@property`` decorator for wrapping a pseudo-constant in a getter method is no longer neccessary.
+But the syntax for future reference is as follows:
+
+.. highlight:: python
+.. code-block:: python
+
+    @property
+    def DEFAULT_CAPACITY(self):
+        # Wraps a constant value of 10 within a class, identified by the specified method name.
+        return 10
+"""
 
 
 class EmptyError(Exception):
@@ -8,14 +19,12 @@ class EmptyError(Exception):
 
 class ArrayQueue:
     """FIFO queue implementation using a Python list as underlying storage."""
-    @property
-    def DEFAULT_CAPACITY(self):
-        """Moderate capacity for all new queues."""
-        return 10
+
+    DEFAULT_CAPACITY = 10       # Moderate capacity for all new queues.
 
     def __init__(self):
         """Create an empty queue."""
-        self._data = [None] * self.DEFAULT_CAPACITY
+        self._data = [None] * ArrayQueue.DEFAULT_CAPACITY
         self._size = 0
         self._front = 0
 
