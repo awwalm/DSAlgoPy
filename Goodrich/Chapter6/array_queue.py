@@ -28,6 +28,10 @@ class ArrayQueue:
         self._size = 0
         self._front = 0
 
+    def __str__(self):
+        """Return a string representation of queue."""
+        return f"{[i for i in self._data if i is not None]}"
+
     def __len__(self):
         """Return the number of elements in the queue."""
         return self._size
