@@ -12,7 +12,7 @@ A repository for practicing DS/Algo in Python using resources from Rance D. Neca
 | Chapter 4  | Algorithm Analysis                        |     | [Recursion](Goodrich/Chapter4)                   |
 | Chapter 5  | Searching and Sorting                     |     | [Array-Based Sequences](Goodrich/Chapter5)       |
 | Chapter 6  | Linked Structures                         |     | [Stacks, Queues, and Deques](Goodrich/Chapter6)  |
-| Chapter 7  | Stacks                                    |     | Linked Lists                                     |
+| Chapter 7  | Stacks                                    |     | [Linked Lists](Goodrich/Chapter7)                |
 | Chapter 8  | Queues                                    |     | Trees                                            |
 | Chapter 9  | Advanced Linked Lists                     |     | Priority Queues                                  |
 | Chapter 10 | Recursion                                 |     | Maps, Hash Tables, and Skip Lists                |
@@ -28,7 +28,8 @@ After cloning the repository, you may run the programs using **PyCharm** or an I
 
 ### Prerequisites
 
-- **Python**: At the moment of writing, the source code was written with Python 3.6. Should you wish to use a higher/up-to-date version, be sure to account for compatibility makeshifts.
+- **Python**: Python 3.6 is used up until commit [``36f2d11``](https://github.com/awwalm/DSAlgoPy/commit/36f2d11710d4f0f8b1146a9aa7d58434a3fd0cb0).
+Further commits may use Python 3.10 features. It is adviced to run the source code on the higher version.
 
 ## Contributing
 
