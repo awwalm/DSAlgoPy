@@ -72,11 +72,17 @@ class ArrayDeque:
         self._data[avail] = e
         self._size += 1
 
-    def add_first(self, e):                                       # Worst case: O(n-front)
+    def add_first(self, e):                                       # Worst case: O(n); Avg: O(n-front); Best: O(1)
         """Add an element to the front of deque."""
+        frdx, fri = self._front, self._data[self._front]          # Front index, and front item.
+        if (frdx >= 1) & (self._data[frdx-1] is None):            # If index before front is vacant...
+            self._data[frdx-1] = e                                # insert element immediately.
+            self._front -= 1                                      # Update front index, size, and exit.
+            self._size += 1
+            return
         endx = len(self._data) - 1 if self._size > 0 else 0       # Last index of INTERNAL list container.
         endi = self._data[endx]                                   # Last item of INTERNAL list container.
-        if (endi is not None) | (self._size == len(self._data)):  # If deque is full or last item is not None...
+        if (endi is not None) | (self._size == len(self._data)):  # If deque is full or last index is not vacant...
             self._resize(2 * len(self._data))                     # resize and...
             endx = self._size                                     # update last index (incremented +1).
         for i in range(endx, self._front-1, -1):                  # Identify index range from front to end.
