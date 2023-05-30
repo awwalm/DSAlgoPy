@@ -53,41 +53,41 @@ class ArrayDeque:
         self._back = (self._front + self._size - 1) % len(self._data)
         return self._data[self._back]
 
-    def _resize(self, cap):                                       # We assume cap >= len(self).
+    def _resize(self, cap):                                             # We assume cap >= len(self).
         """Resize to a new list of capacity >= ``len(self)``."""
-        old = self._data                                          # Keep track of existing list.
-        self._data = [None] * cap                                 # Allocate list with new capacity.
+        old = self._data                                                # Keep track of existing list.
+        self._data = [None] * cap                                       # Allocate list with new capacity.
         walk = self._front
-        for k in range(self._size):                               # Only consider existing elements.
-            self._data[k] = old[walk]                             # Intentionally shift indices.
-            walk = (1 + walk) % len(old)                          # Use old size as modulus.
+        for k in range(self._size):                                     # Only consider existing elements.
+            self._data[k] = old[walk]                                   # Intentionally shift indices.
+            walk = (1 + walk) % len(old)                                # Use old size as modulus.
         self._front = 0
         self._back = self._size - 1
 
-    def add_last(self, e):                                        # Worst case: O(2n); Armotized: O(1)
+    def add_last(self, e):                                              # Worst case: O(2n); Armotized: O(1)
         """Add an element to the back of deque."""
-        if self._size == len(self._data):                         # If deque is in full capacity, resize.
-            self._resize(2 * len(self._data))                     # Double the array size.
+        if self._size == len(self._data):                               # If deque is in full capacity, resize.
+            self._resize(2 * len(self._data))                           # Double the array size.
         avail = (self._front + self._size) % len(self._data)
         self._data[avail] = e
+        self._back = (self._front + self._size - 1) % len(self._data)
         self._size += 1
 
-    def add_first(self, e):                                       # Worst case: O(n); Avg: O(n-front); Best: O(1)
+    def add_first(self, e):                                             # Worst case: O(n); Avg: O(n-front); Best: O(1)
         """Add an element to the front of deque."""
-        frdx, fri = self._front, self._data[self._front]          # Front index, and front item.
-        if (frdx >= 1) & (self._data[frdx-1] is None):            # If index before front is vacant...
-            self._data[frdx-1] = e                                # insert element immediately.
-            self._front -= 1                                      # Update front index, size, and exit.
-            self._size += 1
+        if (self._front >= 1) & (self._data[self._front-1] is None):    # If index before front is vacant...
+            self._front -= 1                                            # Point front index to vacant position behind.
+            self._data[self._front] = e                                 # Insert element immediately.
+            self._size += 1                                             # Update size and exit.
             return
-        endx = len(self._data) - 1 if self._size > 0 else 0       # Last index of INTERNAL list container.
-        endi = self._data[endx]                                   # Last item of INTERNAL list container.
-        if (endi is not None) | (self._size == len(self._data)):  # If deque is full or last index is not vacant...
-            self._resize(2 * len(self._data))                     # resize and...
-            endx = self._size                                     # update last index (incremented +1).
-        for i in range(endx, self._front-1, -1):                  # Identify index range from front to end.
-            self._data[i] = self._data[i-1]                       # Shift elements from front rightwards.
-        self._data[self._front] = e                               # Add desired element as new front.
+        endx = len(self._data) - 1 if self._size > 0 else 0             # Last index of INTERNAL list container.
+        endi = self._data[endx]                                         # Last item of INTERNAL list container.
+        if (endi is not None) | (self._size == len(self._data)):        # If last index is not vacant or deque is full...
+            self._resize(2 * len(self._data))                           # resize and...
+            endx = self._size                                           # update last index (incremented +1).
+        for i in range(endx, self._front-1, -1):                        # Identify index range from front to end (+1).
+            self._data[i] = self._data[i-1]                             # Shift elements from front rightwards.
+        self._data[self._front] = e                                     # Add desired element as new front.
         self._back = (self._front + self._size - 1) % len(self._data)
         self._size += 1
 
