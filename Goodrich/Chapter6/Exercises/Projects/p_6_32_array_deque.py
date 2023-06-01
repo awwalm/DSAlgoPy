@@ -68,9 +68,8 @@ class ArrayDeque:
         """Add an element to the back of deque."""
         if self._size == len(self._data):                               # If deque is in full capacity, resize.
             self._resize(2 * len(self._data))                           # Double the array size.
-        avail = (self._front + self._size) % len(self._data)
-        self._data[avail] = e
-        self._back = (self._front + self._size - 1) % len(self._data)
+        self._back = (self._front + self._size) % len(self._data)       # Update back index of deque.
+        self._data[self._back] = e
         self._size += 1
 
     def add_first(self, e):                                             # Worst case: O(n); Avg: O(n-front); Best: O(1)
