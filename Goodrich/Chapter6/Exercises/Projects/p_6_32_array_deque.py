@@ -19,11 +19,16 @@ class ArrayDeque:
 
     def __str__(self):
         """Return stringified representation of deque."""
-        return f"{[i for i in self._data if i is not None]}"
+        deque, first, last = [i for i in self._data if i is not None], "N/A", "N/A"
+        try:
+            first, last = self.first(), self.last()
+        except EmptyError:
+            pass
+        return f"deque:\t{deque}\nfront:\t{first}\nback:\t{last}\nsize:\t{self._size}\n"
 
     def __repr__(self):
         """Return unfiltered stringified representation of deque."""
-        return f"{[i for i in self._data]}"
+        return f"{[i for i in self._data]}\n"
 
     def __len__(self):
         """Return the number of elements in the deque."""
@@ -72,8 +77,16 @@ class ArrayDeque:
         self._data[self._back] = e
         self._size += 1
 
-    def add_first(self, e):                                             # Worst case: O(n); Avg: O(n-front); Best: O(1)
+    def add_first(self, e):                                             # Amortized at O(1) via O(2n) worst case.
         """Add an element to the front of deque."""
+        if self._size == len(self._data):
+            self._resize(2 * len(self._data))
+        self._front = (self._front - 1) % len(self._data)
+        self._data[self._front] = e
+        self._size += 1
+
+    def add_first_no_wrap(self, e):                                     # Worst case: O(n); Avg: O(n-front); Best: O(1)
+        """Add an element to the front of deque by shifting rightwards."""
         if (self._front >= 1) & (self._data[self._front-1] is None):    # If index before front is vacant...
             self._front -= 1                                            # Point front index to vacant position behind.
             self._data[self._front] = e                                 # Insert element immediately.
