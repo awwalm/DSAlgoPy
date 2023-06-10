@@ -1,4 +1,4 @@
-"""Code Fragment 7.5: Implementation of a stack ADT using a singly linked list (continued in Code Fragment 7.6)."""
+"""Code Fragment 7.5: Implementation of a stack ADT using a singly linked list."""
 from typing import Union
 
 
@@ -48,14 +48,14 @@ class LinkedStack:
 
     def top(self):
         """Return (but do not remove) the element at the top of the stack.\n
-        :raises EmptyError if the stack is empty."""
+        :raises EmptyError: if the stack is empty."""
         if self.is_empty():
             raise EmptyError("Stack is empty")
         return self._head.__element                          # Top of stack is at head of list.
 
     def pop(self):
         """Remove and return the element from the top of the stack (i.e. LIFO)\n
-        :raises EmptyError if the stack is empty."""
+        :raises EmptyError: if the stack is empty."""
         if self.is_empty():
             raise EmptyError("Stack is empty")
         answer = self._head.__element
