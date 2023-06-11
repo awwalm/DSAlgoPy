@@ -27,10 +27,10 @@ instance members must be provided.
 
 - Implemening Stacks and Queues via Linked Lists:
 <br>
-  - Each `_Node` object [^1],[^2] used in structuring the linked list is unaware if it's the head or tail node.
+  - Each `_Node` object[^1],[^2] used in structuring the linked list is unaware if it's the head or tail node.
   - Only the controller or linked list object knows the head and/or tail reference(s).
 
 # References
 
-[^1]: [`linked_queue.py#LinkedQueue#_Node`](/Goodrich/Chapter7/linked_queue.py) <br>
-[^2]: [`linked_stack.py#LinkedStack#_Node`](/Goodrich/Chapter7/linked_stack.py)
+[^1]: `linked_queue.py#LinkedQueue#_Node` - [🔗](/Goodrich/Chapter7/linked_queue.py)
+[^2]: `linked_stack.py#LinkedStack#_Node` - [🔗](/Goodrich/Chapter7/linked_stack.py)
