@@ -42,7 +42,12 @@ class LinkedStack:
         return self._size == 0
 
     def push(self, e):
-        """Add element ``e`` to the top of the stack."""
+        """Add element ``e`` to the top of the stack.
+        - New element is stored as new head node.
+        - Old head nodes becomes the next node.
+        - New head node points to old head node.
+        - First invocation sets next pointer to ``None`` as it's also the tail node.
+        """
         self._head = self._Node(element=e, next=self._head)  # Create and link a new node.
         self._size += 1
 
