@@ -1,10 +1,6 @@
 """Code Fragment 7.11/.12: A Python Node class for use in a doubly linked list."""
 
 
-class EmptyError(Exception):
-    ...
-
-
 class _DoublyLinkedBase:
     """A base class providing a doubly linked list representation."""
 
@@ -43,7 +39,7 @@ class _DoublyLinkedBase:
         def __next(self, value):
             self._next = value
 
-    # Doubly Linked Base methods ----------------------------------------------------------
+    # _DoublyLinkedBase methods ------------------------------------------------------------
     def __init__(self):
         """Create an empty list."""
         self._header: _DoublyLinkedBase._Node = self._Node(None, None, None)
