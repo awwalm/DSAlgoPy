@@ -1,4 +1,6 @@
 """Code Fragment 7.11/.12: A Python Node class for use in a doubly linked list."""
+from __future__ import annotations
+from typing import Union
 
 
 class _DoublyLinkedBase:
@@ -7,13 +9,16 @@ class _DoublyLinkedBase:
     # Nested _Node class -----------------------------------------------------------------
     class _Node:
         """Lightweight, nonpublic class for storing a doubly linked node."""
-        __slots__ = "_element", "_prev", "_next"            # Streamline memory usage.
+        __slots__ = "_element", "_prev", "_next"                        # Streamline memory usage.
 
         # noinspection PyShadowsBuiltInName
-        def __init__(self, element, prev, next):            # Initialize node's fields.
-            self._element = element                         # Reference to user's element.
-            self._prev = prev                               # Reference to previous node.
-            self._next = next                               # Reference to next node.
+        def __init__(self,                                              # Initialize node's fields.
+                     element,
+                     prev: Union[_DoublyLinkedBase._Node, None],        # Future recursive type-hinting.
+                     next: Union[_DoublyLinkedBase._Node, None]):
+            self._element = element                                     # Reference to user's element.
+            self._prev = prev                                           # Reference to previous node.
+            self._next = next                                           # Reference to next node.
 
         @property
         def __element(self):
@@ -44,9 +49,9 @@ class _DoublyLinkedBase:
         """Create an empty list."""
         self._header: _DoublyLinkedBase._Node = self._Node(None, None, None)
         self._trailer: _DoublyLinkedBase._Node = self._Node(None, None, None)
-        self._header.__next = self._trailer                 # Trailer is after header.
-        self._header.__prev = self._header                  # Header is before trailer.
-        self._size = 0                                      # Number of elements.
+        self._header.__next = self._trailer                             # Trailer is after header.
+        self._header.__prev = self._header                              # Header is before trailer.
+        self._size = 0                                                  # Number of elements.
 
     def __len__(self):
         """Return the number of elements in the list."""
@@ -58,7 +63,7 @@ class _DoublyLinkedBase:
 
     def _insert_between(self, e, predecessor: _Node, successor: _Node):
         """Add element ``e`` between two existing nodes and return new node."""
-        newest = self._Node(e, predecessor, successor)      # Linked to neighbors.
+        newest = self._Node(e, predecessor, successor)                  # Linked to neighbors.
         predecessor.__next = newest
         successor.__prev = newest
         self._size += 1
@@ -71,6 +76,6 @@ class _DoublyLinkedBase:
         predecessor.__next = successor
         successor.__prev = predecessor
         self._size -= 1
-        element = node.__element                            # Record deleted element.
-        node.__prev = node.__next = node.__element = None   # Deprecate node.
+        element = node.__element                                        # Record deleted element.
+        node.__prev = node.__next = node.__element = None               # Deprecate node.
         return element
