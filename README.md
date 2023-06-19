@@ -1,6 +1,8 @@
 # Data Structures and Algorithms (Python)
 
-A repository for practicing DS/Algo in Python using resources from Rance D. Necaise[^1], as well as Michael T. Goodrich et al[^2].
+A repository for practicing DS/Algo in Python using resources from 
+Rance D. Necaise<span title="Rance D. Necaise - Data Structures and Algorithms using Python">[^1]</span>,
+as well as Michael T. Goodrich et al.<span title="Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser - Data Structures & Algorithms in Python">[^2]</span>.
 
 ### Contents
 
@@ -26,10 +28,12 @@ A repository for practicing DS/Algo in Python using resources from Rance D. Neca
 
 After cloning the repository, you may run the programs using **PyCharm** or an IDE/editor of your choice. 
 
-### Prerequisites
+### Release Notes
 
-- **Python**: Python 3.6 is used up until commit [``36f2d11``](https://github.com/awwalm/DSAlgoPy/commit/36f2d11710d4f0f8b1146a9aa7d58434a3fd0cb0).
-Further commits may use Python 3.10 features. It is adviced to run the source code on the higher version.
+- Python 3.6 is used up until commit 36f2d11. Subsequent commits use Python 3.10 (or higher) features.
+
+- Commit 4466df5 uses <span title=" __future__ — Future Statement Definitions - Official Python Documentation">`__future__.annotations`[^3]</span> 
+to set recursive type-hinting (requires Python 3.7 or higher).
 
 ## Contributing
 
@@ -48,3 +52,5 @@ This project is licensed under the [GNU GPL v3](https://choosealicense.com/licen
 [^1]: **Rance D. Necaise** - [Data Structures and Algorithms using Python](https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/0470618299)
 
 [^2]: **Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser** - [Data Structures & Algorithms in Python](https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python-p-9781118290279)
+
+[^3]: **`__future__` — Future Statement Definitions** - [_Official Python Documentation_](https://docs.python.org/3.11/library/__future__.html)
