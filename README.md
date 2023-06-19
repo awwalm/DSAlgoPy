@@ -30,9 +30,11 @@ After cloning the repository, you may run the programs using **PyCharm** or an I
 
 ### Release Notes
 
-- Python 3.6 is used up until commit 36f2d11. Subsequent commits use Python 3.10 (or higher) features.
+- Python 3.6 is used up until commit [`36f2d11`](https://github.com/awwalm/DSAlgoPy/commit/36f2d11). 
+Subsequent commits use Python 3.10 (or higher) features.
 
-- Commit 4466df5 uses <span title=" __future__ — Future Statement Definitions - Official Python Documentation">`__future__.annotations`[^3]</span> 
+- Commit [`4466df5`](https://github.com/awwalm/DSAlgoPy/commit/4466df5) uses 
+<span title=" __future__ — Future Statement Definitions - Official Python Documentation">`__future__.annotations`[^3]</span> 
 to set recursive type-hinting (requires Python 3.7 or higher).
 
 ## Contributing
@@ -47,7 +49,7 @@ This project is licensed under the [GNU GPL v3](https://choosealicense.com/licen
 
 * Hat tip to anyone whose code was used
 
-<big><big><big>**References**</big></big></big>
+<!-- Footnotes -->
 
 [^1]: **Rance D. Necaise** - [Data Structures and Algorithms using Python](https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/0470618299)
 
