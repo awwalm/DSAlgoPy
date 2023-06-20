@@ -37,6 +37,8 @@ Subsequent commits use Python 3.10 (or higher) features.
 <span title=" __future__ — Future Statement Definitions - Official Python Documentation">`__future__.annotations`[^3]</span> 
 to set recursive type-hinting (requires Python 3.7 or higher).
 
+- [`progression.py`](Goodrich/Chapter2/progression.py) uses the `@override` decorator[^4] to emphasize inheritance.
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -51,8 +53,14 @@ This project is licensed under the [GNU GPL v3](https://choosealicense.com/licen
 
 <!-- Footnotes -->
 
-[^1]: **Rance D. Necaise** - [Data Structures and Algorithms using Python](https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/0470618299)
+[^1]: **Rance D. Necaise** - [Data Structures and Algorithms using Python](
+                            https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/0470618299)
 
-[^2]: **Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser** - [Data Structures & Algorithms in Python](https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python-p-9781118290279)
+[^2]: **Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser** - [Data Structures & Algorithms in Python](
+                            https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python-p-9781118290279)
 
-[^3]: **`__future__` — Future Statement Definitions** - [_Official Python Documentation_](https://docs.python.org/3.11/library/__future__.html)
+[^3]: **`__future__` — Future Statement Definitions** - [Official Python Documentation](
+                            https://docs.python.org/3.11/library/__future__.html)
+
+[^4]: **Mikko Korpela** - [`overrides` — PyPI](
+                            https://pypi.org/project/overrides/)
