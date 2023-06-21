@@ -6,23 +6,23 @@ as well as Michael T. Goodrich et al.<span title="Michael T. Goodrich, Roberto T
 
 ### Contents
 
-| Folders    | Corresponding Directories            [^1] |     | [^2]                                             |
-|:-----------|:------------------------------------------|-----|:-------------------------------------------------|
-| Chapter 1  | [Abstract Data Types](RDNecaise/Chapter1) |     | [Python Primer](Goodrich/Chapter1)               |
-| Chapter 2  | [Arrays](RDNecaise/Chapter2)              |     | [Object-Oriented Programming](Goodrich/Chapter2) |
-| Chapter 3  | [Sets and Maps](RDNecaise/Chapter3)       |     | [Algorithm Analysis](Goodrich/Chapter3)          |
-| Chapter 4  | Algorithm Analysis                        |     | [Recursion](Goodrich/Chapter4)                   |
-| Chapter 5  | Searching and Sorting                     |     | [Array-Based Sequences](Goodrich/Chapter5)       |
-| Chapter 6  | Linked Structures                         |     | [Stacks, Queues, and Deques](Goodrich/Chapter6)  |
-| Chapter 7  | Stacks                                    |     | [Linked Lists](Goodrich/Chapter7)                |
-| Chapter 8  | [Queues](RDNecaise/Chapter8)              |     | Trees                                            |
-| Chapter 9  | Advanced Linked Lists                     |     | Priority Queues                                  |
-| Chapter 10 | Recursion                                 |     | Maps, Hash Tables, and Skip Lists                |
-| Chapter 11 | Hash Tables                               |     | Search Trees                                     |
-| Chapter 12 | Advanced Sorting                          |     | Sorting and Selection                            |
-| Chapter 13 | Binary Trees                              |     | Text Processing                                  |
-| Chapter 14 | Search Tress                              |     | Graph Algorithms                                 |
-| Chapter 15 |                                           |     | Memory Management and B-Trees                    |
+| Folders    | Corresponding Directories            [^1] | [^2]                                             |
+|:-----------|:------------------------------------------|:-------------------------------------------------|
+| Chapter 1  | [Abstract Data Types](RDNecaise/Chapter1) | [Python Primer](Goodrich/Chapter1)               |
+| Chapter 2  | [Arrays](RDNecaise/Chapter2)              | [Object-Oriented Programming](Goodrich/Chapter2) |
+| Chapter 3  | [Sets and Maps](RDNecaise/Chapter3)       | [Algorithm Analysis](Goodrich/Chapter3)          |
+| Chapter 4  | Algorithm Analysis                        | [Recursion](Goodrich/Chapter4)                   |
+| Chapter 5  | Searching and Sorting                     | [Array-Based Sequences](Goodrich/Chapter5)       |
+| Chapter 6  | Linked Structures                         | [Stacks, Queues, and Deques](Goodrich/Chapter6)  |
+| Chapter 7  | Stacks                                    | [Linked Lists](Goodrich/Chapter7)                |
+| Chapter 8  | [Queues](RDNecaise/Chapter8)              | Trees                                            |
+| Chapter 9  | Advanced Linked Lists                     | Priority Queues                                  |
+| Chapter 10 | Recursion                                 | Maps, Hash Tables, and Skip Lists                |
+| Chapter 11 | Hash Tables                               | Search Trees                                     |
+| Chapter 12 | Advanced Sorting                          | Sorting and Selection                            |
+| Chapter 13 | Binary Trees                              | Text Processing                                  |
+| Chapter 14 | Search Tress                              | Graph Algorithms                                 |
+| Chapter 15 |                                           | Memory Management and B-Trees                    |
 
 ## Getting Started
 
@@ -37,7 +37,7 @@ Subsequent commits use Python 3.10 (or higher) features.
 <span title=" __future__ — Future Statement Definitions - Official Python Documentation">`__future__.annotations`[^3]</span> 
 to set recursive type-hinting (requires Python 3.7 or higher).
 
-- [`progression.py`](Goodrich/Chapter2/progression.py) uses the `@override` decorator[^4] to emphasize inheritance.
+- [`progression.py`](Goodrich/Chapter2/progression.py) uses the `@override` decorator[^4] to emphasize polymorphism.
 
 ## Contributing
 
