@@ -25,10 +25,22 @@ instance members must be provided.
 
 ## Chpater 7: Linked Lists
 
-- Implemening Stacks and Queues via Linked Lists:
+- **Implemening Stacks and Queues via Linked Lists**:
 <br>
 Each `_Node` object [^1],[^2] used in structuring the linked list is unaware if it's the head or tail node. 
-Only the controller or linked list object knows the head and tail references
+Only the controller or linked list object knows the head and tail references.
+<hr>
+
+- **The Positional List ADT**:
+<br>
+As useless as it seems (this assumption proves to be ultimately true as the ADT serves no unique purpose), 
+this data structure is just a facility for inserting and removing at any location in a doubly linked list.
+It can be argued that the accessing a specific node (which at this time of writing) via a selected routine
+can be done in constant time, but I maitain the position that this is **NOT** <i>O</i>(1) time however.
+<br>
+<blockquote>Consider continuously reassigning a node variable to the next node until the correct one is detected.
+Is this any different from iterating until arriving at an item (<i>O(m <= n)</i>) ? Or perhaps, do we approximate 
+this to "constant time instant retrieval" (<i>O(k >= 1)</i>) ?</blockquote>
 
 # References
 
