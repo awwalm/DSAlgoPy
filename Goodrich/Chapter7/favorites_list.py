@@ -33,7 +33,7 @@ class FavoritesList:
             walk = self._data.after(walk)
         return walk
 
-    def _move_up(self, p):
+    def _move_up(self, p: PositionalList.Position):
         """Move item at ``Position`` p earlier in the list based on access count."""
         if p != self._data.first():                         # Consider moving...
             cnt = p.element().__count__
