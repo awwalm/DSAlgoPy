@@ -21,27 +21,27 @@ class _DoublyLinkedBase:
             self._next = next                                           # Reference to next node.
 
         @property
-        def __element(self):
+        def element(self):
             return self._element
 
         @property
-        def __prev(self):
+        def prev(self):
             return self._prev
 
         @property
-        def __next(self):
+        def next(self):
             return self._next
 
-        @__element.setter
-        def __element(self, value):
+        @element.setter
+        def element(self, value):
             self._element = value
 
-        @__prev.setter
-        def __prev(self, value):
+        @prev.setter
+        def prev(self, value):
             self._prev = value
 
-        @__next.setter
-        def __next(self, value):
+        @next.setter
+        def next(self, value):
             self._next = value
 
     # _DoublyLinkedBase methods ------------------------------------------------------------
@@ -49,8 +49,8 @@ class _DoublyLinkedBase:
         """Create an empty list."""
         self._header: _DoublyLinkedBase._Node = self._Node(None, None, None)
         self._trailer: _DoublyLinkedBase._Node = self._Node(None, None, None)
-        self._header.__next = self._trailer                             # Trailer is after header.
-        self._header.__prev = self._header                              # Header is before trailer.
+        self._header.next = self._trailer                               # Trailer is after header.
+        self._header.prev = self._header                                # Header is before trailer.
         self._size = 0                                                  # Number of elements.
 
     def __len__(self):
@@ -64,18 +64,18 @@ class _DoublyLinkedBase:
     def _insert_between(self, e, predecessor: _Node, successor: _Node):
         """Add element ``e`` between two existing nodes and return new node."""
         newest = self._Node(e, predecessor, successor)                  # Linked to neighbors.
-        predecessor.__next = newest
-        successor.__prev = newest
+        predecessor.next = newest
+        successor.prev = newest
         self._size += 1
         return newest
 
     def _delete_node(self, node: _Node):
         """Delete nonsentinel node from the list and return its element."""
-        predecessor = node.__prev
-        successor = node.__next
-        predecessor.__next = successor
-        successor.__prev = predecessor
+        predecessor = node.prev
+        successor = node.next
+        predecessor.next = successor
+        successor.prev = predecessor
         self._size -= 1
-        element = node.__element                                        # Record deleted element.
-        node.__prev = node.__next = node.__element = None               # Deprecate node.
+        element = node.element                                          # Record deleted element.
+        node.prev = node.next = node.element = None                     # Deprecate node.
         return element
