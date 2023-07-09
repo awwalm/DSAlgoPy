@@ -27,7 +27,7 @@ class PositionalList(_DoublyLinkedBase):
 
         def element(self):
             """Return the element stored at this ``Position``."""
-            return self._node.__element
+            return self._node.element
 
         def __eq__(self, other: PositionalList.Position):
             """Return ``True`` if other is a ``Position`` representing the same location."""
@@ -45,7 +45,7 @@ class PositionalList(_DoublyLinkedBase):
             raise TypeError("p must be proper Position type")
         if p.__container is not self:
             raise ValueError("p does not belong to this container")
-        if p.__node.__next is None:
+        if p.__node.next is None:
             raise ValueError("p is no longer valid")                    # RIP bro, you'll be missed.
         return p.__node
 
@@ -59,21 +59,21 @@ class PositionalList(_DoublyLinkedBase):
     # Accessors --------------------------------------------------------------------------------
     def first(self):
         """Return the first ``Position`` in the list (or ``None`` if the list is empty)."""
-        return self._make_position(self._header.__next)
+        return self._make_position(self._header.next)
 
     def last(self):
         """Return the last ``Position`` in the list (or ``None`` if the list is empty)."""
-        return self._make_position(self._trailer.__prev)
+        return self._make_position(self._trailer.prev)
 
     def before(self, p: Position):
         """Return the ``Position`` just before Position ``p`` (or ``None`` if p is first)."""
         node = self._validate(p)                                        # Crash the program if invalid.
-        return self._make_position(node.__prev)
+        return self._make_position(node.prev)
 
     def after(self, p: Position):
         """Return the ``Position`` just after Position ``p`` (or ``None`` if p is last)."""
         node = self._validate(p)
-        return self._make_position(node.__next)
+        return self._make_position(node.next)
 
     def __iter__(self):
         """Generate a forward iteration of the elements of the list."""
@@ -91,21 +91,21 @@ class PositionalList(_DoublyLinkedBase):
 
     def add_first(self, e):
         """Insert element ``e`` at the front of the list and return new ``Position``."""
-        return self._insert_between(e, self._header, self._header.__next)
+        return self._insert_between(e, self._header, self._header.next)
 
     def add_last(self, e):
         """Insert element e at the back of the list and return new ``Position``."""
-        return self._insert_between(e, self._trailer.__prev, self._trailer)
+        return self._insert_between(e, self._trailer.prev, self._trailer)
 
     def add_before(self, p, e):
         """Insert element e into list before ``Position p`` and return new ``Position``."""
         original = self._validate(p)
-        return self._insert_between(e, original.__prev, original)
+        return self._insert_between(e, original.prev, original)
 
     def add_after(self, p, e):
         """Insert element e into list after ``Position p`` and return new `Position``."""
         original = self._validate(p)
-        return self._insert_between(e, original, original.__next)
+        return self._insert_between(e, original, original.next)
 
     def delete(self, p):
         """Remove and return the element at Position ``p``."""
@@ -116,6 +116,6 @@ class PositionalList(_DoublyLinkedBase):
         """Replace the element at ``Position p`` with ``e``.\n
         :return: the element formerly at Position p."""
         original = self._validate(p)
-        old_value = original.__element                                  # Temporarily store old element.
-        original.__element = e                                          # Replace with new element.
+        old_value = original.element                                  # Temporarily store old element.
+        original.element = e                                          # Replace with new element.
         return old_value                                                # Return the old element value.
