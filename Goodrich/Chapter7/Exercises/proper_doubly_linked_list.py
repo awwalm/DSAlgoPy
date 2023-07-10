@@ -18,12 +18,12 @@ class DoublyLinkedList(SinglyLinkedList):
         - Inherits from the ``SinglyLinkedList``'s internal ``_Node`` class.
         - Extends the ``_Node`` class with a ``_prev`` reference.
         """
-        __slots__ = "_element", "_prev", "_next"                            # Streamline memory usage.
+        __slots__ = "_element", "_prev", "_next"          # Streamline memory usage.
 
         # noinspection PyShadowsBuiltInName
-        def __init__(self,
-                     element,
-                     next: Union[DoublyLinkedList._Node, None]):            # @TODO: Make init accept prev argument.
+        def __init__(self, element, next: Union[DoublyLinkedList._Node, None]):
+            """Inherits from ``SinglyLinkedList._Node.__init__()``, ``prev`` is set separately."""
+            # @TODO: Make __init__() accept prev argument.
             super(DoublyLinkedList._Node, self).__init__(element, next)
             self._prev = next
 

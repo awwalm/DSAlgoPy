@@ -18,22 +18,41 @@ def find_second_to_last(L: SinglyLinkedList):
         cur = cur.next
 
 
+def print_nodes(L: SinglyLinkedList):
+    cur = L.head
+    while cur is not None:
+        print(cur.element)
+        cur = cur.next
+
+
+def populate_nodes(L: SinglyLinkedList, limit: int):
+    cur = L.head
+    assert cur.element < limit, "limit must be greater than head value"
+    while cur is not None:
+        L.insert_after(cur.element + 1, cur)
+        cur = cur.next
+        if cur.element == limit:
+            break
+
+
 l = SinglyLinkedList(1)
-h = l.head
 
 # Populate Linked List with values 1 to 10.
-while h is not None:
-    l.insert_after(h.element + 1, h)
-    h = h.next
-    if h.element == 10:
-        break
+populate_nodes(l, 10)
 
 # Print all node elements (should print 1 to 10)
-h = l.head
-while h is not None:
-    print(h.element)
-    h = h.next
+print_nodes(l)
 
 # And now for my final trick...print 9!
 n = find_second_to_last(l)
 print(n.element)
+
+# One more trick: insert 2.5 before 3, and 9.5 after 9.
+curnode = l.head
+while curnode is not None:
+    if curnode.element == 3:
+        l.insert_before(2.5, curnode)
+    if curnode.element == 9:
+        l.insert_after(9.5, curnode)
+    curnode = curnode.next
+print_nodes(l)
