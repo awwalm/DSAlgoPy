@@ -68,9 +68,11 @@ class SinglyLinkedList:
         inserted = False
         if self.is_empty():                                     # If Linked List is empty, raise an exception.
             raise EmptyError("Linked List is empty")
-        elif self._size == 1 and guide == self._header:         # If Linked List has singleton node and guide is head...
+        elif self._size == 1 or guide == self._header:         # If Linked List has singleton node and guide is head...
             self._header = newest                               # Make new node the header, pointed next to old head.
+            inserted = True
         else:                                                   # If more than one node detected...
+            cur = cur.next
             while cur is not None:                              # While current node is valid...
                 if cur.next == guide:                           # If node ahead of current node is guide...
                     cur.next = newest                           # Point the node before guide next to a new node.
@@ -78,8 +80,7 @@ class SinglyLinkedList:
                     break                                       # Insertion complete, terminate loop.
                 cur = cur.next                                  # If not, keep iterating till tail.
         if not inserted:
-            raise ValueError(f"Node {guide} not in {self}")     # In case node is not found, raise an exception.
-        self._size += 1
+            raise ValueError(f"Node {guide} not in {self}")     # In case node is not found, raise an exception.        self._size += 1
         return newest
 
     def insert_after(self, e, guide: _Node):
@@ -108,7 +109,8 @@ class SinglyLinkedList:
         deleted = False
         if self.is_empty():                                     # If Linked List is empty, raise an exception.
             raise EmptyError("Linked List is empty")
-        elif self._size == 1 and node == self._header:          # If Linked List has singleton node and guide is head...
+        elif node == self._header:                              # If node to be deleted is head...
+            self._header = node.next
             node.element = node.next = None                     # Deprecate node.
             deleted = True
         else:
@@ -118,6 +120,7 @@ class SinglyLinkedList:
                     node.element = node.next = None
                     deleted = True
                     break
+                cur = cur.next
         if not deleted:
             raise ValueError(f"Node {node} not in {self}")      # In case node is not found, raise an exception.
         self._size -= 1
