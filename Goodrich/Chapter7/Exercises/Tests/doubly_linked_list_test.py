@@ -1,23 +1,6 @@
 """Tests for the proper doubly linked list class."""
 
-from Goodrich.Chapter7.Exercises.proper_doubly_linked_list import DoublyLinkedList
-
-
-def print_nodes(L: DoublyLinkedList):
-    cur = L.head()
-    while cur is not None:
-        print(cur.element)
-        cur = cur.next
-
-
-def populate_nodes(L: DoublyLinkedList, limit: int):
-    cur = L.head()
-    assert cur.element < limit, "limit must be greater than head value"
-    while cur is not None:
-        L.insert_after(cur.element + 1, cur)
-        cur = cur.next
-        if cur.element >= limit:
-            break
+from Goodrich.Chapter7.Exercises.Utility.utils import *
 
 
 # Initialize and populate a doubly linked list.
@@ -33,6 +16,10 @@ while c is not None:
         l.insert_after(5.75, c)
         break
     c = c.next
+print_nodes(l)
+
+# Insert 0.25 before head node.
+l.insert_before(0.25, l.head())
 print_nodes(l)
 
 # Delete the additional nodes above.
@@ -53,3 +40,13 @@ while c is not None:
         break
     c = c.next
 print(l.head().element)
+
+# One more trick: insert 2.5 before 3, and 9.5 after 9.
+curnode = l.head()
+while curnode is not None:
+    if curnode.element == 3:
+        l.insert_before(2.5, curnode)
+    if curnode.element == 9:
+        l.insert_after(9.5, curnode)
+    curnode = curnode.next
+print_nodes(l)
