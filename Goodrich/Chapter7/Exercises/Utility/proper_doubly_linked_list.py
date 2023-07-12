@@ -6,7 +6,7 @@
 from __future__ import annotations
 from typing import Union
 from overrides import override
-from Goodrich.Chapter7.Exercises.proper_singly_linked_list import SinglyLinkedList, EmptyError
+from Goodrich.Chapter7.Exercises.Utility.proper_singly_linked_list import SinglyLinkedList, EmptyError
 
 
 class DoublyLinkedList(SinglyLinkedList):
@@ -56,7 +56,7 @@ class DoublyLinkedList(SinglyLinkedList):
         """Insert element ``e`` before a ``guide`` node and return new node."""
         if self.is_empty():
             raise EmptyError("Linked List is empty")
-        elif self._size == 1 and guide == self._header:
+        elif self._size == 1 or guide == self._header:
             newest = self._Node(e, self._header)
             newest.prev = None
             self._header.prev = self._header = newest
