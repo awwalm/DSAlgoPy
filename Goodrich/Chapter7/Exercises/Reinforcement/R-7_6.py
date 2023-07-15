@@ -6,11 +6,8 @@ from Goodrich.Chapter7.Exercises.Utility.utils import *
 
 def from_same_list(x, y):
     """:type x: CircularSinglyLinkedList._Node
-       :type y: CircularSinglyLinkedList._Node
-
-       See Also
-       --------
-       ``Goodrich.Chapter7.Exercises.R-7_6_bonus.from_identical_list``
+    :type y: CircularSinglyLinkedList._Node\n
+    See Also: ``Goodrich.Chapter7.Exercises.R-7_6_bonus.from_identical_list``
     """
     xhead = x                                 # Assume x node as the head (since the list is circular).
     while (x, y) != (None, None):             # `while True` will also suffice (circularly linked nodes are never None).

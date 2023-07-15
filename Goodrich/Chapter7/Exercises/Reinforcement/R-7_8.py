@@ -7,7 +7,7 @@ from Goodrich.Chapter7.doubly_linked_list import _DoublyLinkedBase
 
 
 class DoublyLinkedList(_DoublyLinkedBase):
-    """Small ``DoublyLinkedList`` subclass of the base provided in the book."""
+    """Compact ``DoublyLinkedList`` subclass of the base provided in the book."""
     def __init__(self):
         super().__init__()
 
@@ -17,26 +17,33 @@ class DoublyLinkedList(_DoublyLinkedBase):
 
     @property
     def tail(self):
-        return self._header.prev
+        return self._trailer.prev
 
     def insert_between(self, e, predecessor, successor):
         super()._insert_between(e, predecessor, successor)
 
 
+# noinspection PyProtectedMember
 def middle(L: DoublyLinkedList):
-    """Evaluates the middle node of a doubly linked list via string parsing.
+    """Evaluates the middle node of a doubly linked list via simultaneous link hopping.
+    Executes in O(n/2) time, where n = number of nodes in ``L``.\n
     :rtype: DoublyLinkedList._Node
-    Executes in O(n/2) time, where n = number of nodes in ``L``.
     """
-    mid_index = ".next" * (len(L)//2)
-    return eval(f"L.head{mid_index}")
+    ch, ct = L.head, L.tail
+    while ch is not L._trailer:
+        ch = ch.next
+        if ch == ct:
+            return ch.prev
+        ct = ct.prev
 
 
 # Instantiate doubly linked list and populate incrementally from 1 to 10.
 dbll = DoublyLinkedList()
-cur = dbll.head
+# noinspection PyProtectedMember
+cur = dbll._header
 for i in range(1, 11):
-    dbll.insert_between(i, cur, dbll.tail)
+    # noinspection PyProtectedMember
+    dbll.insert_between(i, cur, dbll._trailer)
     cur = cur.next
 
 # Print element of mid node, i.e. 5.
@@ -45,7 +52,8 @@ print(middle(dbll).element)
 # Let's try that again with odd node counts.
 cur = dbll.tail.prev
 for i in range(len(dbll) + 1, 20):
-    dbll.insert_between(i, cur, dbll.tail)
+    # noinspection PyProtectedMember
+    dbll.insert_between(i, cur, dbll._trailer)
     cur = cur.next
 
 # Print element of mid node, i.e. 9.

@@ -6,7 +6,9 @@ from Goodrich.Chapter7.Exercises.Utility.utils import *
 
 def from_identical_list(x, y):
     """:type x: CircularSinglyLinkedList._Node
-       :type y: CircularSinglyLinkedList._Node"""
+    :type y: CircularSinglyLinkedList._Node\n
+    See Also: ``Goodrich.Chapter7.Exercises.R-7_6.from_same_list``
+    """
     xhead = yhead = None
     while (x.element, y.element) != (None, None):
         if x.element == y.element:
