@@ -1,7 +1,7 @@
 """Code Fragment 7.14/.15/.16: A ``PositionalList`` class based on a doubly linked list."""
 from __future__ import annotations
 from overrides import override
-from doubly_linked_list import _DoublyLinkedBase
+from Goodrich.Chapter7.doubly_linked_list import _DoublyLinkedBase
 
 
 class PositionalList(_DoublyLinkedBase):
