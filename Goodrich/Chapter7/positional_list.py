@@ -18,11 +18,11 @@ class PositionalList(_DoublyLinkedBase):
             self._node = node
 
         @property
-        def __container(self):
+        def container(self):
             return self._container
 
         @property
-        def __node(self):
+        def node(self):
             return self._node
 
         def element(self):
@@ -31,7 +31,7 @@ class PositionalList(_DoublyLinkedBase):
 
         def __eq__(self, other: PositionalList.Position):
             """Return ``True`` if other is a ``Position`` representing the same location."""
-            return type(other) is type(self) and other.__node is self._node
+            return type(other) is type(self) and other.node is self._node
 
         def __ne__(self, other):
             """Return ``True`` if other does not represent the same location."""
@@ -43,18 +43,18 @@ class PositionalList(_DoublyLinkedBase):
         :raises ValueError | TypeError: if p is not a Position object or belongs to other container."""
         if not isinstance(p, self.Position):
             raise TypeError("p must be proper Position type")
-        if p.__container is not self:
+        if p.container is not self:
             raise ValueError("p does not belong to this container")
-        if p.__node.next is None:
-            raise ValueError("p is no longer valid")                    # RIP bro, you'll be missed.
-        return p.__node
+        if p.node.next is None:
+            raise ValueError("p is no longer valid")                # RIP bro, you'll be missed.
+        return p.node
 
     def _make_position(self, node: _DoublyLinkedBase._Node):
         """Return ``Position`` instance for a given ``node`` (or ``None`` if sentinel)."""
-        if node is self._header or node is self._trailer:               # Boundary violation.
+        if node is self._header or node is self._trailer:           # Boundary violation.
             return None
         else:
-            return self.Position(self, node)                            # Legitimate position.
+            return self.Position(self, node)                        # Legitimate position.
 
     # Accessors --------------------------------------------------------------------------------
     def first(self):
@@ -67,7 +67,7 @@ class PositionalList(_DoublyLinkedBase):
 
     def before(self, p: Position):
         """Return the ``Position`` just before Position ``p`` (or ``None`` if p is first)."""
-        node = self._validate(p)                                        # Crash the program if invalid.
+        node = self._validate(p)                                     # Crash the program if invalid.
         return self._make_position(node.prev)
 
     def after(self, p: Position):
@@ -79,7 +79,7 @@ class PositionalList(_DoublyLinkedBase):
         """Generate a forward iteration of the elements of the list."""
         cursor = self.first()
         while cursor is not None:
-            yield cursor.element()                                      # Generator.
+            yield cursor.element()                                   # Generator.
             cursor = self.after(cursor)
 
     # Mutators --------------------------------------------------------------------------------
@@ -110,12 +110,12 @@ class PositionalList(_DoublyLinkedBase):
     def delete(self, p):
         """Remove and return the element at Position ``p``."""
         original = self._validate(p)
-        return self._delete_node(original)                              # Inherited method returns element
+        return self._delete_node(original)                          # Inherited method returns element
 
     def replace(self, p, e):
         """Replace the element at ``Position p`` with ``e``.\n
         :return: the element formerly at Position p."""
         original = self._validate(p)
-        old_value = original.element                                  # Temporarily store old element.
-        original.element = e                                          # Replace with new element.
-        return old_value                                                # Return the old element value.
+        old_value = original.element                                # Temporarily store old element.
+        original.element = e                                        # Replace with new element.
+        return old_value                                            # Return the old element value.
