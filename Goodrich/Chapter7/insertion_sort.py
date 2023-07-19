@@ -1,5 +1,5 @@
 """Code Fragment 7.17: Python code for performing insertion-sort on a positional list."""
-from positional_list import PositionalList
+from Goodrich.Chapter7.positional_list import PositionalList
 
 
 def insertion_sort(L: PositionalList):
