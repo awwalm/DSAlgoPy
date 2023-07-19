@@ -1,5 +1,5 @@
 """Code Fragment 7.13: Implementation of a LinkedDeque class that inherits from the DoublyLinkedBase class."""
-from doubly_linked_list import _DoublyLinkedBase
+from doubly_linked_base import _DoublyLinkedBase
 
 
 class EmptyError(Exception):
