@@ -49,9 +49,9 @@ class _DoublyLinkedBase:
         """Create an empty list."""
         self._header: _DoublyLinkedBase._Node = self._Node(None, None, None)
         self._trailer: _DoublyLinkedBase._Node = self._Node(None, None, None)
-        self._header.next = self._trailer                               # Trailer is after header.
-        self._header.prev = self._header                                # Header is before trailer.
-        self._size = 0                                                  # Number of elements.
+        self._header.next = self._trailer                     # Trailer is after header.
+        self._header.prev = self._header                      # Header is before trailer.
+        self._size = 0                                        # Number of elements.
 
     def __len__(self):
         """Return the number of elements in the list."""
@@ -63,7 +63,7 @@ class _DoublyLinkedBase:
 
     def _insert_between(self, e, predecessor: _Node, successor: _Node):
         """Add element ``e`` between two existing nodes and return new node."""
-        newest = self._Node(e, predecessor, successor)                  # Linked to neighbors.
+        newest = self._Node(e, predecessor, successor)        # Linked to neighbors.
         predecessor.next = newest
         successor.prev = newest
         self._size += 1
@@ -76,6 +76,20 @@ class _DoublyLinkedBase:
         predecessor.next = successor
         successor.prev = predecessor
         self._size -= 1
-        element = node.element                                          # Record deleted element.
-        node.prev = node.next = node.element = None                     # Deprecate node.
+        element = node.element                                # Record deleted element.
+        node.prev = node.next = node.element = None           # Deprecate node.
         return element
+
+    # Exercise C-7.33
+    def reverse(self):
+        curnode, prevnode = self._header, None
+        while curnode is not None:
+            nextnode = curnode.next
+            curnode.prev = nextnode
+            curnode.next = prevnode
+            prevnode = curnode
+            curnode = nextnode
+        oldheader = self._header
+        oldtrailer = self._trailer
+        self._header = oldtrailer
+        self._trailer = oldheader
