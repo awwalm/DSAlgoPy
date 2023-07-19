@@ -1,7 +1,7 @@
 """Code Fragment 7.14/.15/.16: A ``PositionalList`` class based on a doubly linked list."""
 from __future__ import annotations
 from overrides import override
-from Goodrich.Chapter7.doubly_linked_list import _DoublyLinkedBase
+from Goodrich.Chapter7.doubly_linked_base import _DoublyLinkedBase
 
 
 class PositionalList(_DoublyLinkedBase):
@@ -46,15 +46,15 @@ class PositionalList(_DoublyLinkedBase):
         if p.container is not self:
             raise ValueError("p does not belong to this container")
         if p.node.next is None:
-            raise ValueError("p is no longer valid")                # RIP bro, you'll be missed.
+            raise ValueError("p is no longer valid")        # RIP bro, you'll be missed.
         return p.node
 
     def _make_position(self, node: _DoublyLinkedBase._Node):
         """Return ``Position`` instance for a given ``node`` (or ``None`` if sentinel)."""
-        if node is self._header or node is self._trailer:           # Boundary violation.
+        if node is self._header or node is self._trailer:   # Boundary violation.
             return None
         else:
-            return self.Position(self, node)                        # Legitimate position.
+            return self.Position(self, node)                # Legitimate position.
 
     # Accessors --------------------------------------------------------------------------------
     def first(self):
@@ -67,7 +67,7 @@ class PositionalList(_DoublyLinkedBase):
 
     def before(self, p: Position):
         """Return the ``Position`` just before Position ``p`` (or ``None`` if p is first)."""
-        node = self._validate(p)                                     # Crash the program if invalid.
+        node = self._validate(p)                            # Crash the program if invalid.
         return self._make_position(node.prev)
 
     def after(self, p: Position):
@@ -79,11 +79,40 @@ class PositionalList(_DoublyLinkedBase):
         """Generate a forward iteration of the elements of the list."""
         cursor = self.first()
         while cursor is not None:
-            yield cursor.element()                                   # Generator.
+            yield cursor.element()                          # Generator.
             cursor = self.after(cursor)
 
+    # Exercise R-7.12
+    def max(self):
+        return max(self)                                    # It's iterable, don't reinvent the wheel.
+
+    # Exercise R-7.13
+    def find(self, e):
+        cur = self.first()
+        for i in self:
+            if i == e:
+                return cur
+            cur = self.after(cur)
+        raise ValueError(f"No node with element {e} in {str(self)[35:-1]}")
+
+    # Exercise R-7.14
+    def recursive_find(self, e, cur: Position):
+        if cur is None:
+            raise ValueError(f"No node with element {e} in {str(self)[35:-1]}")
+        if cur.element() == e:
+            return cur
+        return self.recursive_find(e, self.after(cur))
+
+    # Exercise R-7.15
+    def __reversed__(self):
+        """Generate a backward iteration of the elements of the list."""
+        cursor = self.last()
+        while cursor is not None:
+            yield cursor.element()
+            cursor = self.before(cursor)
+
     # Mutators --------------------------------------------------------------------------------
-    @override  # Override inherited  version Position, rather than Node.
+    @override                                               # Override inherited  version Position, rather than Node.
     def _insert_between(self, e, predecessor, successor):
         """Add element between existing nodes and return new ``Position``."""
         node = super()._insert_between(e, predecessor, successor)
@@ -110,12 +139,12 @@ class PositionalList(_DoublyLinkedBase):
     def delete(self, p):
         """Remove and return the element at Position ``p``."""
         original = self._validate(p)
-        return self._delete_node(original)                          # Inherited method returns element
+        return self._delete_node(original)                  # Inherited method returns element
 
     def replace(self, p, e):
         """Replace the element at ``Position p`` with ``e``.\n
         :return: the element formerly at Position p."""
         original = self._validate(p)
-        old_value = original.element                                # Temporarily store old element.
-        original.element = e                                        # Replace with new element.
-        return old_value                                            # Return the old element value.
+        old_value = original.element                        # Temporarily store old element.
+        original.element = e                                # Replace with new element.
+        return old_value                                    # Return the old element value.

@@ -1,6 +1,6 @@
 """R-7.9: Give a fast algorithm for concatenating two doubly linked lists L and M,
  with header and trailer sentinel nodes, into a single list L_."""
-from Goodrich.Chapter7.doubly_linked_list import _DoublyLinkedBase
+from Goodrich.Chapter7.doubly_linked_base import _DoublyLinkedBase
 
 
 # noinspection PyProtectedMember

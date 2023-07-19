@@ -3,7 +3,7 @@ the middle node of a doubly linked list with header and trailer sentinels.
 In the case of an even number of nodes, report the node slightly left of center as the “middle.”
 (Note: This method must only use link hopping; it cannot use a counter.)
 What is the running time of this method?"""
-from Goodrich.Chapter7.doubly_linked_list import _DoublyLinkedBase
+from Goodrich.Chapter7.doubly_linked_base import _DoublyLinkedBase
 
 
 class DoublyLinkedList(_DoublyLinkedBase):
@@ -25,7 +25,7 @@ class DoublyLinkedList(_DoublyLinkedBase):
 
 # noinspection PyProtectedMember
 def middle(L: DoublyLinkedList):
-    """Evaluates the middle node of a doubly linked list via simultaneous link hopping.
+    """Returns the middle node of a doubly linked list via simultaneous link hopping.
     Executes in O(n/2) time, where n = number of nodes in ``L``.\n
     :rtype: DoublyLinkedList._Node
     """
