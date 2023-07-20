@@ -13,9 +13,9 @@ as well as Michael T. Goodrich et al.<span title="Michael T. Goodrich, Roberto T
 | Chapter 3  | [Sets and Maps](RDNecaise/Chapter3)       | [Algorithm Analysis](Goodrich/Chapter3)          |
 | Chapter 4  | Algorithm Analysis                        | [Recursion](Goodrich/Chapter4)                   |
 | Chapter 5  | Searching and Sorting                     | [Array-Based Sequences](Goodrich/Chapter5)       |
-| Chapter 6  | Linked Structures                         | [Stacks, Queues, and Deques](Goodrich/Chapter6)  |
+| Chapter 6  | [Linked Structures](RDNecaise/Chapter6)   | [Stacks, Queues, and Deques](Goodrich/Chapter6)  |
 | Chapter 7  | Stacks                                    | [Linked Lists](Goodrich/Chapter7)                |
-| Chapter 8  | [Queues](RDNecaise/Chapter8)              | Trees                                            |
+| Chapter 8  | [Queues](RDNecaise/Chapter8)              | [Trees](Goodrich/Chapter8)                       |
 | Chapter 9  | Advanced Linked Lists                     | Priority Queues                                  |
 | Chapter 10 | Recursion                                 | Maps, Hash Tables, and Skip Lists                |
 | Chapter 11 | Hash Tables                               | Search Trees                                     |
