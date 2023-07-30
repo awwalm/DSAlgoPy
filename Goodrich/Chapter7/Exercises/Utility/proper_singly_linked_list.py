@@ -68,7 +68,7 @@ class SinglyLinkedList:
         inserted = False
         if self.is_empty():                                     # If Linked List is empty, raise an exception.
             raise EmptyError("Linked List is empty")
-        elif self._size == 1 or guide == self._header:         # If Linked List has singleton node and guide is head...
+        elif self._size == 1 or guide == self._header:          # If Linked List has singleton node and guide is head...
             self._header = newest                               # Make new node the header, pointed next to old head.
             inserted = True
         else:                                                   # If more than one node detected...
@@ -80,7 +80,8 @@ class SinglyLinkedList:
                     break                                       # Insertion complete, terminate loop.
                 cur = cur.next                                  # If not, keep iterating till tail.
         if not inserted:
-            raise ValueError(f"Node {guide} not in {self}")     # In case node is not found, raise an exception.        self._size += 1
+            raise ValueError(f"Node {guide} not in {self}")     # In case node is not found, raise an exception.
+        self._size += 1
         return newest
 
     def insert_after(self, e, guide: _Node):
@@ -113,7 +114,7 @@ class SinglyLinkedList:
             self._header = node.next
             node.element = node.next = None                     # Deprecate node.
             deleted = True
-        else:
+        else:                                                   # If any other node...
             while cur is not None:
                 if cur.next == node:
                     cur.next = node.next
