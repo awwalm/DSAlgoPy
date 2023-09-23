@@ -8,7 +8,7 @@ class LinkedBinaryTree(BinaryTree):
     """Linked representation of a binary tree structure."""
 
     # Private _Node class -----------------------------------------------------------------------
-    class _Node:        # Lightweight, nonpublic class for storing a node
+    class _Node:                                # Lightweight, nonpublic class for storing a node
         __slots__ = '_element', '_parent', '_left', '_right'
         def __init__(self, element, parent=None, left=None, right=None):
             self._element = element
@@ -80,7 +80,7 @@ class LinkedBinaryTree(BinaryTree):
             raise TypeError("p must be proper Position type")
         if p.container is not self:
             raise ValueError("p does not belong to this container")
-        if p.node.parent is p.node:             # Convention for deprecated nodes
+        if p.node.parent is p.node:                     # Convention for deprecated nodes
             raise ValueError("p is no longer valid")
         return p.node
 
@@ -122,9 +122,9 @@ class LinkedBinaryTree(BinaryTree):
         """Return the number of children of Position p."""
         node = self._validate(p)
         count = 0
-        if node.left is not None:               # Left child exists
+        if node.left is not None:                       # Left child exists
             count += 1
-        if node.right is not None:              # Rigt child exists
+        if node.right is not None:                      # Rigt child exists
             count += 1
         return count
 
@@ -145,7 +145,7 @@ class LinkedBinaryTree(BinaryTree):
         node = self._validate(p)
         if node.left is not None: raise ValueError("Left child exists")
         self._size += 1
-        node.left = self._Node(e, node)         # Node is its parent
+        node.left = self._Node(e, node)                 # Node is its parent
         return self._make_position(node.left)
 
     def _add_right(self, p: Position, e):
@@ -156,7 +156,7 @@ class LinkedBinaryTree(BinaryTree):
         node = self._validate(p)
         if node.right is not None: raise ValueError("Right child exists")
         self._size += 1
-        node.right = self._Node(e, node)        # Node is its parent
+        node.right = self._Node(e, node)                # Node is its parent
         return self._make_position(node.right)
 
     def _replace(self, p: Position, e):
@@ -173,11 +173,11 @@ class LinkedBinaryTree(BinaryTree):
         """
         node = self._validate(p)
         if self.num_children(p) == 2: raise ValueError("p has two children")
-        child: LinkedBinaryTree._Node = node.left if node.left else node.right      # Might be None
-        if child is not None:
-            child.parent = node.parent          # Child's grandparent becomes parent
+        child: LinkedBinaryTree._Node = node.left if node.left else node.right
+        if child is not None:                           # Might be None (see previous line)
+            child.parent = node.parent                  # Child's grandparent becomes parent
         if node is self._root:
-            self._root = child                  # Child becomes root
+            self._root = child                          # Child becomes root
         else:
             parent = node.parent
             if node is parent.left:
@@ -185,6 +185,24 @@ class LinkedBinaryTree(BinaryTree):
             else:
                 parent.right = child
         self._size -= 1
-        node.parent = node                      # Convention for deprecated node
+        node.parent = node                              # Convention for deprecated node
         return node.element
+
+    def _attach(self, p: Position, t1: LinkedBinaryTree, t2: LinkedBinaryTree):
+        """Attach trees t1 and t2 as left and right subtrees of external p."""
+        node = self._validate(p)
+        if not self.is_leaf(p): raise ValueError("position must be leaf")
+        if not type(self) is type(t1) is type(t2):      # All 3 trees must be same type
+            raise TypeError("Tree types must match")
+        self._size += len(t1) + len(t2)
+        if not t1.is_empty():                           # Attached t1 as left subtree of node
+            t1._root.parent = node
+            node.left = t1._root
+            t1._root = None                             # Set t1 instance to empty
+            t1._size = 0
+        if not t2.is_empty():                           # Attached t2 as right subtree of node
+            t2._root.parent = node
+            node.right = t2._root
+            t2._root = None                             # Set t2 instance to empty
+            t2._size = 0
 
