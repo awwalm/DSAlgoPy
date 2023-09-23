@@ -67,7 +67,7 @@ class CircularQueue:
 
     def enqueue(self, e):
         """Add an element to the back of queue."""
-        newest = self._Node(e, None)                        # Node will be new tail node.
+        newest = self._Node(e, None)                  # Node will be new tail node.
         if self.is_empty():
             newest.next = newest                            # Initialize circularly (point back to self).
         else:
