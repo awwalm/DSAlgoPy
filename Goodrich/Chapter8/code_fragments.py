@@ -31,3 +31,11 @@ def height(self, p=None):
     if p is None:
         p = self.root()
     return self._height2(p)     # Start _height2 recursion
+
+# Code Fragment 8.16: Iterting all elements of a Tree instance, based upon an iteration
+# of the positions of the tree. This code should be included in the body of the Tree class.
+def __iter__(self):
+    """Generate an iteration of the tree's elements."""
+    for p in self.positions():
+        yield p.element()
+
