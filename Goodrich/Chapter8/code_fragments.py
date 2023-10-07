@@ -39,3 +39,11 @@ def __iter__(self):
     for p in self.positions():
         yield p.element()
 
+# Code Fragment 8.23: Efficient recursion for printing indented version of a preorder traversal.
+# On a complete tree T, the recursion should be started with form preorder_indent(T, T.root(), 0).
+def preorder_indent(T, p, d):
+    """Print preorder representation of subtree of T rooted at p at depth d."""
+    print(2*d*' ' + str(p.element()))       # Use depth for indentation
+    for c in T.children(p):
+        preorder_indent(T, c, d+1)          # Child depth is d+1
+
