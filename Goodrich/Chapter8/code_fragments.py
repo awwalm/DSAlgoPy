@@ -43,7 +43,41 @@ def __iter__(self):
 # On a complete tree T, the recursion should be started with form preorder_indent(T, T.root(), 0).
 def preorder_indent(T, p, d):
     """Print preorder representation of subtree of T rooted at p at depth d."""
-    print(2*d*' ' + str(p.element()))       # Use depth for indentation
+    print(2*d*' ' + str(p.element()))           # Use depth for indentation
     for c in T.children(p):
-        preorder_indent(T, c, d+1)          # Child depth is d+1
+        preorder_indent(T, c, d+1)              # Child depth is d+1
+
+# Code Fragment 8.24: Efficient recursion for printing an indented and labeled presentation
+# of a preorder traversal.
+def preorder_label(T, p, d, path):
+    """Print labeled representation of subtree of T rooted at p at depth d."""
+    label = '.'.join(str(j+1) for j in path)    # Displayed labels are one-indexed
+    print(2*d*' ' + label, p.element())
+    path.append(0)                              # Path entries are zero-indexed
+    for c in T.children(p):
+        preorder_label(T, c, d+1, path)         # Child depth is d+1
+        path[-1] += 1
+    path.pop()
+
+# Code Fragment 8.25: Function that prints prenthetic string representation of a tree.
+def parenthesize(T, p):
+    """Print parenthesized representation of subtree of T rooted at p."""
+    print(p.element(), end='')                  # Use of end avoids trailing newline
+    if not T.is_leaf(p):
+        first_time = True
+        for c in T.children(p):
+            sep = ' (' if first_time else ', '  # Determine proper separator
+            print(sep, end='')
+            first_time = False                  # Any future passes will not be the first
+            parenthesize(T, c)                  # Recur on child
+        print(')', end='')                      # Include closing parenthesis
+
+# Code Fragment 8.26: Recursive computation of disk space for a tree.
+# We assume that a space() method of each tree reports the local space used at that position.
+def disk_space(T, p):
+    """Return total disk space for subtree of T rooted at p."""
+    subtotal = p.element().space()              # Space used at position p
+    for c in T.children(p):
+        subtotal += disk_space(T, c)            # Add child's space to subtotal
+    return subtotal
 
