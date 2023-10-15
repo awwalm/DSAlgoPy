@@ -1,11 +1,9 @@
-"""Code Fragment 8.28: An EulerTour base class providing a framework
-for performing Euler tour traversals of a tree."""
-
 from typing import Union, Any
 from Goodrich.Chapter8.tree import Tree
 from Goodrich.Chapter8.binary_tree import BinaryTree
 
-
+# Code Fragment 8.28: An EulerTour base class providing a framework
+# for performing Euler tour traversals of a tree.
 class EulerTour:
     """Abstract base class for performing Euler tour of a tree.\n
     ``_hook_previsit`` and ``_hook_postvisit`` may be overridden by subclasses.
@@ -107,3 +105,16 @@ class BinaryEulerTour(EulerTour):
     # @TODO (contd.) Thus, the assumption is it simply carries the logic for a node without siblings.
     def _hook_invisit(self, p, d, path): pass           # Can be overridden
 
+
+# Code Fragment 8.34: A BinaryLayout class that computes coordinates at which to draw positions
+# of a binary tree. We assume that the element type for the original tree supports setX and setY methods.
+class BinaryLayout(BinaryEulerTour):
+    """Class for computing (x,y) coordinates for each node of a binary tree."""
+    def __init__(self, tree):
+        super().__init__(tree)                          # Must call the parent constructor
+        self._count = 0                                 # Initialize count of processed nodes
+
+    def _hook_invisit(self, p, d, path):
+        p.element().setX(self._count)                   # x-coordinate serialized by count
+        p.element().setY(d)                             # y-coordinate is depth
+        self._count += 1                                # advance count of processed nodes
