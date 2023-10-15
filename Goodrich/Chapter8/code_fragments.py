@@ -1,7 +1,9 @@
 """Code Fragments for Chapter 8 (⚠ DO NOT EXECUTE DIRECTLY)"""
+from Goodrich.Chapter8.expression_tree import ExpressionTree
+
 
 # Code Fragment 8.3: Method depth of the Tree class.
-def depth(self, p):             # Works, but O(n^2) worst-case
+def depth(self, p):                             # Works, but O(n^2) worst-case
     """Return the number of levels separating Position p from the root."""
     if self.is_root(p):
         return 0
@@ -15,7 +17,7 @@ def _height1(self):
 
 # Code Fragment 8.5: Method _height2 for computing the height of a subtree
 # rooted at a position p of a Tree.
-def _height2(self, p):          # Time is linear (or in size) of subtree
+def _height2(self, p):                          # Time is linear (or in size) of subtree
     """Return the height of the subtree rooted a Position p."""
     if self.is_leaf(p):
         return 0
@@ -30,7 +32,7 @@ def height(self, p=None):
     """
     if p is None:
         p = self.root()
-    return self._height2(p)     # Start _height2 recursion
+    return self._height2(p)                     # Start _height2 recursion
 
 # Code Fragment 8.16: Iterting all elements of a Tree instance, based upon an iteration
 # of the positions of the tree. This code should be included in the body of the Tree class.
@@ -81,3 +83,20 @@ def disk_space(T, p):
         subtotal += disk_space(T, c)            # Add child's space to subtotal
     return subtotal
 
+# Code Fragment 8.38: Implementation of a build expression tree that produces an ExpressionTree
+# from a sequence of tokens representing an arithmetic expression.
+def build_expression_tree(tokens):
+    """Returns an ExpressionTree based upon by a tokenized expression."""
+    S = []                                      # We use Python list as stack (lazy ass)
+    for t in tokens:
+        if t in "+-x*/":                        # t is an operator symbol
+            S.append(t)                         # Push the operator symbol
+        elif t not in "()":                     # Consider t to be a literal
+            S.append(ExpressionTree(t))         # Push trivil tree storing value
+        elif t == ")":                          # Compose a new tree from three constituent parts
+            right = S.pop()                     # Right subtree as per LIFO
+            op = S.pop()                        # Operator symbol
+            left = S.pop()                      # Left subtree
+            S.append(                           #Repush tree and ignore left parenthesis
+                ExpressionTree(op, left, right))
+    return S.pop()
