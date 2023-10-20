@@ -58,3 +58,10 @@ class BinaryTree(Tree):
     def positions(self):
         """Generate an iteration of the tree's positions."""
         return self.inorder()
+
+    # Exercise R-8.10: Give a direct implementation of the num children method within the class BinaryTree.
+    def num_children(self, p: Tree.Position) -> int:
+        c = 0
+        for c in self.children(p):
+            if c is not None: c += 1
+        return c
