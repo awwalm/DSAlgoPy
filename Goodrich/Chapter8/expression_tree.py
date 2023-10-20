@@ -19,7 +19,7 @@ class ExpressionTree(LinkedBinaryTree):
         """
         super().__init__()                                      # LinkedBinaryTree initialization
         if not isinstance(token, str):
-            raise TypeError("Token must be a string")
+            raise TypeError(f"Token `{token}` must be a string")
         self._add_root(token)                                   # Use inherited, nonpublic method
         if left is not None:                                    # Presumably three-parameter form
             if token not in "+-*x/":
