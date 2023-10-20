@@ -1,7 +1,7 @@
 """Code Fragment 8.8-8.11: The ``LinkedBinaryTree`` class."""
 
 from __future__ import annotations
-from binary_tree import BinaryTree
+from Goodrich.Chapter8.binary_tree import BinaryTree
 
 
 class LinkedBinaryTree(BinaryTree):
