@@ -122,3 +122,19 @@ Given an arbitrary binary tree _T_:
    12. **The maximum number of internal nodes when _n_ is even:** _max_(_n<sub>I</sub>_) = _max_(_n<sub>L</sub>_) + 1 = _floor_(_n_ / 2) + 1
    13. **The maximum number of internal nodes when _n_ is odd:** _max_(_n<sub>I</sub>_) = _max_(_n<sub>L</sub>_) + 2 = _floor_(_n_ / 2) + 2
    14. **The minimum number of internal nodes:** _min_(_n<sub>I</sub>_) = _h_
+
+
+## R-8.20
+> Draw a binary tree _T_ that simultaneously satisfies the following:
+>   - Each internal node of _T_ stores a single character.
+>   - A _preorder_ traversal of _T_ yields EXAMFUN.
+>   - An _inorder_ traversal of _T_ yields MAFXUEN.
+```
+          E
+         / \
+        X   N
+       / \    
+      A   U    
+     / \
+    M   F
+```
