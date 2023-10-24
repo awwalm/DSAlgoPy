@@ -37,10 +37,10 @@ class ExpressionTree:
 
     def _evalTree(self, subtree, varDict):
         """See if the node is a leaf node, in which case return its value.\n
-        :var varDict - Looks like { 'a' : 5, 'b' : 12 }
+        :param varDict: Example - ``{ 'a' : 5, 'b' : 12 }``
         """
-        if subtree.left is None and subtree.right is None:      # Is the operand a literal digit?
-            if "0" <= subtree.element <= "9":
+        if subtree.left is None and subtree.right is None:      # If node is a leaf, return its value.
+            if "0" <= subtree.element <= "9":                   # Is the operand a literal digit?
                 return int(subtree.element)
             else:                                               # Or is it a variable?
                 assert subtree.element in varDict, "Invalid variable"
