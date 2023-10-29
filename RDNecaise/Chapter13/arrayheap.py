@@ -13,6 +13,10 @@ class MaxHeap:
         """Return the number of items in the heap."""
         return self._count
 
+    def capacity(self):
+        """Return the maximum capacity of the heap."""
+        return len(self._elements)
+
     def add(self, value):
         """Add a new value to the heap."""
         assert self._count < self.capacity(), "Cannot add to a full heap."
@@ -27,6 +31,7 @@ class MaxHeap:
         self._count -= 1
         self._elements[0] = self._elements[self._count]
         self._siftDown(0)                       # Sift the root value down the tree.
+        return value
 
     def _siftUp(self, ndx):
         """Sift the value at the ndx element up the tree."""
@@ -48,5 +53,8 @@ class MaxHeap:
         elif right < self._count and self._elements[right] >= self._elements[largest]:
             largest = right
         if largest != ndx:
-            swap(self._elements[ndx], self._elements[largest])
+            # swap(self._elements[ndx], self._elements[largest])
+            temp = self._elements[ndx]
+            self._elements[ndx] = self._elements[largest]
+            self._elements[largest] = temp
             self._siftDown(largest)
