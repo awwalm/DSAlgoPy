@@ -4,9 +4,9 @@ class Queue(queue.Queue):
     """Compact subclass of the inbuilt Python ``Queue`` class."""
     super().__init__(maxsize=0)
     def enqueue(self, item):
-        return self.put(item)
+        return self.put_nowait(item)
     def dequeue(self):
-        return self.get()
+        return self.get_nowait()
 
 
 class ExpressionTree:
