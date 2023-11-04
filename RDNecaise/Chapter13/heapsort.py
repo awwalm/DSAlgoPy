@@ -1,34 +1,6 @@
 from RDNecaise.Chapter13.arrayheap import MaxHeap
 
 
-def siftUp(elements, ndx):
-    """Sift the value at the ndx element up the elements array."""
-    if ndx > 0:
-        parent = ndx // 2
-        if elements[ndx] > elements[parent]:  # Swap elements
-            tmp = elements[ndx]
-            elements[ndx] = elements[parent]
-            elements[parent] = tmp
-            siftUp(elements, parent)
-
-
-def siftDown(elements, ndx):
-    """Sift the value at the ndx element down the tree."""
-    left = 2 * ndx + 1
-    right = 2 * ndx + 2
-    largest = ndx                   # Determine which node contains the larger value.
-    count = len(elements)
-    if left < count and elements[left] >= elements[largest]:
-        largest = left
-    elif right < count and elements[right] >= elements[largest]:
-        largest = right
-    if largest != ndx:
-        # swap(self._elements[ndx], self._elements[largest])
-        temp = elements[ndx]
-        elements[ndx] = elements[largest]
-        elements[largest] = temp
-        siftDown(elements, largest)
-
 def simpleHeapSort(theSeq):
     """A simple implementation of the heapsort algorithm."""
     n = len(theSeq)
@@ -39,21 +11,56 @@ def simpleHeapSort(theSeq):
         theSeq[i] = heap.extract()
 
 
+def buildHeap(theSeq):
+    """Build a heap out of the given sequence."""
+    count = len(theSeq)
+    for i in range(count):
+        child = i + 1
+        parent = child // 2
+        checkParent(theSeq, child, parent, i, count-1)
+    return theSeq
+
+def checkParent(theSeq, child, parent, curNdx, end):
+    if curNdx <= end:
+        if theSeq[child-1] > theSeq[parent-1]:
+            temp = theSeq[child - 1]
+            theSeq[child - 1] = theSeq[parent - 1]
+            theSeq[parent - 1] = temp
+            if (parent-1) > 0:
+                checkParent(theSeq, child=parent, parent=parent//2, curNdx=curNdx, end=end)
+
+def extractRoot(heapSeq):
+    """Extract the root from the heap and reorganize the sequence."""
+    curlen = len(heapSeq) - 1
+    last = heapSeq[curlen]
+    heapSeq[curlen] = heapSeq[0]
+    heapSeq[0] = last
+    while curlen > 0:
+        for i in range(curlen):
+            child = i + 1
+            parent = child // 2
+            checkParent(heapSeq, child, parent, i, curlen-1)
+        curlen -= 1
+        last = heapSeq[curlen]
+        heapSeq[curlen] = heapSeq[0]
+        heapSeq[0] = last
+    return heapSeq
+
+
 def heapSort(theSeq):
     """Improved implementation of the heapsort algorithm.\n
     Sorts a sequence in ascending order using the heapsort.
     """
-    n = len(theSeq)
-    for i in range(n):
-        siftUp(theSeq, i)           # Build a max-heap within the same array.
-    print(*theSeq)
-    for j in range(n-1, 0, -1):
-        tmp = theSeq[j]
-        theSeq[j] = theSeq[0]
-        theSeq[0] = tmp
-        siftDown(theSeq, j-1)
-    print(*theSeq)
-    return theSeq
+    assert len(theSeq) >= 1, "Cannot sort empty sequence"
+    heap = buildHeap(theSeq)
+    sortedSeq = extractRoot(heap)
+    return sortedSeq
 
-print(*[55,38,7,15,56,1,9])
-heapSort([55,38,7,15,56,1,9])
+
+
+# Short test
+A = [10,51,2,18,4,31,13,5,23,64,29]
+# A = [4,8,15,16,23,42]
+print("Original sequence:\t", *A,
+      "\nHeap sequence:\t", *buildHeap(A),
+      "\nSorted sequence:\t", *heapSort(A))
