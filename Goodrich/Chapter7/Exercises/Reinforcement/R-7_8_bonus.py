@@ -27,7 +27,7 @@ def middle(L: DoublyLinkedList):
     """Returns the middle node of a doubly linked list via string parsing.
     Executes in O(n/2) time, where n = number of nodes in ``L``.
     See Also: ``Goodrich.Chapter7.Exercises.R-7_6.middle``\n
-    Disclaimer: Hack solution - **DO NOT TRY THIS AT HOME (k.e. in production)!**
+    Disclaimer: Hack solution - **DO NOT TRY THIS AT HOME (i.e. in production)!**
 
     :rtype: DoublyLinkedList._Node
     """
@@ -44,7 +44,7 @@ for i in range(1, 11):
     dbll.insert_between(i, cur, dbll._trailer)
     cur = cur.next
 
-# Print element of mid node, k.e. 5.
+# Print element of mid node, i.e. 5.
 print(middle(dbll).element)
 
 # Let's try that again with odd node counts.
@@ -54,5 +54,5 @@ for i in range(len(dbll) + 1, 20):
     dbll.insert_between(i, cur, dbll._trailer)
     cur = cur.next
 
-# Print element of mid node, k.e. 9.
+# Print element of mid node, i.e. 9.
 print(middle(dbll).element)
