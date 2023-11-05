@@ -1,66 +1,54 @@
-from RDNecaise.Chapter13.arrayheap import MaxHeap
+# In-place heapsort by building a heap on a sequence, and extracting the root recursively.
 
-
-def simpleHeapSort(theSeq):
-    """A simple implementation of the heapsort algorithm."""
-    n = len(theSeq)
-    heap = MaxHeap(n)               # Create an array-based max-heap.
-    for item in theSeq:             # Build a max-heap from the list of values.
-        heap.add(item)
-    for i in range(n, 0, -1):       # Extract each value from the heap and store them back into the list.
-        theSeq[i] = heap.extract()
-
-
-def buildHeap(theSeq):
+def build_heap(seq):                                    # Time: O(n * log n) worst case
     """Build a heap out of the given sequence."""
-    count = len(theSeq)
-    for i in range(count):
-        child = i + 1
+    count = len(seq)
+    for c in range(count):
+        child = c + 1
         parent = child // 2
-        checkParent(theSeq, child, parent, i, count-1)
-    return theSeq
+        verify_heap(seq, child, parent, c, count - 1)
+    return seq
 
-def checkParent(theSeq, child, parent, curNdx, end):
-    if curNdx <= end:
-        if theSeq[child-1] > theSeq[parent-1]:
-            temp = theSeq[child - 1]
-            theSeq[child - 1] = theSeq[parent - 1]
-            theSeq[parent - 1] = temp
-            if (parent-1) > 0:
-                checkParent(theSeq, child=parent, parent=parent//2, curNdx=curNdx, end=end)
+def swap(seq, k, j):                                    # Constant time/space operation: O(1)
+    """Swap the elements at indices k and j in a given sequence."""
+    temp = seq[k]
+    seq[k] = seq[j]
+    seq[j] = temp
 
-def extractRoot(heapSeq):
-    """Extract the root from the heap and reorganize the sequence."""
-    curlen = len(heapSeq) - 1
-    last = heapSeq[curlen]
-    heapSeq[curlen] = heapSeq[0]
-    heapSeq[0] = last
+def verify_heap(seq, child, parent, cur_ndx, end):      # Time: O(log n) worst case
+    """Recursively verify the heap property given a sequence."""
+    if cur_ndx <= end:
+        if seq[child - 1] > seq[parent - 1]:
+            swap(seq, child - 1, parent - 1)
+            if (parent - 1) > 0:
+                verify_heap(seq, child=parent, parent=parent // 2, cur_ndx=cur_ndx, end=end)
+
+def extract_root(heap_seq):                             # Time: O(n * log n)
+    """Extract the root from the heap and recursively reorganize the sequence."""
+    curlen = len(heap_seq) - 1
+    swap(heap_seq, 0, curlen)
     while curlen > 0:
         for i in range(curlen):
             child = i + 1
             parent = child // 2
-            checkParent(heapSeq, child, parent, i, curlen-1)
+            verify_heap(heap_seq, child, parent, i, curlen - 1)
         curlen -= 1
-        last = heapSeq[curlen]
-        heapSeq[curlen] = heapSeq[0]
-        heapSeq[0] = last
-    return heapSeq
+        swap(heap_seq, 0, curlen)
+    return heap_seq
 
-
-def heapSort(theSeq):
-    """Improved implementation of the heapsort algorithm.\n
-    Sorts a sequence in ascending order using the heapsort.
-    """
-    assert len(theSeq) >= 1, "Cannot sort empty sequence"
-    heap = buildHeap(theSeq)
-    sortedSeq = extractRoot(heap)
-    return sortedSeq
-
+def heap_sort(the_seq):                                 # Time: θ(2(n * log n)) ∴ O(n * log n)
+    """Sorts a sequence in ascending order using the heapsort."""
+    assert len(the_seq) >= 1, "Cannot sort empty sequence"
+    build_heap(the_seq)
+    extract_root(the_seq)
+    return the_seq
 
 
 # Short test
 A = [10,51,2,18,4,31,13,5,23,64,29]
-# A = [4,8,15,16,23,42]
-print("Original sequence:\t", *A,
-      "\nHeap sequence:\t", *buildHeap(A),
-      "\nSorted sequence:\t", *heapSort(A))
+B = [4,8,15,16,23,42]
+C = [23,34,78,-1,6,90,343,5]
+for s in A,B,C :                                        # For sequence A, we get...
+    print("Original sequence:\t", *s,                   # 10 51 2 18 4 31 13 5 23 64 29
+      "\nHeap sequence:\t", *build_heap(s),             # 64 51 31 18 29 2 13 5 10 4 23
+      "\nSorted sequence:\t", *heap_sort(s), "\n")      # 2 4 5 10 13 18 23 29 31 51 64
