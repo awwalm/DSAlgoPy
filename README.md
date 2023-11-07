@@ -16,7 +16,7 @@ as well as Michael T. Goodrich et al.<span title="Michael T. Goodrich, Roberto T
 | Chapter 6  | [Linked Structures](RDNecaise/Chapter6)   | [Stacks, Queues, and Deques](Goodrich/Chapter6)  |
 | Chapter 7  | Stacks                                    | [Linked Lists](Goodrich/Chapter7)                |
 | Chapter 8  | [Queues](RDNecaise/Chapter8)              | [Trees](Goodrich/Chapter8)                       |
-| Chapter 9  | Advanced Linked Lists                     | Priority Queues                                  |
+| Chapter 9  | Advanced Linked Lists                     | [Priority Queues](Goodrich/Chapter9)             |
 | Chapter 10 | Recursion                                 | Maps, Hash Tables, and Skip Lists                |
 | Chapter 11 | Hash Tables                               | Search Trees                                     |
 | Chapter 12 | Advanced Sorting                          | Sorting and Selection                            |
