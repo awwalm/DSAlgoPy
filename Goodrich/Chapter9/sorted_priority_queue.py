@@ -1,15 +1,16 @@
-from queue import Empty
-
 from Goodrich.Chapter7.positional_list import PositionalList
 from Goodrich.Chapter9.priority_queue_base import PriorityQueueBase
 
+
+class Empty(Exception):
+    ...
 
 class SortedPriorityQueue(PriorityQueueBase):       # Base class defines _Item
     """A min-oriented priority queue implemented with a sorted list."""
 
     def __init__(self):
         """Create a new empty Priority Queue."""
-        self._data = PositionalList()
+        self._data = PositionalList()               # Our container is a doubly linked list
 
     def __len__(self):
         """Return the number of items in the priority queue."""

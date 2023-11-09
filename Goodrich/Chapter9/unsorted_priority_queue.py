@@ -1,8 +1,9 @@
-from queue import Empty
-
 from Goodrich.Chapter7.positional_list import PositionalList
 from Goodrich.Chapter9.priority_queue_base import PriorityQueueBase
 
+
+class Empty(Exception):
+    ...
 
 class UnsortedPriorityQueue(PriorityQueueBase):     # Base class defines _Item
     """A min-oriented priority queue implemented with an unsorted list."""
