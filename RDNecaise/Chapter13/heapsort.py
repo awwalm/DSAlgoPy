@@ -34,21 +34,22 @@ def extract_root(heap_seq):                             # Time: O(n * log n)
             verify_heap(heap_seq, child, parent, i, curlen - 1)
         curlen -= 1
         swap(heap_seq, 0, curlen)
-    return heap_seq
 
 def heap_sort(the_seq):                                 # Time: θ(2(n * log n)) ∴ O(n * log n)
     """Sorts a sequence in ascending order using the heapsort."""
-    assert len(the_seq) >= 1, "Cannot sort empty sequence"
+    assert len(the_seq) > 0, "Cannot sort empty sequence"
     build_heap(the_seq)
     extract_root(the_seq)
     return the_seq
 
 
 # Short test
-A = [10,51,2,18,4,31,13,5,23,64,29]
-B = [4,8,15,16,23,42]
-C = [23,34,78,-1,6,90,343,5]
-for s in A,B,C :                                        # For sequence A, we get...
-    print("Original sequence:\t", *s,                   # 10 51 2 18 4 31 13 5 23 64 29
-      "\nHeap sequence:\t", *build_heap(s),             # 64 51 31 18 29 2 13 5 10 4 23
-      "\nSorted sequence:\t", *heap_sort(s), "\n")      # 2 4 5 10 13 18 23 29 31 51 64
+if __name__ == "__main__":
+    A = [10,51,2,18,4,31,13,5,23,64,29]
+    B = [4,8,15,16,23,42]
+    C = [23,34,78,-1,6,90,343,5]
+    D = [1,5,18,5,6,1,20]
+    for s in A,B,C,D :                                   # For sequence A, we get...
+        print("Original sequence:\t", *s,                # 10 51 2 18 4 31 13 5 23 64 29
+          "\nHeap sequence:\t", *build_heap(s),          # 64 51 31 18 29 2 13 5 10 4 23
+          "\nSorted sequence:\t", *heap_sort(s), "\n")   # 2 4 5 10 13 18 23 29 31 51 64
