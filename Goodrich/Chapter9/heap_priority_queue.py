@@ -1,4 +1,3 @@
-from __future__ import annotations
 from Goodrich.Chapter9.priority_queue_base import PriorityQueueBase
 
 
