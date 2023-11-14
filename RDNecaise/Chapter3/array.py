@@ -39,7 +39,7 @@ class MultiArray:
 
     def __getitem__(self, ndxTuple):
         """Returns the contents of element (i_1, i_2, ..., i_n)."""
-        assert len(ndxTuple) == self.numDims(), "Invalid # of array subscripts."
+        assert len(ndxTuple) == self.numDims(), "Invalid number of array subscripts."
         index = self._computeIndex(ndxTuple)
         assert index is not None, "Array subscript out of range."
         return self._elements[index]
@@ -68,25 +68,25 @@ class MultiArray:
     def _computeFactors(self):
         """
         Computes the factor values used in the index equation.
-        Factors are the number of elements to be skipped within the corresponding dimension.
+        Factors are the number of elements to be skipped per dimension, within the underlying 1-D array.
         This should execute prior to calling ``_computeIndex()`` which is called from ``__init__()``.
         This method should populate the factors array with the corresponding factors.
 
         Recall that given an n-dimensional array:
             * Let F be the collection of Factors and D the collection of numerated Dimensions.
             * f_n = 1, f_n ∈ F
-            * F = ∏ d_k ∀ 0<j<n & ∀ d ∈ D
-            * ⊨ j+1<=k<= n (i.e the value of k ranges from j+1 to n)
+            * F = { ∏ d_k ∀ 0<j<n & ∀ d ∈ D }
+            * ⊨ j+1<=k<= n (i.e. the value of k ranges from j+1 to n)
         For example, given a 4-dimensional array:
             * index4(i1, i2, i3, i4) = i1 × (f1 = d2 × d3 × d4) +
                                        i2 × (f2 = d3 × d4) +
                                        i3 × (f3 = d4) +
                                        i4 × (f4 = 1)
-        A recursive O(n) time algorithm is given as:
+        A recursive O(n) time algorithm is given as follows:
             ALGORITHM ComputeFactors(curfact, lencustdims):
                 curfact:        Current/temporary factor, initial value MUST be instantiated as 1.\n
-                lcustdims:       Array of dimensions without first dimension stated.\n
-                encustdims:    Index iterator used to traverse custdims by length.\n
+                lencustdims:    Array of dimensions without first dimension stated.\n
+                custdims:       Index iterator used to traverse custdims by length.\n
 
                 curfact *= custdims[lencustdims - 1]        # Multiply current factor by current dimension.
                 self._factors[lencustdims - 1] = curfact    # Add current factor to the end of factors array.
