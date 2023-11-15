@@ -6,23 +6,23 @@ as well as Michael T. Goodrich et al.<span title="Michael T. Goodrich, Roberto T
 
 ### Contents
 
-| Folders    | Corresponding Directories            [^1] | [^2]                                             |
-|:-----------|:------------------------------------------|:-------------------------------------------------|
-| Chapter 1  | [Abstract Data Types](RDNecaise/Chapter1) | [Python Primer](Goodrich/Chapter1)               |
-| Chapter 2  | [Arrays](RDNecaise/Chapter2)              | [Object-Oriented Programming](Goodrich/Chapter2) |
-| Chapter 3  | [Sets and Maps](RDNecaise/Chapter3)       | [Algorithm Analysis](Goodrich/Chapter3)          |
-| Chapter 4  | Algorithm Analysis                        | [Recursion](Goodrich/Chapter4)                   |
-| Chapter 5  | Searching and Sorting                     | [Array-Based Sequences](Goodrich/Chapter5)       |
-| Chapter 6  | [Linked Structures](RDNecaise/Chapter6)   | [Stacks, Queues, and Deques](Goodrich/Chapter6)  |
-| Chapter 7  | Stacks                                    | [Linked Lists](Goodrich/Chapter7)                |
-| Chapter 8  | [Queues](RDNecaise/Chapter8)              | [Trees](Goodrich/Chapter8)                       |
-| Chapter 9  | Advanced Linked Lists                     | [Priority Queues](Goodrich/Chapter9)             |
-| Chapter 10 | Recursion                                 | Maps, Hash Tables, and Skip Lists                |
-| Chapter 11 | Hash Tables                               | Search Trees                                     |
-| Chapter 12 | Advanced Sorting                          | Sorting and Selection                            |
-| Chapter 13 | [Binary Trees](RDNecaise/Chapter13)       | Text Processing                                  |
-| Chapter 14 | Search Trees                              | Graph Algorithms                                 |
-| Chapter 15 |                                           | Memory Management and B-Trees                    |
+| Folders    | Corresponding Directories            [^1] | [^2]                                                    |
+|:-----------|:------------------------------------------|:--------------------------------------------------------|
+| Chapter 1  | [Abstract Data Types](RDNecaise/Chapter1) | [Python Primer](Goodrich/Chapter1)                      |
+| Chapter 2  | [Arrays](RDNecaise/Chapter2)              | [Object-Oriented Programming](Goodrich/Chapter2)        |
+| Chapter 3  | [Sets and Maps](RDNecaise/Chapter3)       | [Algorithm Analysis](Goodrich/Chapter3)                 |
+| Chapter 4  | Algorithm Analysis                        | [Recursion](Goodrich/Chapter4)                          |
+| Chapter 5  | Searching and Sorting                     | [Array-Based Sequences](Goodrich/Chapter5)              |
+| Chapter 6  | [Linked Structures](RDNecaise/Chapter6)   | [Stacks, Queues, and Deques](Goodrich/Chapter6)         |
+| Chapter 7  | Stacks                                    | [Linked Lists](Goodrich/Chapter7)                       |
+| Chapter 8  | [Queues](RDNecaise/Chapter8)              | [Trees](Goodrich/Chapter8)                              |
+| Chapter 9  | Advanced Linked Lists                     | [Priority Queues](Goodrich/Chapter9)                    |
+| Chapter 10 | Recursion                                 | [Maps, Hash Tables, and Skip Lists](Goodrich/Chapter10) |
+| Chapter 11 | Hash Tables                               | Search Trees                                            |
+| Chapter 12 | Advanced Sorting                          | Sorting and Selection                                   |
+| Chapter 13 | [Binary Trees](RDNecaise/Chapter13)       | Text Processing                                         |
+| Chapter 14 | Search Trees                              | Graph Algorithms                                        |
+| Chapter 15 |                                           | Memory Management and B-Trees                           |
 
 ## Getting Started
 

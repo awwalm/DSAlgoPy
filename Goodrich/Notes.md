@@ -1,5 +1,11 @@
 # Notes
 
+## Supporting Material (Similar Repos & Solved Problems)
+
+- [Charles Reid's DSA/ML Repo with Java Solutions](https://github.com/charlesreid1/java)
+- [Jihoon Kim's Worked Solutions (Till Chapter 8)](https://github.com/jihoonerd/Data_Structures_and_Algorithms_in_Python)
+- [William Cameron's Solutions (Till Chapter 6)](https://github.com/wdlcameron/Solutions-to-Data-Structures-and-Algorithms-in-Python)
+
 ## Chpater 2: Object-Oriented Programming
 
 - **Design Pattern**:
