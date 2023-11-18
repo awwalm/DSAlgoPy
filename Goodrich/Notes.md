@@ -54,6 +54,9 @@ can be done in constant time, but I maintain the position that this is **NOT** _
   - This comes with several challenges such as dealing with dichotomies of Python's more obscure inheritance syntax.
   Nothing that can't be handled by enforcing D.R.Y. principles (so far) and coverage tests.
 
+
+## Chapter 10: Maps, Hash Tables, and Skip Lists
+- **See [HashingNotes.md](Chapter10/HashingNotes.md)**
   
 [^1]: See class/method: [`linked_queue.LinkedQueue._Node`](../Goodrich/Chapter7/linked_queue.py)
 
