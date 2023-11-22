@@ -107,6 +107,13 @@ print(f"Hashed Value: {hashed_value}")
    ```
    - The final hash value for the string "hello" is printed.
 
+## Compression Functions
+
+This maps a function 
+```math
+\left( h(k) \rightarrow i \exists i \in \[0,N-1\] \subset \mathbb{N} \right) 
+```
+
 ## Conclusion
 
 Understanding bitwise operations is fundamental in low-level programming and computer science. Whether applied in basic operations or more complex tasks like hashing, these operations provide powerful tools for data manipulation and algorithm development.
