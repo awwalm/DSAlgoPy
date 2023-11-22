@@ -1,6 +1,5 @@
 
 # Understanding Bitwise Operations and Hashing
-Written in conjunction with GPT-3.5
 
 ## Introduction
 
@@ -109,23 +108,36 @@ print(f"Hashed Value: {hashed_value}")
 
 ## Compression Functions
 
-This maps a function 
-Let $`A`$ be a bucket array of size $`\N`$ containing $`n`$ elements. 
+### Premise
+In the event that two distinct keys map to the same value (see [Collision](#collision)), 
+we introduce a **bucket array** to mediate this whereby each bucket may manage a collection
+of items that are sent to a specific index by the hash function.
+
+### Definition
+Let $`A`$ be a bucket array of size $`N`$ containing $`n`$ elements. 
 We define a **hash function** $`h(k)`$ where $`k`$ is a key as follows:
 ```math
-\begin{document}
-
 \begin{align*}
-   h(k) \rightarrow i \exists i \in [0,N-1] \\
-   \forall i \in \mathbb{N}
+   h(k) \rightarrow i, \exists i \in [0,N-1], \forall i \in \mathbb{N}
 \end{align*}
-
-
-\end{document}
 ```
+The value of $`h(k)`$ is strictly an index that can be queried by $`A[h(k)=i]`$.
 
-## Conclusion
+### Collision
+When $`h(k)`$ and $`h({k}')`$ both map to the same value $`v`$, it indicates a collision.
 
-Understanding bitwise operations is fundamental in low-level programming and computer science. Whether applied in basic operations or more complex tasks like hashing, these operations provide powerful tools for data manipulation and algorithm development.
+### Hash Coding & Compression
+The 1st stage of hashing consists of **hash coding**, this entails mapping a key to an arbitray integer.
+The 2nd stage, known as **compression**, involves transformation of that hashcode to an integer
+limited to a range within the bucket $`A`$.
 
-Feel free to use this Markdown text as needed!
+### Polynomial Hashcodes
+Simply taking the Unicode values of characters during hash coding (see [Bitwise Hashing](#hashing-with-bitwise-operations))
+is not enough as it opens the floodgates to collision. Thusly, we derive a polynomial $`h(x)`$ 
+for the characters of a string delimited by the tuple $`( x_0 , x_1, x_2, \ldots, x_{n-1} )`$ as
+
+```math
+\begin{align*}
+   h(x) := 
+\end{align*}
+```
