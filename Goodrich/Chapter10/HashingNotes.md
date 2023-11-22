@@ -113,9 +113,15 @@ This maps a function
 Let $`A`$ be a bucket array of size $`\N`$ containing $`n`$ elements. 
 We define a **hash function** $`h(k)`$ where $`k`$ is a key as follows:
 ```math
+\begin{document}
+
 \begin{align*}
-   h(k) \rightarrow i \exists i \in [0,N-1] such that all values of i \in \mathbb{N}
+   h(k) \rightarrow i \exists i \in [0,N-1] \\
+   \forall i \in \mathbb{N}
 \end{align*}
+
+
+\end{document}
 ```
 
 ## Conclusion
