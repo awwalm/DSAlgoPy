@@ -138,6 +138,12 @@ for the characters of a string delimited by the tuple $`( x_0 , x_1, x_2, \ldots
 
 ```math
 \begin{align*}
-   h(x) := 
+   h(x) := x_{0}a^{n-1} + x_{1}a^{n-2} + \ldots + x_{n-2}a^{1} + x_{n-1}a^{0}
+\end{align*}
+
+\paragraph{horners_rule}
+By Horner's law, $h(x)$ can be further simplified as follows:
+\begin{align*}
+   h(x) := x_{n-1} + a(x_{n-2} + a(x_{n-3} + \ldots + a(x_{2} + a(x_{1} + ax_{0})) \ldots ))
 \end{align*}
 ```
