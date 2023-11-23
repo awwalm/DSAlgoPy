@@ -136,7 +136,7 @@ limited to a range within the bucket $`A`$.
 ### Polynomial Hashcodes
 Simply taking the Unicode values of characters during hash coding (see [Bitwise Hashing](#hashing-with-bitwise-operations))
 is not enough as it opens the floodgates to collision. Thusly, we derive a polynomial $`h(x)`$ 
-for the characters of a string delimited by the tuple $`( x_0 , x_1, x_2, \ldots, x_{n-1} )`$ as
+for the characters of a string delineated by the tuple $`( x_0 , x_1, x_2, \ldots, x_{n-1} )`$ as
 
 ```math
 \begin{align*}
