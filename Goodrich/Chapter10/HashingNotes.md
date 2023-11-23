@@ -95,13 +95,15 @@ print(f"Hashed Value: {hashed_value}")
 2. **Iterating Over Characters in "hello":**
    ```python
    for character in "hello":
-       h = (h << 5 & mask) | (h >> 27)
+       # noinspection PyUnresolvedReferences
+h = (h << 5 & mask) | (h >> 27)
        h += ord(character)
    ```
    - The hash value `h` is updated using bitwise operations and the ASCII value of each character.
 
 3. **Final Result:**
    ```python
+# noinspection PyUnresolvedReferences
    print(f"Hashed Value: {hashed_value}")
    ```
    - The final hash value for the string "hello" is printed.
@@ -140,9 +142,10 @@ for the characters of a string delimited by the tuple $`( x_0 , x_1, x_2, \ldots
 \begin{align*}
    h(x) := x_{0}a^{n-1} + x_{1}a^{n-2} + \ldots + x_{n-2}a^{1} + x_{n-1}a^{0}
 \end{align*}
+```
 
-\paragraph{horners_rule}
-By Horner's law, $h(x)$ can be further simplified as follows:
+By Horner's law, $`h(x)`$ can be further simplified as follows:
+```math
 \begin{align*}
    h(x) := x_{n-1} + a(x_{n-2} + a(x_{n-3} + \ldots + a(x_{2} + a(x_{1} + ax_{0})) \ldots ))
 \end{align*}
