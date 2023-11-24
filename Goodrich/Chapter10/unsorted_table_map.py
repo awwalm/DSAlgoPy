@@ -12,7 +12,7 @@ class UnsortedTableMap(MapBase):
         self._table: List[MapBase._Item] = []                            # List of _Items
 
     def __getitem__(self, k):
-        """Return value associated with key k (raise KeyError if not found."""
+        """Return value associated with key k (raise KeyError if not found)."""
         for item in self._table:
             if k == item._key:
                 return item._value
