@@ -95,15 +95,13 @@ print(f"Hashed Value: {hashed_value}")
 2. **Iterating Over Characters in "hello":**
    ```python
    for character in "hello":
-       # noinspection PyUnresolvedReferences
-h = (h << 5 & mask) | (h >> 27)
-       h += ord(character)
+        h = (h << 5 & mask) | (h >> 27)
+        h += ord(character)
    ```
    - The hash value `h` is updated using bitwise operations and the ASCII value of each character.
 
 3. **Final Result:**
    ```python
-# noinspection PyUnresolvedReferences
    print(f"Hashed Value: {hashed_value}")
    ```
    - The final hash value for the string "hello" is printed.
@@ -143,10 +141,62 @@ for the characters of a string delineated by the tuple $`( x_0 , x_1, x_2, \ldot
    h(x) := x_{0}a^{n-1} + x_{1}a^{n-2} + \ldots + x_{n-2}a^{1} + x_{n-1}a^{0}
 \end{align*}
 ```
-
 By Horner's law, $`h(x)`$ can be further simplified as follows:
 ```math
 \begin{align*}
    h(x) := x_{n-1} + a(x_{n-2} + a(x_{n-3} + \ldots + a(x_{2} + a(x_{1} + ax_{0})) \ldots ))
 \end{align*}
 ```
+
+## Efficiency of Hash Tables
+
+<table>
+    <thead>
+        <tr>
+            <th rowspan=2>Operation</th>
+            <th rowspan=2">List</th>
+            <th colspan="2">Hash Table</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan=2></td>
+            <td>Expected</td>
+            <td>Worst Case</td>
+        </tr>
+        <tr>
+            <td><code>__getitem__</code></td>
+            <td>O(n)</td>
+            <td>O(1)</td>
+            <td>O(n)</td>
+        </tr>
+        <tr>
+            <td><code>__setitem__</code></td>
+            <td>O(n)</td>
+            <td>O(1)</td>
+            <td>O(n)</td>
+        </tr>
+        <tr>
+            <td><code>__delitem__</code></td>
+            <td>O(n)</td>
+            <td>O(1)</td>
+            <td>O(n)</td>
+        </tr>
+        <tr>
+            <td><code>__len__</code></td>
+            <td>O(1)</td>
+            <td>O(1)</td>
+            <td>O(1)</td>
+        </tr>
+        <tr>
+            <td><code>__iter__</code></td>
+            <td>O(n)</td>
+            <td>O(n)</td>
+            <td>O(n)</td>
+        </tr>
+    </tbody>
+</table>
+
+Comparison of the running times of the methods of a map realized by means of an unsorted list or a hash table. 
+We let n denote the number of items in the map, and we assume that the bucket array supporting the hash table 
+is maintained such that its capacity is proportional to the number of items in the map.
