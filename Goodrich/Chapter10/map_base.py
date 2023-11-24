@@ -25,3 +25,10 @@ class MapBase(MutableMapping):
         def __lt__(self, other: MapBase._Item):
             return self._key < other._key           # Compare items based on their keys
 
+        @property
+        def key(self):
+            return self._key
+
+        @property
+        def value(self):
+            return self._value
