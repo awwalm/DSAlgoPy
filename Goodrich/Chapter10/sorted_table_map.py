@@ -93,6 +93,14 @@ class SortedTableMap(MapBase):
         else:
             return None
 
+    def find_le(self, k):
+        """Return (key,value) pair with the greatest key less than or equal to k."""
+        j = self._find_index(k, 0, len(self._table) - 1)
+        if len(self._table) > j >= 0:
+            return self._table[j].key, self._table[j].value         # j's key !> k
+        else:
+            return None
+
     def find_gt(self, k):
         """Return (key,value) pair with the least key strictly greater than k."""
         j = self._find_index(k, 0, len(self._table) - 1)        # j's key >= 1
