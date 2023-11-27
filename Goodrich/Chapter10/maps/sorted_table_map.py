@@ -1,6 +1,6 @@
 """Code Fragment 10.8/10.9/10.10: An implementation of a SortedTableMap class."""
 from typing import List
-from Goodrich.Chapter10.map_base import MapBase
+from Goodrich.Chapter10.maps.map_base import MapBase
 
 
 class SortedTableMap(MapBase):

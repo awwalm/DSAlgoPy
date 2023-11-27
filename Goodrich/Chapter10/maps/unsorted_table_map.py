@@ -1,6 +1,6 @@
 """Code Fragment 10.3: An implementation of a map using a Python list as an unsorted table."""
 from typing import List
-from Goodrich.Chapter10.map_base import MapBase
+from Goodrich.Chapter10.maps.map_base import MapBase
 
 
 # noinspection PyProtectedMember

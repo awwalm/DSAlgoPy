@@ -1,7 +1,7 @@
 """Code Fragment 10.5: Concrete hash map class with separate chaining."""
 
-from Goodrich.Chapter10.hashmap_base import HashMapBase
-from Goodrich.Chapter10.unsorted_table_map import UnsortedTableMap
+from Goodrich.Chapter10.maps.hashmap_base import HashMapBase
+from Goodrich.Chapter10.maps.unsorted_table_map import UnsortedTableMap
 
 
 class ChainHashMap(HashMapBase):

@@ -3,14 +3,14 @@ A base class for our hash table implementations, extending our MapBase class fro
 from random import randrange
 from typing import Union, List
 
-from Goodrich.Chapter10.map_base import MapBase
+from Goodrich.Chapter10.maps.map_base import MapBase
 
 
 # noinspection PyAbstractClass
 class HashMapBase(MapBase):
     """Abstract base class for map using hash-table with MAD compression."""
 
-    def __int__(self, cap=11, p=109345121):
+    def __init__(self, cap=11, p=109345121):
         """Create an empty hash-table map."""
         self._table: List[Union[                    # Lookup table/bucket array
             MapBase._Item,                          # Direct storage for linear probing
