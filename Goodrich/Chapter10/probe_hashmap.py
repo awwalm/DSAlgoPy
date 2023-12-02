@@ -1,6 +1,6 @@
 """Code Fragment 10.6: Concrete ProbeHashMap class that uses linear probing for collision resolution."""
 
-from Goodrich.Chapter10.maps.hashmap_base import HashMapBase
+from Goodrich.Chapter10.hashmap_base import HashMapBase
 
 
 class ProbeHashMap(HashMapBase):

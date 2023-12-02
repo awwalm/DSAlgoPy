@@ -3,7 +3,7 @@ A base class for our hash table implementations, extending our MapBase class fro
 from random import randrange
 from typing import Union, List
 
-from Goodrich.Chapter10.maps.map_base import MapBase
+from Goodrich.Chapter10.map_base import MapBase
 
 
 # noinspection PyAbstractClass
