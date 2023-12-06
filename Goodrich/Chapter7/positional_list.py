@@ -89,8 +89,8 @@ class PositionalList(_DoublyLinkedBase):
     # Exercise R-7.13
     def find(self, e):
         cur = self.first()
-        for i in self:
-            if i == e:
+        while cur is not None:
+            if cur.element() == e:
                 return cur
             cur = self.after(cur)
         raise ValueError(f"No node with element {e} in {str(self)[35:-1]}")
