@@ -67,6 +67,9 @@ class UnsortedTableMap:
             cur = self._table.after(cur)
         raise KeyError(repr(k))
 
+    def __iter__(self):
+        return self._table.__iter__()
+
     def __len__(self):
         return len(self._table)
 
