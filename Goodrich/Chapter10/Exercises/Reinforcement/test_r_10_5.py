@@ -43,6 +43,14 @@ class TestPositionalUnsortedMap(unittest.TestCase):
         self.s["Five"] = 5
         print(self.s)
 
+    def test6Iteration(self):
+        self.s["One"] = 1
+        self.s["Two"] = 2
+        self.s["Three"] = 3
+        self.s["Four"] = 4
+        self.s["Five"] = 5
+        for i in self.s: print(i.key,i.value)
+
 
 if __name__ == '__main__':
     unittest.main()
