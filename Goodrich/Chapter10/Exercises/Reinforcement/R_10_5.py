@@ -4,10 +4,10 @@ using the PositionalList class from Section 7.4 rather than a Python list."""
 from __future__ import annotations
 from Goodrich.Chapter7.positional_list import PositionalList
 
-class UnsortedTableMap(PositionalList):
+class UnsortedTableMap:
     """TAKE CAUTION:\n
-    * PositionalList stores _Node objects (NOT Positions), but returns Position objects.
-    * Iterating through PositionalList yields Position items, NOT _Node items.
+    * PositionalList stores _Node objects (NOT Positions).
+    * Iterating through PositionalList yields explicit abitaririly typed objects (NOT Positions).
     """
 
     class _Item:
@@ -39,38 +39,44 @@ class UnsortedTableMap(PositionalList):
         def value(self, value):
             self._value = value
 
+    def __init__(self):
+        self._table = PositionalList()
+
     def __getitem__(self, k):
-        for element in self:
+        for element in self._table:
             if k == element.key:
                 return element.value
         raise KeyError(k)
 
     def __setitem__(self, k, v):
-        for element in self:
+        if len(self._table) == 0:
+            self._table.add_first(self._Item(k,v))
+            return
+        for element in self._table:
             if k == element.key:
                 element.value = v
                 return
-        if len(self) == 0:
-            self.add_first(self._Item(k,v))
-        else:
-            self.add_last(self._Item(k,v))
+        self._table.add_last(self._Item(k,v))
 
     def __delitem__(self, k):
-        cur = self.first()
+        cur = self._table.first()
         while cur is not None:
             if cur.element().key == k:
-                self.delete(cur)
+                self._table.delete(cur)
                 return
-            cur = self.after(cur)
+            cur = self._table.after(cur)
         raise KeyError(repr(k))
+
+    def __len__(self):
+        return len(self._table)
 
     def __str__(self):
         return "{" + ", ".join([f"{i}: {j.value}" for i,j in zip(self.keys(), self.items())]) + "}"
 
     def items(self):
-        for element in self:
+        for element in self._table:
             yield element
 
     def keys(self):
-        for element in self:
+        for element in self._table:
             yield element.key
