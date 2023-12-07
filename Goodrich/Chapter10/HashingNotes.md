@@ -236,4 +236,4 @@ from a [`SortedTableMap`](./sorted_table_map.py) instance that initially contain
 > - Deletion calls the binary search method to attempt to locate the items first.
 > - Once located, deletion results in reconstructing a portion of the array.
 > - This leads to a threshold of $`O(n)`$ time for each delete.
-> - Hence, the runtime for deleting n items is $`\theta(\sum_{i}^{j}\lvert n \rvert) \medspace \exists n \in M`$.
+> - Hence, the runtime for deleting n items is $`\theta(\sum_{i} ^{j} \lvert n \rvert), \exists n \in M`$.
