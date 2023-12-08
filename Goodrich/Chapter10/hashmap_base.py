@@ -4,6 +4,7 @@ from random import randrange
 from typing import Union, List
 
 from Goodrich.Chapter10.map_base import MapBase
+from Goodrich.Chapter10.unsorted_table_map import UnsortedTableMap
 
 
 # noinspection PyAbstractClass
@@ -15,6 +16,7 @@ class HashMapBase(MapBase):
         self._table: List[Union[                    # Lookup table/bucket array
             MapBase._Item,                          # Direct storage for linear probing
             List,                                   # Independent bucket for separate chaining
+            UnsortedTableMap,                       # Alternate bucket type for separate chaining
             object,                                 # For indicating available space
             None
         ]] = cap * [None]
