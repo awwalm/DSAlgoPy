@@ -6,20 +6,23 @@ from Goodrich.Chapter10.probe_hashmap import ProbeHashMap
 class OptimizedPHM(ProbeHashMap):
 
     def __getitem__(self, k):
-        query = self._find_slot(0, k)
-        if query[0]:
-            return self._table[query[1]].value
-        raise KeyError
+        j = self._hash_function(k)
+        return self._bucket_getitem(j, k)
 
     def __setitem__(self, k, v):
-        return self._bucket_setitem(0, k, v)
+        j = self._hash_function(k)
+        self._bucket_setitem(j, k, v)
+        if self._n > len(self._table) // 2:         # Keep load factor <= 0.5
+            self._resize(2 * len(self._table) - 1)  # Number 2^x - 1 is often prime
 
     @override
     def setdefault(self, k, d):
         try:
             return self[k]
         except KeyError:
-            if self._table[-1] is self._AVAIL:
-                self._table[-1] = self._Item(k,d)
+            j = self._hash_function(k)
+            if self._table[j] is None or self._table[j] is self._AVAIL:
+                self._table[j] = self._Item(k,d)
             else: self._table.append(self._Item(k,d))
+            self._n += 1
             return d
