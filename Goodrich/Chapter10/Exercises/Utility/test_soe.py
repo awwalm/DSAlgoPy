@@ -5,14 +5,23 @@ from Goodrich.Chapter10.Exercises.Utility.soe import (
     naive_sieve,
     suboptimal_sieve,
     optimal_sieve,
-    primes_sieve2
+    primes_sieve2,
+    SOE2,
+    correct_sieve
 )
 
 
 class MyTestCase(unittest.TestCase):
-    def setUp(self, m = 5000): #random.randrange(1,23)):
+    def setUp(self, m = 100): #random.randrange(1,23)):
         self._m = m
         print(f"\nTest for range [{self._m},{2 * self._m}):")
+
+    def test_correct_sieve(self):
+        print(f"\nCorrect Sieve Test for range [0, {self._m}):")
+        t1 = time.time()
+        print(*correct_sieve(self._m), sep='\n')
+        t2 = time.time()
+        print(f"Correct Sieve Speed: {t2 - t1:8f}")
 
     def test_optimal_sieve(self):
         print(f"\nOptimal Sieve Test for range [0, {self._m}):")
@@ -36,6 +45,7 @@ class MyTestCase(unittest.TestCase):
         print(f"Stackoverflow Sieve Speed: {t2 - t1:8f}")
 
     def compare_standard_and_optimal(self):
+        self.test_correct_sieve()
         self.test_optimal_sieve()
         self.test_standard_sieve()
         self.test_stackoverflow_sieve()
