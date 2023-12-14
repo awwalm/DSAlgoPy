@@ -2,17 +2,15 @@
 
 import time
 import matplotlib.pyplot as plt
-from Goodrich.Chapter10.Exercises.Creativity.C_10_31 import SOE
-from Goodrich.Chapter10.Exercises.Utility.soe import optimal_sieve
-from Goodrich.Chapter10.Exercises.Utility.soe import primes_sieve2
-from Goodrich.Chapter10.Exercises.Utility.soe import correct_sieve
+from Goodrich.Chapter10.Exercises.Utility.soe import *
 
 def visualize_performance():
     yt_standard = []                                # Standard implmenetation
     yt_optimal = []                                 # Optimal implementation
     yt_stackoverflow = []                           # Stackoverflow implementation
-    yt_correct = []
-    # xd = [x for x in range(1000, 50001, 1000)]      # 50 datapoints in intervals of 1000
+    yt_correct = []                                 # Algorithmically correct implementation
+    yt_lowspace = []                                # Algorithmically correct lowspace usage
+    # xd = [x for x in range(1000, 50001, 1000)]    # 50 datapoints in intervals of 1000
     xd = [x for x in range(150, 4501, 150)]
 
     for dt in xd:
@@ -20,7 +18,8 @@ def visualize_performance():
             [SOE, yt_standard],
             [optimal_sieve, yt_optimal],
             [primes_sieve2, yt_stackoverflow],
-            [correct_sieve, yt_correct]
+            [correct_sieve, yt_correct],
+            [lowspace_sieve, yt_lowspace]
         ]:
             t1 = time.time()
             f[0](dt)
@@ -31,6 +30,7 @@ def visualize_performance():
     plt.plot(xd, yt_optimal, label="Optimal SOE")
     plt.plot(xd, yt_stackoverflow, label="Stackoverflow SOE")
     plt.plot(xd, yt_correct, label="Correct SOE")
+    plt.plot(xd, yt_lowspace, label="Lowspace Correct SOE")
 
     plt.legend()
     plt.xlabel("Range of Primes Computed")
