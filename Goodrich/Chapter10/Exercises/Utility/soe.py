@@ -9,12 +9,24 @@ def optimal_sieve(m: int):
             BA[j] = False
     return [i for i,j in zip(range(2, m + 1), BA[2:]) if j is True]
 
+def lowspace_sieve(m: int):
+    BA = [True] * m
+    rtm = int(m**(1/2)) + 1
+    for i in range(2, len(BA)):
+        if BA[i]:
+            yield i
+            if i < rtm:
+                f = i
+                while f < len(BA):
+                    BA[f] = False
+                    f += i
+
 def correct_sieve(m: int):
     BA = [True] * m
     rtm = int(m**(1/2)) + 1
     p = []
     for i in range(2, rtm):
-        if BA[i]:           # Starts from no. 2 which is prime
+        if BA[i]:
             p.append(i)
             f = i
             while f < len(BA):
@@ -24,6 +36,20 @@ def correct_sieve(m: int):
         if BA[i]: p.append(i)
     return p
 
+def SOE(m: int):
+    """Standard Sieve of Eratosthenes algorithm that finds primes from 0 till m."""
+    BA = [True] * m
+    for i, k in zip(range(2, m + 1), range(len(BA))):
+        if BA[k] is False: continue
+        for j in range(2, i):
+            if i % j == 0:
+                BA[k] = False
+                f = k + j
+                while f < len(BA):
+                    BA[f] = False
+                    f += j
+                break
+    return [i for i,j in zip(range(2, m + 1), BA) if j is True]
 
 def SOE2(m: int):
     """Standard Sieve of Eratosthenes algorithm that finds primes from 0 till m."""
