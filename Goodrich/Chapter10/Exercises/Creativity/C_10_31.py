@@ -7,20 +7,18 @@ that are multiples of 2, 3, 5, 7, and so on. This process can stop after it reac
 √ 2M. (Hint: Consider a bootstrapping method for finding the primes up to √ 2M)"""
 # @TODO: Works but needs improvement - find a way to generate primes until  √ 2M
 
-def SOE(m: int):
-    """Standard Sieve of Eratosthenes algorithm that finds primes from 0 till m."""
+def soe(m: int):
+    """Efficient and fast Sieve of Eratosthenes algorithm that finds primes from 0 till m."""
     BA = [True] * m
-    for i, k in zip(range(2, m + 1), range(len(BA))):
-        if BA[k] is False: continue
-        for j in range(2, i):
-            if i % j == 0:
-                BA[k] = False
-                f = k + j
+    rtm = int(m**(1/2)) + 1
+    for i in range(2, len(BA)):
+        if BA[i]:
+            yield i
+            if i < rtm:
+                f = i
                 while f < len(BA):
                     BA[f] = False
-                    f += j
-                break
-    return [i for i,j in zip(range(2, m + 1), BA) if j is True]
+                    f += i
 
 def sieve(m: int):
     """Lazy Sieve of Eratosthenes algorithm for finding primes in range [m > 0, 2*m).\n
@@ -29,7 +27,7 @@ def sieve(m: int):
     BA = [True] * m
     rtm = (2*m)**(1/2)
     lim = []
-    for x in SOE(m):
+    for x in soe(m):
         lim.append(x)
         if x > rtm:
             break
