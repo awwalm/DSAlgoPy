@@ -1,4 +1,4 @@
-# Notes
+# Notes on [_Data Structures and Algorithms in Python_](https://www.amazon.com/Structures-Algorithms-Python-Necaise-published/dp/B00EKYV3DU)
 
 ## Chpater 1: Abstract Data Types
 
