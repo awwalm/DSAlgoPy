@@ -1,0 +1,89 @@
+
+Algorithm TRINODE RESTRUCTURE(node, path):
+	INPUTS:=
+		node: new node that triggered imbalance				{when path is given, node is root}
+		path: path from node to root						{optional but most optimal when provided}
+	OUTPUT:=
+		root: a modified node that now serves the root		
+	CONDITIONS:=
+		a balanced tree such that -1 <= LBF(R)-RBF(R) <= 1	{rotate three nodes to maintain balance}
+
+	grandparent = node
+	root = None
+
+	if path is None:										{if path is not given via INSERTION algorithm}
+		path = []
+		while grandparent is not root, do:					{crawl up and generate path from node to root}
+			if grandparent is grandparent.parent.left:		{stops when grandparent is now root}
+				path.append(L)
+			else: path.append(R)
+			grandparent = grandparent.parent
+
+	parent = grandparent.left if path[-1] is L else grandparent.right
+	child = parent.left if path[-2] is L else parent.right
+
+	skew = (path[-1], path[-2])								{LR, RL, RR, or LL}
+
+	if skew is LR:											{left-right double rotation needed}
+		T2 = child.left, T3 = child.right,					{determine subtrees}
+		T1 = parent.left, T4 = grandparent.right
+		child.left = parent, child.right = grandparent		{perform left-right rotation statically}
+		parent.right = T2, grandparent.left = T3
+		root = child										{identify new root}			
+
+	else, if skew is RL:									{right-left double rotation needed}
+		T2 = child.left, T3 = child.right,
+		T4 = parent.right, T1 = grandparent.left
+		child.left = grandparent, child.right = parent,		{perform right-left rotation statically}
+		parent.left = T3, grandparent.right = T2
+		root = child
+
+	else, if skew is RR:									{single right-rotation needed}
+		T3 = child.left, T4 = child.right,
+		T2 = parent.left, T1 = grandparent.left
+		parent.left = grandparent, grandparent.right = T2	{perform right-rotation statically}
+		root = parent
+
+	else: {skew is LL}										{single left-rotation needed}
+		T1 = child.left, T2 = child.right,
+		T3 = parent.right, T4 = grandparent.right
+		parent.right = grandparent, grandparent.left = T3	{perform left-rotation statically}
+		root = parent
+
+	return root 											{return a reprocessed governor for the tree}
+
+---------------------------------------------------------------------------------------------------------
+
+Algorithm ROTATE(node, path):
+	INPUTS:=
+		node: new node that triggered imbalance				{when path is given, node is root}
+		path: path from node to root						{optional but most optimal when provided}
+	OUTPUT:=
+		root: the access root for the given subtree
+	CONDITIONS:=
+		a balanced tree such that H(LST(R)) < H(RST(R))		{two nodes rotated to maintain BST property}
+
+	parent = node
+
+	if path is None:										{if path is not given via INSERTION algorithm}
+		path = []
+		while parent is not root, do:						{crawl up and generate path from node to root}
+			if parent is parent.parent.left:				{stops when parent is now root}
+				path.append(L)
+			else: path.append(R)
+			parent = parent.parent
+
+	child = parent.left if path[-1] is L else parent.right
+
+	skew = path[-1]											{L, or R}
+
+	if skew is L:											{left-rotation needed}
+		T1 = child.left, T2 = child.right, T3 = parent.right
+		child.right = parent, parent.left = T2
+
+	if skew is R:
+		T2 = child.left, T3 = child.right, T1 = parent.left
+		child.left = parent, parent.right = T2
+
+	return child											{root of the subtree}
+
