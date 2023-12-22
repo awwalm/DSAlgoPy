@@ -7,6 +7,7 @@
 - [William Cameron's Solutions (Till Chapter 6)](https://github.com/wdlcameron/Solutions-to-Data-Structures-and-Algorithms-in-Python)
 - [$`\underline{\LaTeX}`$ Equation Editor by Codecogs](https://latex.codecogs.com/eqneditor/editor.php)
 - [Eric Rowell's Big-O Cheatsheet](https://bigocheatsheet.com)
+- [Plaintext Diagram Editor](https://www.planttext.com)
 
 ## Notes by Chapter
 
