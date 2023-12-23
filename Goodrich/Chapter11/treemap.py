@@ -10,11 +10,13 @@ class TreeMap(LinkedBinaryTree, MapBase):
     class Position(LinkedBinaryTree.Position):
         def key(self):
             """Return key of map's key-value pair."""
-            return self.element()._key()
+            it: TreeMap._Item = self.element()
+            return it.key                                           # MapBase._Item._key
 
         def value(self):
             """Return value of map's key-value pair."""
-            return self.element()._value()
+            it: TreeMap._Item = self.element()
+            return it.value                                         # MapBase._Item._value
 
     # Nonpublic utilities -----------------------------------------------------------------------
     def _subtree_search(self, p: Position, k):
@@ -68,7 +70,7 @@ class TreeMap(LinkedBinaryTree, MapBase):
     def after(self, p: Position):                                   # Symmetric to before(p)
         """Return the Position just after p in the natural order.\n
         Return None if p is the last position."""
-        self._validate(p)  # Inherited from LinkedBinaryTree
+        self._validate(p)                                           # Inherited from LinkedBinaryTree
         if self.right(p):
             return self._subtree_first_position(self.right(p))
         else:
@@ -182,3 +184,46 @@ class TreeMap(LinkedBinaryTree, MapBase):
                 return                                              # Successful deletion complete
             self._rebalance_access(p)                               # Hool for balanced tree subclasses
         raise KeyError(f"Key Error: {repr(k)}")
+
+    def _rebalance_insert(self, p: Position): pass
+    def _rebalance_delete(self, p: Position): pass
+    def _rebalance_access(self, p: Position): pass
+
+    # noinspection PyMethodMayBeStatic
+    def _relink(self, parent, child, make_left_child):
+        """Relink parent node with child node (we allow child to be None)."""
+        if make_left_child:                                         # Make it a left child
+            parent.left = child
+        else:                                                       # Make it a right child
+            parent._right = child
+        if child is not None:                                       # Make child point to a parent
+            child._parent = parent                                  # Explicitly record the property
+
+    def _rotate(self, p: Position):
+        """Rotate Position p above its parent."""
+        x = p.node
+        y = x.parent                                                # We assume this exists
+        z = y.parent                                                # Grandparent (possibly none)
+        if z is None:
+            self._root = x                                          # x becomes root
+            x.parent = None
+        else:
+            self._relink(z, x, y == z.left)                         # x becomes a direct child of z
+        if x == y.left:                                             # Rotate x and y, transfer middle subtree
+            self._relink(y, x.right, True)             # x._right becomes left child of y
+            self._relink(x, y, False)                  # y becomes right child of x
+        else:
+            self._relink(y, x.left, False)             # x._left becomes right child of y
+            self._relink(x, y, True)                   # y becomes left child of x
+
+    def _restructure(self, x: Position):
+        """Perform trinode restructure of Position x with parent/grandparent."""
+        y = self.parent(x)
+        z = self.parent(y)
+        if (x == self.right(x)) == (y == self.right(z)):            # Matching alignments
+            self._rotate(y)                                         # Single rotation (of y)
+            return y                                                # y is new subtree root
+        else:                                                       # Opposite alignments
+            self._rotate(x)                                         # Double rotation (of x)
+            self._rotate(x)
+            return x                                                # x is new subtree root
