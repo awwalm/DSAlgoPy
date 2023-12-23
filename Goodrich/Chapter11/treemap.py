@@ -220,7 +220,7 @@ class TreeMap(LinkedBinaryTree, MapBase):
         """Perform trinode restructure of Position x with parent/grandparent."""
         y = self.parent(x)
         z = self.parent(y)
-        if (x == self.right(x)) == (y == self.right(z)):            # Matching alignments
+        if (x == self.right(y)) == (y == self.right(z)):            # Matching alignments
             self._rotate(y)                                         # Single rotation (of y)
             return y                                                # y is new subtree root
         else:                                                       # Opposite alignments
