@@ -1,5 +1,8 @@
 """Code Fragment 8.7: A Binary Tree abstract base class that extends the existing ``Tree``
 abstract base class from Code Fragments 8.1 and 8.2."""
+from _typeshed import SupportsNext
+from typing import Iterable, Union
+
 from Goodrich.Chapter8.tree import Tree
 
 
@@ -31,7 +34,7 @@ class BinaryTree(Tree):
             else:
                 return self.left(parent)            # possibly None
 
-    def children(self, p: Tree.Position):
+    def children(self, p: Tree.Position) -> Union[SupportsNext, Iterable]:
         """Generate an iteration of Positions representing p's children."""
         if self.left(p) is not None:
             yield self.left(p)
