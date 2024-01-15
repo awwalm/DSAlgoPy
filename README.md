@@ -21,7 +21,7 @@ as well as Michael T. Goodrich et al.<span title="Michael T. Goodrich, Roberto T
 | Chapter 11 | Hash Tables                               | [Search Trees](Goodrich/Chapter11)                      |
 | Chapter 12 | Advanced Sorting                          | Sorting and Selection                                   |
 | Chapter 13 | [Binary Trees](RDNecaise/Chapter13)       | Text Processing                                         |
-| Chapter 14 | Search Trees                              | Graph Algorithms                                        |
+| Chapter 14 | [Search Trees](RDNecaise/Chapter14)       | Graph Algorithms                                        |
 | Chapter 15 |                                           | Memory Management and B-Trees                           |
 
 ## Getting Started
