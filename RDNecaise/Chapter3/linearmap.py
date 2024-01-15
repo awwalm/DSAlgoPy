@@ -73,9 +73,9 @@ class _MapIterator:
 
     def __next__(self):
         if self._curNdx < len(self._mapRef):
-            val = self._mapRef[self._curNdx]
+            item = self._mapRef[self._curNdx]
             self._curNdx += 1
-            return val
+            return item
         else:
             raise StopIteration
 
