@@ -128,7 +128,7 @@ class _BSTMapNode:
 
 
 class _BSTMapIterator:
-    """An iterator for the binary search tree using a software stack."""
+    """An iterator for the binary search tree using a Stack ADT."""
 
     def __init__(self, root):
         """Create a stack for use in traversing the tree."""
