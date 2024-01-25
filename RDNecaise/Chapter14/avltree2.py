@@ -322,11 +322,11 @@ class AVLTree:
 
         if not node is None:
             self.elements_count -= 1
-            if node.is_leaf():
+            if node.is_leaf():                                          # No child
                 self.remove_leaf(node)
-            elif (bool(node.leftChild)) ^ (bool(node.rightChild)):
+            elif (bool(node.leftChild)) ^ (bool(node.rightChild)):      # At least 1 child
                 self.remove_branch(node)
-            else:
+            else:                                                       # 2 children
                 self.swap_with_successor_and_remove(node)
 
     def swap_with_successor_and_remove(self, node):

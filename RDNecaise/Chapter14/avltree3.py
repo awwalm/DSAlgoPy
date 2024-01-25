@@ -1,20 +1,24 @@
-"""A proper implementation of an AVL Tree with proper coding standards too.
-The implementation from the book contains cryptic/indecipherable bugs."""
+"""A proper implementation of an AVL Tree with proper coding standards.
+This version was adapted from https://github.com/zinchse/AVLTree.
+The implementation from the book contains cryptic/indecipherable bugs,
+hence, not recommended for usage.
 
-from enum import Enum, unique, auto
+Implemented public/classic methods:
++ insert(key, value)
++ delete(key)
++ search(key)
++ predecessor(key)
+"""
+
 from typing import Union
 
-@unique
-class Path(Enum):
-    L = auto()
-    R = auto()
 
 class AVLTree:
     """An AVL Tree."""
 
     # Nonpublic node class -----------------------------------------------------------------
     class _AVLNode:
-        __slots__ = "_key", "_value", "_parent", "_left", "_right", "_height", "_node_size"
+        __slots__ = "_key", "_value", "_parent", "_left", "_right", "_height"
 
         def __init__(self, key, value, parent, left=None, right=None, height=0):
             self._key = key
@@ -23,7 +27,6 @@ class AVLTree:
             self._left: Union[AVLTree._AVLNode, None] = left
             self._right: Union[AVLTree._AVLNode, None] = right
             self._height: int = height
-            self._node_size = 1     # Total number of nodes rooted in the subtree including itself
 
         @property
         def key(self):
@@ -49,10 +52,6 @@ class AVLTree:
         def height(self):
             return self._height
 
-        @property
-        def node_size(self):
-            return self._node_size
-
         @key.setter
         def key(self, k):
             self._key = k
@@ -77,9 +76,6 @@ class AVLTree:
         def height(self, h):
             self._height = h
 
-        @node_size.setter
-        def node_size(self, ns):
-            self._node_size = ns
 
     # AVL search tree utilities -----------------------------------------------------------------
     def __init__(self):
@@ -111,12 +107,18 @@ class AVLTree:
 
     # noinspection PyMethodMayBeStatic
     def predecessor(self, subtree: _AVLNode):
-        if subtree and subtree.left: subtree = subtree.left
-        while subtree is not None:
-            if subtree.right:
-                subtree = subtree.right
-            else:
-                break
+        if subtree and subtree.left:
+            subtree = subtree.left
+            while subtree is not None:
+                if subtree.right:
+                    subtree = subtree.right
+                else:
+                    break
+        elif subtree and subtree.parent:
+            while subtree:
+                if subtree.parent and subtree.parent.key < subtree.key:
+                    return subtree.parent
+                subtree = subtree.parent
         return subtree
 
     def insert(self, key, value):
@@ -138,20 +140,70 @@ class AVLTree:
                         self._update_height(node)
                 self._size += 1
 
+    def _remove_full_node(self, subtree: _AVLNode):
+        """Heuristic for deleting internal node with two children."""
+        successor = self.predecessor(subtree.right)
+        subtree.key, subtree.value = successor.key, successor.value
+        if subtree.height == 0:
+            self._remove_leaf_node(subtree)
+        else:
+            self._remove_half_node(subtree)
+
+    def _remove_half_node(self, subtree: _AVLNode):
+        """Heuristic for deleting internal node with one child."""
+        parent = subtree.parent
+        if parent:
+            if parent.left == subtree:
+                parent.left = subtree.right or subtree.left
+            else:
+                parent.right = subtree.right or subtree.left
+            if subtree.left:
+                subtree.left.parent = parent
+            else:
+                subtree.right.parent = parent
+            self._recompute_height(parent)
+        # Consider a rebalance
+        subtree = parent
+        while subtree:
+            if -1 <= self._get_balance(subtree) <= 1:
+                pass
+            else:
+                self._rebalance(subtree)
+            subtree = subtree.parent
+
+    def _remove_leaf_node(self, subtree: _AVLNode):
+        """Heuristic for deleting leaf node."""
+        parent = subtree.parent
+        if parent:
+            if parent.left == subtree:
+                parent.left = None
+            else:
+                parent.right = None
+            self._recompute_height(parent)
+        else:
+            self._root = None                               # Singleton root node
+        # Consider a rebalance
+        subtree = parent
+        while subtree:
+            if -1 <= self._get_balance(subtree) <= 1:
+                pass
+            else:
+                self._rebalance(subtree)
+            subtree = subtree.parent
+
     def delete(self, key):
+        """Remove subtree with the given key from the tree, or raise error if not found."""
         node = self.search(key, self._root)
         if key != node.key:
-            raise KeyError(f"Key `{key}` not in AVLTree instance {self}")
+            raise KeyError(f"Key `{key}` not in {self.__str__()[-38:]}")
         else:
-            if node.left and node.right:
-                ...
-            elif node.right or node.left:
-                self._remove_
-            else:   # Leaf node
-                self._remove_leaf(node)
+            if node.left and node.right:                    # Subtree has two children
+                self._remove_full_node(node)
+            elif node.right or node.left:                   # Subtree has at least one child
+                self._remove_half_node(node)
+            else:                                           # Leaf node: subtree has no children
+                self._remove_leaf_node(node)
             self._size -= 1
-
-
 
     # noinspection PyMethodMayBeStatic
     def _get_balance(self, subtree: _AVLNode):
@@ -185,7 +237,6 @@ class AVLTree:
     def _update_height(self, subtree: _AVLNode):
         """Increment height upwards until an imbalanced node is reached, and subsequently balanced."""
         node = subtree
-        node.node_size += 1                                 # Now contains extra child as invoked by insert()
         if node.height == 0:                                # Update required (this node has a child)
             while node is not None:
                 node.height = self._get_max_height(node) + 1
@@ -286,4 +337,3 @@ class AVLTree:
                     C.parent = F
                 self._recompute_height(A)
                 self._recompute_height(B)
-

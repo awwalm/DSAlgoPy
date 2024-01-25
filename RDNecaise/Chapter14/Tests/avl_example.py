@@ -117,12 +117,17 @@ def test3():
     tree = AVLTreeC()
     vals = [3,8,10,4,1,2,9,6,5,7,17,12,15,21,18,19,13,3,8,10,4,1,2]
     lim = random.randrange(10, 16)
-    for i in vals: # random.sample(range(1, lim+1), lim): #vals:
+    for i in random.sample(range(1, lim+1), lim): #vals:
         print(f"\ncurrent key/value: {i}")
         tree.insert(i, i)
         print_tree3(tree.root())
-    tree.delete(6)
-    print("Key 6 deleted")
+    print("Attempting to delete key 36")
+    try: tree.delete(36)
+    except KeyError as e: print(e)
+    print_tree3(tree.root())
+    root_key = tree.root().key
+    tree.delete(root_key)
+    print(f"Attempting to delete root key/value: {root_key}\nNew root is: {tree.root().key}")
     print_tree3(tree.root())
     print(f"5 in tree: {5 in tree}")
     print(f"25 in tree: {25 in tree}")
