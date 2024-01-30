@@ -10,6 +10,19 @@ def inorder_traversal(node):
     if node.right:
         inorder_traversal(node.right)
 
+def bfs(level):
+    if level.__len__() == 0:
+        return
+    next_level = []
+    for node in level:
+        if node:
+            print(node.value)
+            if node.left: next_level.append(node.left)
+            if node.right: next_level.append(node.right)
+    del level
+    bfs(next_level)
+
+
 def test():
     tree = AVLTree()
     lim = random.randrange(10, 30)
@@ -48,6 +61,10 @@ def test():
     print(print_pretty_tree(tree.root()))
     # print_tree(tree.root())
 
+    print("Inorder traversal:")
     inorder_traversal(tree.root())
+
+    print("BFS (left to right) traversal:")
+    bfs([tree.root()])
 
 test()
