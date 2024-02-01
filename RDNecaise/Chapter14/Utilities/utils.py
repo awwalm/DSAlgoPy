@@ -7,6 +7,18 @@ def inorder_traversal(node):
     if node.right:
         inorder_traversal(node.right)
 
+def bfs(level):
+    if level.__len__() == 0:
+        return
+    next_level = []
+    for node in level:
+        if node:
+            print(node.value)
+            if node.left: next_level.append(node.left)
+            if node.right: next_level.append(node.right)
+    del level
+    bfs(next_level)
+
 def print_pretty_tree(start_node):
     """From GitHub: https://github.com/zinchse/AVLTree"""
     space_symbol = r" "
