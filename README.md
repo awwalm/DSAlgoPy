@@ -19,7 +19,7 @@ as well as Michael T. Goodrich et al.<span title="Michael T. Goodrich, Roberto T
 | Chapter 9  | Advanced Linked Lists                     | [Priority Queues](Goodrich/Chapter9)                    |
 | Chapter 10 | Recursion                                 | [Maps, Hash Tables, and Skip Lists](Goodrich/Chapter10) |
 | Chapter 11 | Hash Tables                               | [Search Trees](Goodrich/Chapter11)                      |
-| Chapter 12 | Advanced Sorting                          | Sorting and Selection                                   |
+| Chapter 12 | Advanced Sorting                          | [Sorting and Selection](Goodrich/Chapter12)             |
 | Chapter 13 | [Binary Trees](RDNecaise/Chapter13)       | Text Processing                                         |
 | Chapter 14 | [Search Trees](RDNecaise/Chapter14)       | Graph Algorithms                                        |
 | Chapter 15 |                                           | Memory Management and B-Trees                           |
