@@ -63,19 +63,33 @@ print(s4)
 
 # @FIXME: Not completed
 def merge_sort(seq):
-    if 0 <= len(seq) <= 1: return seq
-    if len(seq) > 2:
-        print(merge_sort(seq[:len(seq)//2]) + merge_sort(seq[len(seq)//2:]))
-    elif len(seq) == 2:
-        if seq[1] < seq[0]:
-            seq[0], seq[1] = seq[1], seq[0]
-    #print(seq)
-    return seq
+    if len(seq) == 0: return seq
+    mid = len(seq) // 2
+    left, right = seq[:mid], seq[mid:]
+    if len(seq) > 1:
+        merge_sort(left)
+        merge_sort(right)
+    lsize, rsize = mid, len(seq) - mid
+    i, l, r = 0, 0, 0
+    while l < lsize and r < rsize:
+        if left[l] < right[r]:
+            seq[i] = left[l]
+            i += 1
+            l += 1
+        else:
+            seq[i] = right[r]
+            i += 1
+            r += 1
+    while l < lsize:
+        seq[i] = left[l]
+        i += 1
+        l += 1
+    while r < rsize:
+        seq[i] = right[r]
+        i += 1
+        r += 1
 
 s5 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
-s5 = merge_sort(s5)
+merge_sort(s5)
 print(s5)
-
-
-
 
