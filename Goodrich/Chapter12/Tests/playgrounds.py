@@ -61,7 +61,6 @@ s4 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 bubble_sort(s4)
 print(s4)
 
-# @FIXME: Not completed
 def merge_sort(seq):
     if len(seq) == 0: return seq
     mid = len(seq) // 2
