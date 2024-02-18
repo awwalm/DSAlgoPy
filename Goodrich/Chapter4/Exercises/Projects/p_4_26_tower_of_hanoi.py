@@ -72,11 +72,14 @@ class HanoiTowers:
         print(f"\t{base}\n{tower_names}\n")
 
     def _hanoi(self, disk: int, source: TowerStack, intermediate: TowerStack, destination: TowerStack):
-        """Prints the move of each disk across the towers recursively.\n
-        :param disk:            The initial disks on the contemporary source tower.
-        :param source:          The contemporary source tower a disk move starts from.
-        :param intermediate:    A varying provisional storage tower.
-        :param destination:     The contemporary destination tower a disk is moved to.
+        """
+        Prints the move of each disk across the towers recursively.
+
+        Args:
+            disk:            The initial disks on the contemporary source tower.
+            source:          The contemporary source tower a disk move starts from.
+            intermediate:    A varying provisional storage tower.
+            destination:     The contemporary destination tower a disk is moved to.
         """
         if disk == 1:
             print(f"Disk {disk} moved from Tower {source.tower} to {destination.tower}.")
