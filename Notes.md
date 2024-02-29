@@ -8,6 +8,7 @@
 - [$`\underline{\LaTeX}`$ Equation Editor by Codecogs](https://latex.codecogs.com/eqneditor/editor.php)
 - [Eric Rowell's Big-O Cheatsheet](https://bigocheatsheet.com)
 - [Plaintext Diagram Editor](https://www.planttext.com)
+- Use `curl -o filename.extension "URL"` syntaxt to download a file to `pwd`
 
 <hr>
 
