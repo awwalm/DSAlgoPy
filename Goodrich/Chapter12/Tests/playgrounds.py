@@ -17,7 +17,7 @@ print(f"-9 in {s}: {bin_search(-9, s, 0, len(s)-1)}")      # False
 print(f"7 in {s}: {bin_search(7, s, 0, len(s)-1)}\n")    # True
 
 def insertion_sort(seq):
-    if 0 <= len(seq) <= 1: return
+    if len(seq) < 2: return
     for i in range(1, len(seq)):
         j, k = i-1, i
         while j > -1:
@@ -32,14 +32,14 @@ insertion_sort(s2)
 print("Insertion Sort:\t\t", s2)
 
 def selection_sort_too_many_rewrites(seq):
-    if 0 <= len(seq) <= 1: return
+    if len(seq) < 2: return
     for i in range(len(seq)):
         for j in range(i+1, len(seq)):
             if seq[j] < seq[i]:
                 seq[i], seq[j] = seq[j], seq[i]
 
 def selection_sort(seq):
-    if 0 <= len(seq) <= 1: return
+    if len(seq) < 2: return
     for i in range(len(seq)):
         minval, searchpos = seq[i], i
         for j in range(i+1, len(seq)):
@@ -51,12 +51,21 @@ s3 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 selection_sort(s3)
 print("Selection Sort:\t\t", s3)
 
-def bubble_sort(seq):
-    if 0 <= len(seq) <= 1: return
+def bubble_sort_too_many_passes(seq):
+    if len(seq) < 2: return
     for i in range(len(seq)):
         for j in range(1, len(seq)):
             if seq[j] < seq[j-1]:
                 seq[j], seq[j-1] = seq[j-1], seq[j]
+
+def bubble_sort(seq):
+    k = len(seq)
+    if k < 2: return
+    while k > 0:
+        for i in range(1, k):
+            if seq[i] < seq[i-1]:
+                seq[i], seq[i-1] = seq[i-1], seq[i]
+        k -= 1
 
 s4 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 bubble_sort(s4)
