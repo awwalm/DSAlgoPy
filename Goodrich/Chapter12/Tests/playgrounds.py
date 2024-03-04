@@ -1,4 +1,6 @@
 """Sample snippets and short tests."""
+import heapq
+
 
 def bin_search(val, seq, start, end):
     if end < start:      # if start == len(seq) or end == 0     # Range exceeded
@@ -27,7 +29,7 @@ def insertion_sort(seq):
             k -= 1
 
 s2 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
-print("Original Sequence:\t", s2)
+print("Original Sequence:\t", s2, "\n")
 insertion_sort(s2)
 print("Insertion Sort:\t\t", s2)
 
@@ -126,3 +128,53 @@ def partition(seq, i, j):
 s6 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 quick_sort(s6, 0, len(s6)-1)
 print("Quick-Sort:\t\t\t", s6)
+
+def inbuilt_heapsort(seq):
+    n = len(seq)
+    heapq.heapify(seq)
+    for i in range(n): yield heapq.heappop(seq)
+
+s7 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
+s7 = list(inbuilt_heapsort(s7))
+print("Heap-Sort:\t\t\t", s7)
+
+def merge_sorted_lists(l1, l2):
+    len1, len2 = len(l1), len(l2)
+    i1, i2, M = 0, 0, []                # Index variables for l1 and l2, M = merged container
+
+    while (i1 < len1) and (i2 < len2):  # Merge items in order until at LEAST one list is empty
+        if l1[i1] < l2[i2]:
+            M.append(l1[i1])
+            l1[i1] = None
+            i1+= 1
+        elif l1[i1] > l2[i2]:
+            M.append(l2[i2])
+            l2[i2] = None
+            i2+= 1
+        else:
+            if l1[i1] == l2[i2]:
+                M.append(l1[i1]); l1[i1] = None; i1 += 1
+                M.append(l2[i2]); l2[i2] = None; i2 += 1
+
+    #if i1 < len1: i1 = 0                # If big list is not empty, copy over remaining items
+    while i1 < len1:
+        if l1[i1]:
+            M.append(l1[i1])
+            l1[i1] = None
+        i1 += 1
+
+    #if i2 < len2: i2 = 0                # If small list is not empty, copy over remaining items
+    while i2 < len2:
+        if l2[i2]:
+            M.append(l2[i2])
+            l2[i2] = None
+        i2 += 1
+
+    return M                            # Return merged list
+
+s8 = [-15, -3, 0, 4, 15, 18, 25]  # [4,8,15,23,42]
+s9 = [1, 3, 4, 5, 7, 9] # [1,2,3,4,5,6,7,8,9]
+print("\nl1:\t\t\t\t\t", s8)
+print("l2:\t\t\t\t\t", s9)
+s10 = merge_sorted_lists(s8, s9)
+print("Merged l1 and l2:\t", s10)
