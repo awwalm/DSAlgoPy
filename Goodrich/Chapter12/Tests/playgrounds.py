@@ -73,37 +73,6 @@ s4 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 bubble_sort(s4)
 print("Bubble Sort:\t\t", s4)
 
-def merge_sort(seq):
-    if len(seq) == 0: return seq
-    mid = len(seq) // 2
-    left, right = seq[:mid], seq[mid:]
-    if len(seq) > 1:
-        merge_sort(left)
-        merge_sort(right)
-    lsize, rsize = mid, len(seq) - mid
-    i, l, r = 0, 0, 0
-    while l < lsize and r < rsize:
-        if left[l] < right[r]:
-            seq[i] = left[l]
-            i += 1
-            l += 1
-        else:
-            seq[i] = right[r]
-            i += 1
-            r += 1
-    while l < lsize:
-        seq[i] = left[l]
-        i += 1
-        l += 1
-    while r < rsize:
-        seq[i] = right[r]
-        i += 1
-        r += 1
-
-s5 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
-merge_sort(s5)
-print("Merge-Sort:\t\t\t", s5)
-
 def quick_sort(seq, start, end):
     if len(seq) < 2 or start >= end:            # Sequence/subsequence with 1 or 0 items is already sorted
         return
@@ -145,32 +114,38 @@ def merge_sorted_lists(l1, l2):
     while (i1 < len1) and (i2 < len2):  # Merge items in order until at LEAST one list is empty
         if l1[i1] < l2[i2]:
             M.append(l1[i1])
-            l1[i1] = None
-            i1+= 1
+            i1 += 1
         elif l1[i1] > l2[i2]:
             M.append(l2[i2])
-            l2[i2] = None
-            i2+= 1
+            i2 += 1
         else:
             if l1[i1] == l2[i2]:
-                M.append(l1[i1]); l1[i1] = None; i1 += 1
-                M.append(l2[i2]); l2[i2] = None; i2 += 1
+                M.append(l1[i1]); i1 += 1
+                M.append(l2[i2]); i2 += 1
 
-    #if i1 < len1: i1 = 0                # If big list is not empty, copy over remaining items
-    while i1 < len1:
-        if l1[i1]:
-            M.append(l1[i1])
-            l1[i1] = None
+    while i1 < len1:                    # If l1 is not empty, copy over remaining items
+        M.append(l1[i1])
         i1 += 1
 
-    #if i2 < len2: i2 = 0                # If small list is not empty, copy over remaining items
-    while i2 < len2:
-        if l2[i2]:
-            M.append(l2[i2])
-            l2[i2] = None
+    while i2 < len2:                    # If l2 is not empty, copy over remaining items
+        M.append(l2[i2])
         i2 += 1
 
     return M                            # Return merged list
+
+def merge_sort(seq):
+    n = len(seq)
+    if n < 2:
+        return seq
+    else:
+        R = merge_sort(seq[n//2:])      # Right subsequence
+        L = merge_sort(seq[:n//2])      # Left subsequence
+        M = merge_sorted_lists(L, R)    # Merged subsequence
+        return M
+
+s5 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
+s5 = merge_sort(s5)
+print("Merge-Sort:\t\t\t", s5)
 
 s8 = [-15, -3, 0, 4, 15, 18, 25]  # [4,8,15,23,42]
 s9 = [1, 3, 4, 5, 7, 9] # [1,2,3,4,5,6,7,8,9]
