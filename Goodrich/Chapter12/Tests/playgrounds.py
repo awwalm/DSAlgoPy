@@ -1,5 +1,6 @@
 """Sample snippets and short tests."""
 import heapq
+import queue
 
 
 def bin_search(val, seq, start, end):
@@ -115,13 +116,9 @@ def merge_sorted_lists(l1, l2):
         if l1[i1] < l2[i2]:
             M.append(l1[i1])
             i1 += 1
-        elif l1[i1] > l2[i2]:
+        else:  # if l1[i1] > l2[i2]:
             M.append(l2[i2])
             i2 += 1
-        else:
-            if l1[i1] == l2[i2]:
-                M.append(l1[i1]); i1 += 1
-                M.append(l2[i2]); i2 += 1
 
     while i1 < len1:                    # If l1 is not empty, copy over remaining items
         M.append(l1[i1])
@@ -146,6 +143,37 @@ def merge_sort(seq):
 s5 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 s5 = merge_sort(s5)
 print("Merge-Sort:\t\t\t", s5)
+
+
+def sort_bins(seq):
+    n = len(seq)
+    if n < 2: return seq
+    highest = max(seq)
+    digits = 0
+    while abs(highest) >= 10**digits: digits += 1
+    bins = [queue.Queue(maxsize=n) for _ in range(10)]
+
+    power = 0
+    for d in range(digits):
+        for i in range(n):
+            bins[ (seq[i] // 10**power) % 10 ].put(seq[i])
+        ndx = 0
+        for b in range(10):
+            while not bins[b].empty():
+                seq[ndx] = bins[b].get()
+                ndx += 1
+        power += 1
+
+    return seq
+
+def radix_sort(seq):
+    negatives = sort_bins([i for i in seq if i < 0])
+    positives = sort_bins([i for i in seq if i >= 0])
+    return negatives + positives
+
+s11 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
+s11 = radix_sort(s11)
+print("Radix-Sort:\t\t\t", s11)
 
 s8 = [-15, -3, 0, 4, 15, 18, 25]  # [4,8,15,23,42]
 s9 = [1, 3, 4, 5, 7, 9] # [1,2,3,4,5,6,7,8,9]
