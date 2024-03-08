@@ -1,6 +1,8 @@
 """Sample snippets and short tests."""
 import heapq
+import math
 import queue
+from typing import Dict, SupportsInt, Sequence
 
 
 def bin_search(val, seq, start, end):
@@ -174,6 +176,51 @@ def radix_sort(seq):
 s11 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 s11 = radix_sort(s11)
 print("Radix-Sort:\t\t\t", s11)
+
+
+def bucket_sort(seq):
+    n = len(seq)
+    lowest, highest = min(seq), max(seq)
+    num_buckets = math.ceil((highest - lowest) / (n//2))
+    bucket_size = n // num_buckets
+    buckets: Dict[SupportsInt: Sequence] = {
+        i: queue.Queue(maxsize=bucket_size) for i in range(num_buckets)}
+    for i in range(n):
+        # FIXME: determine a means to segregate elements by range
+        buckets[hash(seq[i])].put_nowait(seq[i])
+    for b in buckets:
+        b.sorted()
+    j = 0
+    for i in range(len(buckets)):
+        while not buckets[i].empty():
+            seq[j] = buckets[i].get_nowait()
+
+    #seq = list(map(lambda f: (f * 10), seq))
+
+
+
+def sort_buckets(seq: list, capacity: int):
+    n = len(seq)
+    bucket = [queue.Queue(maxsize=n) for _ in range(capacity+1)]
+    for k in seq:
+        bucket[k].put(k)
+    seq = []
+    for b in bucket:
+        while not b.empty():
+            seq.append(b.get())
+    return seq
+
+def bogo_bucket_sort(seq):
+    unsorted_negatives = [i for i in seq if i < 0]
+    unsorted_positives = [i for i in seq if i >= 0]
+    negatives = sort_buckets(unsorted_negatives, max([abs(i) for i in unsorted_negatives]))
+    positives = sort_buckets(unsorted_positives, max(unsorted_positives))
+    return negatives + positives
+
+s12 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
+bucket_sort(s12)
+print("Bucket-Sort:\t\t", s12)
+
 
 s8 = [-15, -3, 0, 4, 15, 18, 25]  # [4,8,15,23,42]
 s9 = [1, 3, 4, 5, 7, 9] # [1,2,3,4,5,6,7,8,9]
