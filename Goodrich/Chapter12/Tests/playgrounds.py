@@ -21,6 +21,7 @@ s = [-15,2,3,4,5,6,7,8]
 print(f"-9 in {s}: {bin_search(-9, s, 0, len(s)-1)}")      # False
 print(f"7 in {s}: {bin_search(7, s, 0, len(s)-1)}\n")    # True
 
+
 def insertion_sort(seq):
     if len(seq) < 2: return
     for i in range(1, len(seq)):
@@ -35,6 +36,7 @@ s2 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 print("Original Sequence:\t", s2, "\n")
 insertion_sort(s2)
 print("Insertion Sort:\t\t", s2)
+
 
 def selection_sort_too_many_rewrites(seq):
     if len(seq) < 2: return
@@ -56,6 +58,7 @@ s3 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 selection_sort(s3)
 print("Selection Sort:\t\t", s3)
 
+
 def bubble_sort_too_many_passes(seq):
     if len(seq) < 2: return
     for i in range(len(seq)):
@@ -75,6 +78,7 @@ def bubble_sort(seq):
 s4 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 bubble_sort(s4)
 print("Bubble Sort:\t\t", s4)
+
 
 def quick_sort(seq, start, end):
     if len(seq) < 2 or start >= end:            # Sequence/subsequence with 1 or 0 items is already sorted
@@ -101,6 +105,7 @@ s6 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 quick_sort(s6, 0, len(s6)-1)
 print("Quick-Sort:\t\t\t", s6)
 
+
 def inbuilt_heapsort(seq):
     n = len(seq)
     heapq.heapify(seq)
@@ -109,6 +114,7 @@ def inbuilt_heapsort(seq):
 s7 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
 s7 = list(inbuilt_heapsort(s7))
 print("Heap-Sort:\t\t\t", s7)
+
 
 def merge_sorted_lists(l1, l2):
     len1, len2 = len(l1), len(l2)
@@ -158,7 +164,13 @@ def sort_bins(seq):
     power = 0
     for d in range(digits):
         for i in range(n):
+            # Index for `bins` is determined by nth digit of an element in seq, from its RHS.
+            # This is done incrementally (n-1th digit from the RHS is considered in second round)
+            # for a total of rounds corresponding to the item with most digits.
+            # This is done by dividing ALL items with incremental powers of 10 (from 0) per round,
+            # and then obtaining the modulus of the quotient by 10.
             bins[ (seq[i] // 10**power) % 10 ].put(seq[i])
+
         ndx = 0
         for b in range(10):
             while not bins[b].empty():
@@ -178,48 +190,57 @@ s11 = radix_sort(s11)
 print("Radix-Sort:\t\t\t", s11)
 
 
-def bucket_sort(seq):
-    n = len(seq)
-    lowest, highest = min(seq), max(seq)
-    num_buckets = math.ceil((highest - lowest) / (n//2))
-    bucket_size = n // num_buckets
-    buckets: Dict[SupportsInt: Sequence] = {
-        i: queue.Queue(maxsize=bucket_size) for i in range(num_buckets)}
-    for i in range(n):
-        # FIXME: determine a means to segregate elements by range
-        buckets[hash(seq[i])].put_nowait(seq[i])
-    for b in buckets:
-        b.sorted()
-    j = 0
-    for i in range(len(buckets)):
-        while not buckets[i].empty():
-            seq[j] = buckets[i].get_nowait()
+def bogo_bucket_sort(seq):  # Do not try this at home !!!
+    def sort_buckets(_seq: list, capacity: int):
+        n = len(_seq)
+        bucket = [queue.Queue(maxsize=n) for _ in range(capacity + 1)]
+        for k in _seq:
+            bucket[k].put(k)
+        _seq = []
+        for b in bucket:
+            while not b.empty():
+                _seq.append(b.get())
+        return _seq
 
-    #seq = list(map(lambda f: (f * 10), seq))
-
-
-
-def sort_buckets(seq: list, capacity: int):
-    n = len(seq)
-    bucket = [queue.Queue(maxsize=n) for _ in range(capacity+1)]
-    for k in seq:
-        bucket[k].put(k)
-    seq = []
-    for b in bucket:
-        while not b.empty():
-            seq.append(b.get())
-    return seq
-
-def bogo_bucket_sort(seq):
     unsorted_negatives = [i for i in seq if i < 0]
     unsorted_positives = [i for i in seq if i >= 0]
     negatives = sort_buckets(unsorted_negatives, max([abs(i) for i in unsorted_negatives]))
     positives = sort_buckets(unsorted_positives, max(unsorted_positives))
     return negatives + positives
 
+def bucket_sort(seq):
+    n = len(seq)
+    if n < 2: return
+    lowest, highest = min(seq), max(seq)
+    num_buckets = int(math.sqrt(highest - lowest)) # math.ceil((highest - lowest) / (n//2))
+    buckets: Dict[SupportsInt: Sequence] = { i: [] for i in range(num_buckets) }
+
+    for i in range(n):
+        # Bucket index calculates an offset (distance between current and lowest values)
+        # divided by value range, in order to weigh it on a scale of [0.0, ..., 1.0].
+        # We simply multiply this scale by number of buckets (minus 1, for index correction)
+        # to scale it back to available indices range of [0, 1, ..., num_buckets-1].
+        bucket_index = int((seq[i] - lowest) / (highest - lowest) * (num_buckets - 1))
+        heapq.heappush(buckets[bucket_index], (seq[i]))
+
+    for b in buckets: print(buckets[b])     # [Debugging purposes] Show all buckets
+
+    j = 0
+    for i in range(len(buckets)):
+        while len(buckets[i]) > 0:
+            seq[j] = heapq.heappop(buckets[i])
+            j += 1
+
 s12 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
-bucket_sort(s12)
-print("Bucket-Sort:\t\t", s12)
+#bucket_sort(s12)
+# print("Bucket-Sort:\t\t", s12)
+A = [10,51,2,18,4,31,13,5,23,64,29]
+B = [4,8,15,16,23,42]
+C = [23,34,78,-1,6,90,343,5]
+D = [1,5,18,5,6,1,20]
+for s in s12,A,B,C,D :
+    bucket_sort(s)
+    print("Bucket-Sort:\t\t", s, "\n")
 
 
 s8 = [-15, -3, 0, 4, 15, 18, 25]  # [4,8,15,23,42]
