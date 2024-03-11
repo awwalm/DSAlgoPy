@@ -20,7 +20,7 @@ as well as Michael T. Goodrich et al.<span title="Michael T. Goodrich, Roberto T
 | Chapter 10 | Recursion                                   | [Maps, Hash Tables, and Skip Lists](Goodrich/Chapter10) |
 | Chapter 11 | Hash Tables                                 | [Search Trees](Goodrich/Chapter11)                      |
 | Chapter 12 | [Advanced Sorting](RDNecaise/Chapter12)     | [Sorting and Selection](Goodrich/Chapter12)             |
-| Chapter 13 | [Binary Trees](RDNecaise/Chapter13)         | Text Processing                                         |
+| Chapter 13 | [Binary Trees](RDNecaise/Chapter13)         | [Text Processing](Goodrich/Chapter13)                   |
 | Chapter 14 | [Search Trees](RDNecaise/Chapter14)         | Graph Algorithms                                        |
 | Chapter 15 |                                             | Memory Management and B-Trees                           |
 
