@@ -11,7 +11,7 @@ from RDNecaise.Chapter14.Utilities.utils import print_pretty_tree
 
 class BST:
 
-    # Composition Architecture: Nested private Node instance cannot exist independent of BST object
+    # Composition Pattern: Nested private Node instance cannot exist independent of BST object
     class _Node:
         __slots__ = "_key", "_value", "_parent", "_left", "_right", "_height"
         def __init__(self, key, value, parent):
