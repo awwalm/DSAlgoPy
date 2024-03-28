@@ -374,3 +374,66 @@ that is larger than the one stored in that position. The running time is bounded
   * Here, we progressively walk **upwards** ensuring the child node is located at the right of its parent.
   * Once it's no longer on the right, the current value is returned. This is all based on the logic of inorder traversal.
 
+
+# 5. Text Processing
+
+## Boyer-Moore String Matching Algorithm 
+
+The Boyer-Moore algorithm uses various heuristic(s) to conduct an efficient string match
+as opposed brute-forcing. The general idea is to determine an ideal number of characters
+to skip when finding a substring (**_pattern_**) in a **_text_**. 
+There are several variants utilizing different heuristics.
+
+### Partial/Simplified Boyer-Moore Algorithm
+- **Objective:**  
+>When a mismatch occurs, look at the pattern at an earlier position for
+the occurrence of the mismatched character, then attempt to align, else shift past
+mismatched character by one step and then repeat.
+
+- **Heuristics Required:**
+  - Last-Occurence Table.
+
+- **Resources:**
+    - Main Reference (_DSA by Goodrich, Tamassia, and Goldwasser_)
+
+### Horspool Algorithm
+<small>Honestly deserves its own section, but we're associating it with Boyer-Moore for now.</small>
+- **Objective:**
+>When a mismatch occurs, take into account the number of recently matched characters
+and derive the number of steps to skip based on a possible recurrence of the
+partially matched portion of the pattern from the text, in the pattern.
+
+- **Heuristic(s) Required:**
+    - Shift-Value Table
+
+- **References/Resources** (covers heuristic constructions):
+  - _Introduction to the Design and Analysis of Algorithms by Anany Levitin (Chapter 7)_
+  - _"Horspool Algorithm" by Dr. H S Guru Prasad_ ([video](https://youtu.be/W4h6555g5qo))
+  
+### Boyer-Moore-Horspool Algorithm
+- **Objective:**
+> On par with Horspool Algorithm, this hybrid aims to adapt the partial matching 
+technique with a "Bad-Match Table". When a mismatch occurs, we proceed just as with
+Horspool algorithm, with the mew heuristic dictating the number of skips.
+
+- **Heuristic Required:**
+  - Bad-Match Table
+  
+- **References/Resources** (covers heuristic constructions):
+  - _"Boyer-Moore Pattern-Matching Algorithm" (it is in fact a [video](https://youtu.be/4Oj_ESzSNCk) 
+      on the Boyer-Moore-Horspool variant) by Prof. Bharathi Ramesh_
+
+### Classic Boyer-Moore Algorithm
+- **Objective:**
+> Utilizes both a Shift-Value Table and a Good-Suffix Rule to determine the correct number of skips.
+This is a very complicated algorithm and the 7th chapter of Anany Levitin's book 
+is extremely and absolutely recomended for it, and mandatory for sound understanding.
+
+- **Heuristics Required:**
+  - Shift-Value Table
+  - Good Suffix Table
+
+- **References/Resources** (covers heuristic constructions):
+  - _Introduction to the Design and Analysis of Algorithms by Anany Levitin (Chapter 7)_
+  - _Concise [presentation slides](https://www.collegesidekick.com/study-docs/4797428) 
+      by Houssain Kettani, based off Anany Levitin's book_
