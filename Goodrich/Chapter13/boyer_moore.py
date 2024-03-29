@@ -1,4 +1,4 @@
-"""Code Fragment 13.2: An implementation of the Boyer-Moore algorithm."""
+"""Code Fragment 13.2: A (simplified/partial) implementation of the Boyer-Moore algorithm."""
 
 def find_boyer_moore(T, P):
     """Return the lowest index of T at which substring P begins (or else -1)."""

@@ -391,7 +391,7 @@ the occurrence of the mismatched character, then attempt to align, else shift pa
 mismatched character by one step and then repeat.
 
 - **Heuristics Required:**
-  - Last-Occurence Table.
+  - Last-Occurrence Table
 
 - **Resources:**
     - Main Reference (_DSA by Goodrich, Tamassia, and Goldwasser_)
@@ -403,7 +403,7 @@ mismatched character by one step and then repeat.
 and derive the number of steps to skip based on a possible recurrence of the
 partially matched portion of the pattern from the text, in the pattern.
 
-- **Heuristic(s) Required:**
+- **Heuristic Required:**
     - Shift-Value Table
 
 - **References/Resources** (covers heuristic constructions):
@@ -427,7 +427,7 @@ Horspool algorithm, with the mew heuristic dictating the number of skips.
 - **Objective:**
 > Utilizes both a Shift-Value Table and a Good-Suffix Rule to determine the correct number of skips.
 This is a very complicated algorithm and the 7th chapter of Anany Levitin's book 
-is extremely and absolutely recomended for it, and mandatory for sound understanding.
+is extremely and absolutely recommended for it, and mandatory for sound understanding.
 
 - **Heuristics Required:**
   - Shift-Value Table
