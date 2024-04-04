@@ -59,14 +59,16 @@ class BST:
 
     # noinspection PyMethodMayBeStatic
     def _update_height(self, subtree: _Node):   # Required by tree-printing heuristic
-        if (not subtree.left) and (not subtree.right):
-            subtree._height = 0
-        elif subtree.left and not subtree.right:
-            subtree._height = 1 + subtree.left.height
-        elif subtree.right and not subtree.left:
-            subtree._height = 1 + subtree.right.height
-        else:                                   # Both subtrees are present
-            subtree._height = 1 + max(subtree.left.height, subtree.right.height)
+        while subtree:
+            if (not subtree.left) and (not subtree.right):
+                subtree._height = 0
+            elif subtree.left and not subtree.right:
+                subtree._height = 1 + subtree.left.height
+            elif subtree.right and not subtree.left:
+                subtree._height = 1 + subtree.right.height
+            else:                               # Both subtrees are present
+                subtree._height = 1 + max(subtree.left.height, subtree.right.height)
+            subtree = subtree.parent
 
     def insert(self, key, value):
         max_height = 0
@@ -83,9 +85,7 @@ class BST:
             else:                               # key > subtree.key
                 subtree._right = self._Node(key, value, subtree)
             self._size += 1
-            while subtree:
-                self._update_height(subtree)
-                subtree = subtree.parent
+            self._update_height(subtree)
         return max_height
 
     def search(self, subtree: _Node, key, value, max_height: int):
