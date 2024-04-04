@@ -174,6 +174,7 @@ print(f"Hashed Value: {hashed_value}")
 2. **Iterating Over Characters in "hello":**
    ```python
    for character in "hello":
+        # noinspection PyUnresolvedReferences,PyUnboundLocalVariable
         h = (h << 5 & mask) | (h >> 27)
         h += ord(character)
    ```
@@ -181,6 +182,7 @@ print(f"Hashed Value: {hashed_value}")
 
 3. **Final Result:**
    ```python
+    # noinspection PyUnresolvedReferences
    print(f"Hashed Value: {hashed_value}")
    ```
    - The final hash value for the string "hello" is printed.
@@ -390,8 +392,23 @@ There are several variants utilizing different heuristics.
 the occurrence of the mismatched character, then attempt to align, else shift past
 mismatched character by one step and then repeat.
 
-- **Heuristics Required:**
-  - Last-Occurrence Table
+- **Heuristics Required: _Last-Occurrence Table_**
+
+- **Example 1:**
+  - Let _T_ := _A B A C A B_
+  - Then _LOT_ := 
+
+    | _c_       | _A_ | _B_ | _C_ | _*_ |
+    |-----------|-----|-----|-----|-----|
+    | _last(c)_ | 4   | 5   | 3   | -1  |
+
+- **Example 2:**
+  - Let _T_ := _B A O B A B_
+  - Then _LOT_ := 
+
+    | _c_       | _B_ | _A_ | _O_ | _*_ |
+    |-----------|-----|-----|-----|-----|
+    | _last(c)_ | 5   | 4   | 2   | -1  |
 
 - **Resources:**
     - Main Reference (_DSA by Goodrich, Tamassia, and Goldwasser_)
@@ -403,8 +420,28 @@ mismatched character by one step and then repeat.
 and derive the number of steps to skip based on a possible recurrence of the
 partially matched portion of the pattern from the text, in the pattern.
 
-- **Heuristic Required:**
-    - Shift-Value Table
+- **Heuristic Required: _Shift-Value Table_**
+    - Construction Note ⚠: Indices are reversed; last character is ignored; 
+    all other characters (i.e. wildcard) are assigned value of length pattern;
+    last character, if re-encountered prior to last position in pattern, must be recorded;
+    no repeated enumerations.
+    - Matching Notes: In case of partial match, calculate SVT for most recent matched character; 
+    in case of no partial match, calculate and shift by SVT value of mismatched character.
+
+- **Example 1:**
+  - Let _T_ := _B A O B A B_
+  - Indexing := 
+  
+    | 5   | 4   | 3   | 2   | 1   | 0   |
+    |-----|-----|-----|-----|-----|-----| 
+    | _B_ | _A_ | _O_ | _B_ | _A_ | _B_ |
+
+  - Then _SVT_ := 
+
+    | _A_ | _B_ | _0_ | _*_ |
+    |-----|-----|-----|-----|
+    | 1   | 2   | 3   | 6   |
+
 
 - **References/Resources** (covers heuristic constructions):
   - _Introduction to the Design and Analysis of Algorithms by Anany Levitin (Chapter 7)_
@@ -416,8 +453,27 @@ partially matched portion of the pattern from the text, in the pattern.
 technique with a "Bad-Match Table". When a mismatch occurs, we proceed just as with
 Horspool algorithm, with the mew heuristic dictating the number of skips.
 
-- **Heuristic Required:**
-  - Bad-Match Table
+- **Heuristic Required: _Bad-Match Table_**
+  - ⚠ Construction Notes: Normal indexing; start by assigning length of pattern as values 
+  for wildcard and last character (subsequent occurences of last character are ignored); 
+  take last occurence of subsequent characters distinct from last character in pattern.  
+  - ⚠ Matching Notes: In case of partial match, calculate BMT for most recent matched character;
+  in case of no partial match, calculate and shift by BMT value of mismatched character.
+
+- **Example 1:**
+  - Let _T_ := _B A O B A B_
+  - Indexing := 
+  
+    | 0   | 1   | 2   | 3   | 4   | 5   |
+    |-----|-----|-----|-----|-----|-----| 
+    | _B_ | _A_ | _O_ | _B_ | _A_ | _B_ |
+
+  - Then _BMT_ := 
+
+    | _A_ | _O_ | _B_ | _*_ |
+    |-----|-----|-----|-----|
+    | 4   | 2   | 6   | 6   |
+
   
 - **References/Resources** (covers heuristic constructions):
   - _"Boyer-Moore Pattern-Matching Algorithm" (it is in fact a [video](https://youtu.be/4Oj_ESzSNCk) 
@@ -430,8 +486,59 @@ This is a very complicated algorithm and the 7th chapter of Anany Levitin's book
 is extremely and absolutely recommended for it, and mandatory for sound understanding.
 
 - **Heuristics Required:**
-  - Shift-Value Table
-  - Good Suffix Table
+  - Shift-Value Table (same as with [Horspool](#horspool-algorithm))
+  
+  - Good Suffix Table 
+  <br>See [quote from Wikipedia](
+  https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string-search_algorithm#The_good-suffix_rule):
+      
+    >Suppose for a given alignment of P and T, a substring t of T matches a suffix of P 
+    and suppose t is the largest such substring for the given alignment.
+    <br>
+    >1. Then find, if it exists, the right-most copy t′ of t in P such that 
+    t′ is not a suffix of P and the character to the left of t′ in P 
+    differs from the character to the left of t in P. 
+    Shift P to the right so that substring t′ in P aligns with substring t in T.
+    <br><br>
+    >2. If t′ does not exist, then shift the left end of P to the right by the least amount 
+    (past the left end of t in T) so that a prefix of the shifted pattern matches a suffix of t in T. 
+    This includes cases where t is an exact match of P. 
+    <br><br>
+    >3. If no such shift is possible, then shift P by m (length of P) places to the right.
+  
+
+- **Example 1:**
+  - Let _T_ := _B A O B A B_
+  - Then _GST_ :=
+
+      | 𝒌 |                   |     |     |                   |     |               | 𝒅2            |
+      |----|-------------------|-----|-----|-------------------|-----|---------------|----------------|
+      |    | 0                 | 1   | 2   | 3                 | 4   | 5             |                |
+      |    | _B_               | _A_ | _O_ | _B_               | _A_ | _B_           |                |
+      |    |                   |     |     |                   |     |               |                |
+      | 1  |                   |     |     | _B_<sup> s*</sup> |     | <sup>s*</sup> | abs(5 - 3) = 2 |
+      | 2  | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
+      | 3  | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
+      | 4  | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
+      | 5  | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
+
+- **Example 2:**
+  - Let _T_ := _W O W W O W_
+  - Then _GST_ :=
+
+      | 𝒌 |                   |     |     |                   |     |               | 𝒅2            |
+      |----|-------------------|-----|-----|-------------------|-----|---------------|----------------|
+      |    | 0                 | 1   | 2   | 3                 | 4   | 5             |                |
+      |    | _W_               | _O_ | _W_ | _W_               | _O_ | _W_           |                |
+      |    |                   |     |     |                   |     |               |                |
+      | 1  |                   |     |     | _W_<sup> s*</sup> |     | <sup>s*</sup> | abs(5 - 3) = 2 |
+      | 2  | _W_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
+      | 3  | _W_<sup> s*</sup> |     |     | <sup>s*</sup>     |     |               | abs(3 - 0) = 3 |
+      | 4  | _W_<sup> *p</sup> |     |     | <sup>*p</sup>     |     |               | abs(3 - 0) = 3 |
+      | 5  | _W_<sup> *p</sup> |     |     | <sup>*p</sup>     |     |               | abs(3 - 0) = 3 |
+    
+    See video explanation for this particular example [here](https://www.youtube.com/watch?v=GoDHFZUuVpY) 
+
 
 - **References/Resources** (covers heuristic constructions):
   - _Introduction to the Design and Analysis of Algorithms by Anany Levitin (Chapter 7)_
