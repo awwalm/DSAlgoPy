@@ -1,8 +1,20 @@
-"""Sample snippets and short tests."""
+"""Sorting (and search) algorithm snippets and variants - implemented from scratch.
+
++ Binary Search
++ Insertion Sort
++ Selection Sort
++ Bubble Sort
++ Quick Sort
++ Heap Sort
++ Merge Sort
++ Radix Sort
++ Bucket Sort
+"""
+
 import heapq
 import math
 import queue
-from typing import Dict, SupportsInt, Sequence
+from typing import Mapping, SupportsInt, Sequence
 
 
 def bin_search(val, seq, start, end):
@@ -153,7 +165,7 @@ s5 = merge_sort(s5)
 print("Merge-Sort:\t\t\t", s5)
 
 
-def sort_bins(seq):
+def radix_sort_routine(seq):
     n = len(seq)
     if n < 2: return seq
     highest = max(seq)
@@ -181,8 +193,8 @@ def sort_bins(seq):
     return seq
 
 def radix_sort(seq):
-    negatives = sort_bins([i for i in seq if i < 0])
-    positives = sort_bins([i for i in seq if i >= 0])
+    negatives = radix_sort_routine([i for i in seq if i < 0])
+    positives = radix_sort_routine([i for i in seq if i >= 0])
     return negatives + positives
 
 s11 = [4,1,5,7,4,9,-3,3,-15,15,0,25,18]
@@ -213,7 +225,7 @@ def bucket_sort(seq):
     if n < 2: return
     lowest, highest = min(seq), max(seq)
     num_buckets = int(math.sqrt(highest - lowest)) # math.ceil((highest - lowest) / (n//2))
-    buckets: Dict[SupportsInt: Sequence] = { i: [] for i in range(num_buckets) }
+    buckets: Mapping[SupportsInt: Sequence] = { i: [] for i in range(num_buckets) }
 
     for i in range(n):
         # Bucket index calculates an offset (distance between current and lowest values)
@@ -221,7 +233,7 @@ def bucket_sort(seq):
         # We simply multiply this scale by number of buckets (minus 1, for index correction)
         # to scale it back to available indices range of [0, 1, ..., num_buckets-1].
         bucket_index = int((seq[i] - lowest) / (highest - lowest) * (num_buckets - 1))
-        heapq.heappush(buckets[bucket_index], (seq[i]))
+        heapq.heappush(buckets[bucket_index], seq[i])
 
     for b in buckets: print(buckets[b])     # [Debugging purposes] Show all buckets
 
