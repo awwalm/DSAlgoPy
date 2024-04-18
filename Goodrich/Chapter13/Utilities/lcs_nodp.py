@@ -11,6 +11,9 @@ We compute the LCS twice, each in alternate order, and choose the longest output
 Worst case time complexity: O(2 * m * n) ~ o(mn)
 Worst case space complexity: O(n) : if n >= m; else O(m)
 """
+#@FIXME: Currently not a correct implementation - won't pass all test cases.
+
+from functools import cache
 
 
 def get_lcs(A, B):
@@ -20,6 +23,7 @@ def get_lcs(A, B):
 
 def get_subsequence(A: str, B: str):
     lcs = []
+    @cache
     def scan_match(J, K):
         for j in range(J, len(A)):
             for k in range(K, len(B)):
@@ -42,6 +46,8 @@ if __name__ == "__main__":
         ("BD", "ABCD"),                     # BD (2)
         ("ABCDGH", "AEDFHR"),               # ADH (3)
         ("ABCDE", "ACE"),                   # ACE (3)
+        ( "hofubmnylkra", "pqhgxgdofcvmr"), # hofmr (5)
+        ("oxcpqrsvwf", "shmtulqrypy"),      # @TODO: Currently unable to detect subsequence "qr"
         ("ABC", "DEF"),                     # ∅ (0)
     ]
     for p in pairs:
