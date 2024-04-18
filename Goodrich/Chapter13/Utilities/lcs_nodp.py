@@ -1,16 +1,18 @@
 """Non-Dynamic Programming Longest Common Subsequence solution.
 This piece of $#!+ took me almost 16 hours to correctly implement.
 
++ Exploits the observation that if A is shorter than B, then LCS <= length of A.
 + Improves on the DP implementation by availing O(m * n) space usage.
-- Compromises on DP implementation by running through inputs twice as much.
++ Reduces rate of hitting exactly m*n comparisons when partial matches are hit.
 
-Worst case time complexity: O(2 * m * n) -> O(mn)
-Worst case time complexity: O(n) : if n >= m; else O(m)"""
+Worst case time complexity: O(mn)
+Worst case space complexity: O(n) : if n >= m; else O(m)"""
+
 
 def get_lcs(A, B):
-    lcs1 = get_subsequence(A, B)
-    lcs2 = get_subsequence(B, A)
-    return lcs1 if len(lcs1) > len(lcs2) else lcs2
+    shorter = A if len(A) < len(B) else B
+    longer = B if shorter == A else A
+    return get_subsequence(shorter, longer)
 
 def get_subsequence(A: str, B: str):
     lcs = []
@@ -25,8 +27,8 @@ def get_subsequence(A: str, B: str):
 
 
 if __name__ == "__main__":
-    # LCS :=    BDAB (n=4); GTTTAA (6);  GTTTA (5);   2345 (4); 123 (3);
-    sequence1 = "ABCBDAB", "GTTCCTAATA", "GTTCCTAAT", "12345", "123"
-    sequence2 = "BDCAB", "CGATAATTGAGA", "CGATAATTGAG", "23415", "1323"
+    # LCS :=    BDAB (n=4); GTTTAA (6);  GTTTA (5);   2345 (4); 123 (3); 2654 (4)
+    sequence1 = "ABCBDAB", "GTTCCTAATA", "GTTCCTAAT", "12345", "123", "126548"
+    sequence2 = "BDCAB", "CGATAATTGAGA", "CGATAATTGAG", "23415", "1323", "216544"
     for x,y in zip(sequence1, sequence2):
         print("Longest Common Subsequence:", get_lcs(x, y))
