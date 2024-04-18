@@ -1,18 +1,22 @@
-"""Non-Dynamic Programming Longest Common Subsequence solution.
-This piece of $#!+ took me almost 16 hours to correctly implement.
+"""
+Non-Dynamic Programming Longest Common Subsequence solution.
+Exploits the observation that if A is shorter than B, then LCS <= length of A.
+But what happens when A and B are equally sized?
+We compute the LCS twice, each in alternate order, and choose the longest output.
 
-+ Exploits the observation that if A is shorter than B, then LCS <= length of A.
-+ Improves on the DP implementation by availing O(m * n) space usage.
-+ Reduces rate of hitting exactly m*n comparisons when partial matches are hit.
+* Improves on the DP implementation by availing O(m * n) space usage.
+* Reduces rate of hitting exactly m*n comparisons (per call) when partial matches are hit.
+* Compromises on DP implementation by running through all inputs twice as much.
 
-Worst case time complexity: O(mn)
-Worst case space complexity: O(n) : if n >= m; else O(m)"""
+Worst case time complexity: O(2 * m * n) ~ o(mn)
+Worst case space complexity: O(n) : if n >= m; else O(m)
+"""
 
 
 def get_lcs(A, B):
-    shorter = A if len(A) < len(B) else B
-    longer = B if shorter == A else A
-    return get_subsequence(shorter, longer)
+    lcs1 = get_subsequence(A, B)
+    lcs2 = get_subsequence(B, A)
+    return lcs1 if len(lcs1) > len(lcs2) else lcs2
 
 def get_subsequence(A: str, B: str):
     lcs = []
@@ -27,8 +31,18 @@ def get_subsequence(A: str, B: str):
 
 
 if __name__ == "__main__":
-    # LCS :=    BDAB (n=4); GTTTAA (6);  GTTTA (5);   2345 (4); 123 (3); 2654 (4)
-    sequence1 = "ABCBDAB", "GTTCCTAATA", "GTTCCTAAT", "12345", "123", "126548"
-    sequence2 = "BDCAB", "CGATAATTGAGA", "CGATAATTGAG", "23415", "1323", "216544"
-    for x,y in zip(sequence1, sequence2):
-        print("Longest Common Subsequence:", get_lcs(x, y))
+    pairs = [
+        ("ABCBDAB", "BDCAB"),               # BDAB (n=4)
+        ("GTTCCTAATA", "CGATAATTGAGA"),     # GTTTAA (6)
+        ("GTTCCTAAT", "CGATAATTGAG"),       # GTTTA (5)
+        ("12345", "23415"),                 # 2345 (4)
+        ("123", "1323"),                    # 123 (3)
+        ("126548", "216544"),               # 2654 (4)
+        ("AGGTAB", "GXTXAYB"),              # GTAB (4)
+        ("BD", "ABCD"),                     # BD (2)
+        ("ABCDGH", "AEDFHR"),               # ADH (3)
+        ("ABCDE", "ACE"),                   # ACE (3)
+        ("ABC", "DEF"),                     # ∅ (0)
+    ]
+    for p in pairs:
+        print(f"LCS{p} = ", get_lcs(*p))
