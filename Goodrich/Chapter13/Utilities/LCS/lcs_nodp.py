@@ -13,17 +13,14 @@ Worst case space complexity: O(n) : if n >= m; else O(m)
 """
 #@FIXME: Currently not a correct implementation - won't pass all test cases.
 
-from functools import cache
 
-
-def get_lcs(A, B):
+def get_lcs(A: str, B: str):
     lcs1 = get_subsequence(A, B)
     lcs2 = get_subsequence(B, A)
-    return lcs1 if len(lcs1) > len(lcs2) else lcs2
+    return lcs1 if len(lcs1) >= len(lcs2) else lcs2
 
 def get_subsequence(A: str, B: str):
     lcs = []
-    @cache
     def scan_match(J, K):
         for j in range(J, len(A)):
             for k in range(K, len(B)):
