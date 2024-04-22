@@ -1,5 +1,5 @@
 """
-Non-Dynamic Programming Longest Common Subsequence solution.
+Non-Dynamic Programming Longest Common Subsequence solution using-two pointer method.
 Exploits the observation that if A is shorter than B, then LCS <= length of A.
 But what happens when A and B are equally sized?
 We compute the LCS twice, each in alternate order, and choose the longest output.

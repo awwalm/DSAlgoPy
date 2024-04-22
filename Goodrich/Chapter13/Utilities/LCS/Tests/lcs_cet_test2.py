@@ -54,6 +54,8 @@ def CET_LCS(A: str, B: str):
                 pm.append(m)
     if len(pm) > len(PM): PM = pm
 
+    print(f"B indices of matches: {PM}")
+
     return [B[k] for k in PM]
 
 
@@ -75,6 +77,6 @@ if __name__ == "__main__":
             ("ABC", "DEF"),  # ∅ (0)
         ]
         for p in pairs:
-            print(f"LCS{p} = ", max([TP_LCS(*p), CET_LCS(*p), CET_LCS(p[1], p[0])], key=len))
+            print(f"LCS{p} = {max([TP_LCS(*p), CET_LCS(*p)], key=len)}\n")
 
 
