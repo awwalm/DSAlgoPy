@@ -451,7 +451,7 @@ partially matched portion of the pattern from the text, in the pattern.
 - **Objective:**
 > On par with Horspool Algorithm, this hybrid aims to adapt the partial matching 
 technique with a "Bad-Match Table". When a mismatch occurs, we proceed just as with
-Horspool algorithm, with the mew heuristic dictating the number of skips.
+Horspool algorithm, with the new heuristic dictating the number of skips.
 
 - **Heuristic Required: _Bad-Match Table_**
   - ⚠ Construction Notes: Normal indexing; start by assigning length of pattern as values 
