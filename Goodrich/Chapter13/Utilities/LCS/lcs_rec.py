@@ -29,22 +29,40 @@ def LCSCACHE(A, B, j: int, k: int):
         return max(LCS(A, B, j+1, k), LCS(A, B, j, k+1))
 
 
-def LCSMEMO(A: str, B: str, j: int, k: int, memotab: defaultdict):
-    if memotab[(j, k)] == "N/A":
+def LCSMEMO(A: str, B: str, j: int, k: int, memo: defaultdict):
+    if memo[(j, k)] == "N/A":
         pass
     else:
-        return memotab[(j, k)]
+        return memo[(j, k)]
     if (j == len(A)) or (k == len(B)):
-        memotab[(j, k)] = 0
+        memo[(j, k)] = 0
         return 0
     elif A[j] == B[k]:
-        memotab[(j, k)] = 1 + LCSMEMO(A, B, j + 1, k + 1, memotab)
-        return memotab[(j, k)]
+        memo[(j, k)] = 1 + LCSMEMO(A, B, j + 1, k + 1, memo)
+        return memo[(j, k)]
     else:
-        memotab[(j, k)] = max(
-            LCSMEMO(A, B, j + 1, k, memotab), LCSMEMO(A, B, j, k + 1, memotab)
+        memo[(j, k)] = max(
+            LCSMEMO(A, B, j + 1, k, memo), LCSMEMO(A, B, j, k + 1, memo)
         )
-        return memotab[(j, k)]
+        return memo[(j, k)]
+
+
+def LCSBU(A: str, B: str, j: int, k: int, memo: defaultdict):
+    if memo[(j,k)] == "N/A":
+        pass
+    else:
+        return memo[(j,k)]
+    if (j < 0) or (k < 0):
+        memo[(j,k)] = 0
+        return 0
+    elif A[j] == B[k]:
+        memo[(j,k)] = 1 + LCSBU(A, B, j-1, k-1, memo)
+        return memo[(j,k)]
+    else:
+        memo[(j,k)] = max(
+            LCSBU(A, B, j-1, k, memo), LCSBU(A, B, j, k-1, memo)
+        )
+        return memo[(j,k)]
 
 
 
@@ -78,14 +96,21 @@ if __name__ == "__main__":
         t2 = time.perf_counter()
         print(f"Time taken [LCS with cache] = {t2 - t1:.10f}s")
 
-        tab_ = defaultdict(lambda : "N/A")
+        # tab_ = defaultdict(lambda : "N/A")
         t1 = time.perf_counter()
-        sol3 = LCSMEMO(p[0], p[1], 0, 0, tab_)
+        sol3 = LCSMEMO(p[0], p[1], 0, 0, defaultdict(lambda: "N/A"))
         t2 = time.perf_counter()
-        print(f"Time taken [with memoization] = {t2 - t1:.10f}s")
+        print(f"Time taken [memoized/top-down] = {t2 - t1:.10f}s")
+
+         # tab2 = defaultdict(lambda: "N/A")
+        t1 = time.perf_counter()
+        sol4 = LCSBU(p[0], p[1], len(p[0])-1, len(p[1])-1, defaultdict(lambda: "N/A"))
+        t2 = time.perf_counter()
+        print(f"Time taken [memoized/buttom-up] = {t2 - t1:.10f}s")
 
         print(f"LCS no cache solution = {sol}")
         print(f"LCS cache solution = {sol2}")
-        print(f"LCS memoization solution = {sol3}")
+        print(f"LCS memoization top-down = {sol3}")
+        print(f"LCS memoized buttom-up = {sol4}")
         # for key, val in zip(tab_.keys(), tab_.values()): print(f"{key} : {val}")
         print()
