@@ -1,14 +1,14 @@
-"""Code Fragment 6.6: Array-based implementation of a queue (continued in Code Fragment 6.7).
-The ``@property`` decorator for wrapping a pseudo-constant in a getter method is no longer neccessary.
-But the syntax for future reference is as follows:
+"""
+Code Fragment 6.6: Array-based implementation of a queue (continued in Code Fragment 6.7).
 
-.. highlight:: python
-.. code-block:: python
+The ``@property`` decorator for wrapping a pseudo-constant in a getter method:
 
-    @property
-    def DEFAULT_CAPACITY(self):
-        # Wraps a constant value of 10 within a class, identified by the specified method name.
-        return 10
+
+   >>> @property
+   >>> def DEFAULT_CAPACITY(self):
+   >>>     # Wraps a constant value of 10 within a class,
+   >>>     # identified by the specified method name.
+   >>>     return 10
 """
 
 
