@@ -1,3 +1,4 @@
+# @FIXME: CURRENTLY DOES NOT WORK IN ALL CASES!
 """
 Longest Common Subsequence solution using a custom
 `Common Element Table` (CET) construction technique.
@@ -6,9 +7,6 @@ by recorrecting itself with the CET generated results.
 The CET technique similarly complements its inadequacies with the TP results.
 """
 from collections import deque
-import time
-import copy
-
 
 
 # Two-Pointer component
@@ -28,22 +26,16 @@ def TP_LCS(A: str, B: str):
 # Common Element Tabulation component
 def CET_LCS(A: str, B: str):
     CET : list[list, list] = [              # Common Element Table
-        [j for j in range(len(A))], [deque() for j in range(len(A))] ]
-    PM = []            # Partial/Potential LCS indices
+        [j for j in range(len(A))], [deque() for _ in range(len(A))] ]
+    PM : list[int] = []                     # Partial/Potential Matches
 
-    t1 = time.perf_counter()
     for j in range(len(A)):                 # Construct CET with respect due to A
         for k in range(len(B)):             # Find all occurences of A[j] in B
             if A[j] == B[k]:
-                CET[1][j].append(k)     # Record matched indices in queue
-    t2 = time.perf_counter()
-    print(f"{t2- t1:.10f}")
+                CET[1][j].append(k)         # Enqueue all matches in bucket under A[j]
 
-    cet_debug = copy.deepcopy(CET)
-
-    pm = []
+    pm = []                                 # PM cache
     for j in range(len(A)):
-        k = j
         if len(CET[1][j]) == 0:
             continue
         else:
@@ -56,70 +48,33 @@ def CET_LCS(A: str, B: str):
                         matched = m
                         break
                 if not matched:
-                    PM.append(pm)
+                    if len(pm) > len(PM): PM = pm
                     pm = []
             else:
                 m = CET[1][j].popleft()
                 pm.append(m)
-                matched = m
+    if len(pm) > len(PM): PM = pm
 
-        print(pm)
-    PM.append(pm)
-
-
-    return cet_debug
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return [B[k] for k in PM]
 
 
 if __name__ == "__main__":
     pairs = [
-        ("ABCBDAB", "BDCAB"),               # BDAB (n=4)
-        ("GTTCCTAATA", "CGATAATTGAGA"),     # GTTTAA (6)
-        ("GTTCCTAAT", "CGATAATTGAG"),       # GTTTA (5)
-        ("12345", "23415"),                 # 2345 (4)
-        ("123", "1323"),                    # 123 (3)
-        ("126548", "216544"),               # 2654 (4)
-        ("AGGTAB", "GXTXAYB"),              # GTAB (4)
-        ("BD", "ABCD"),                     # BD (2)
-        ("ABCDGH", "AEDFHR"),               # ADH (3)
-        ("ABCDE", "ACE"),                   # ACE (3)
-        ( "hofubmnylkra", "pqhgxgdofcvmr"), # hofmr (5)
-        ("oxcpqrsvwf", "shmtulqrypy"),      # qr (2) @TODO: Bug-fixing in progress
-        ("ABC", "DEF"),                     # ∅ (0)
+        ("ABCBDAB", "BDCAB"),  # BDAB (n=4)
+        ("GTTCCTAATA", "CGATAATTGAGA"),  # GTTTAA (6)
+        ("GTTCCTAAT", "CGATAATTGAG"),  # GTTTA (5)
+        ("12345", "23415"),  # 2345 (4)
+        ("123", "1323"),  # 123 (3)
+        ("126548", "216544"),  # 2654 (4)
+        ("AGGTAB", "GXTXAYB"),  # GTAB (4)
+        ("BD", "ABCD"),  # BD (2)
+        ("ABCDGH", "AEDFHR"),  # ADH (3)
+        ("ABCDE", "ACE"),  # ACE (3)
+        ("hofubmnylkra", "pqhgxgdofcvmr"),  # hofmr (5)
+        ("oxcpqrsvwf", "shmtulqrypy"),  # @TODO: Currently unable to detect subsequence "qr"
+        ("ABC", "DEF"),  # ∅ (0)
     ]
     for p in pairs:
-        # print(f"LCS{p} = ", TP_LCS(*p))
-        cet = CET_LCS(*p)
-        r1 = cet[0]
-        r2 = []
-        for q in cet[1]: r2.append([q.popleft() for e in range(len(q))])
-        print(f"{p}\n{r1}\n{r2}\n")
+        print(f"LCS{p} = ", max([TP_LCS(*p), CET_LCS(*p), CET_LCS(p[1], p[0])], key=len))
+
+
