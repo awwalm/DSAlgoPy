@@ -1,4 +1,3 @@
-
 # Code Fragment 13.1: An implementation of brute-force pattern-matching algorithm.
 def find_brute(T, P):
     """Return the lowest index of T at which substring P begins (or else -1)."""

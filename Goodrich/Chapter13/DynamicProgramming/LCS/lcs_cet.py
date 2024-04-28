@@ -1,3 +1,4 @@
+# @FIXME: CURRENTLY NOT A VALID SOLUTION. DO NOT USE!
 """
 Longest Common Subsequence solution using a custom
 `Common Element Table` (CET) construction technique.

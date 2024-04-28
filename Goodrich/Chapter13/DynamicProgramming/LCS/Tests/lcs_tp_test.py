@@ -1,5 +1,5 @@
 import unittest
-from Goodrich.Chapter13.Utilities.LCS.lcs_tp import *
+from Goodrich.Chapter13.DynamicProgramming.LCS.lcs_tp import *
 
 class MyTestCase(unittest.TestCase):
 
