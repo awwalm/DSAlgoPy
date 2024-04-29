@@ -30,16 +30,15 @@ def CS_NR(s: int, n: int, opt: list[int, int]):
     n   - Number of stairs to climb.
     opt - Choices of steps to take at once.
     """
-    if s < n:           # Not there yet, keep climbing
+    if s < n:           # s < n [Climb higher with all options]
         opt1 = CS_NR(s + opt[0], n, opt)
         opt2 = CS_NR(s + opt[1], n, opt)
         return opt1 + opt2
     elif n - s == 0:    # s = n [We've found 1 way for now]
-        opt1 = CS_NR(s + opt[0], n, opt)
-        opt2 = CS_NR(s + opt[1], n, opt)
-        return 1 + opt1 + opt2
+        return 1
     else:               # s > n [invalid step, zero ways]
         return 0
+
 
 # Memoized recursive
 def CS_MR(s: int, n: int, opt: list, memo: dict):
@@ -51,12 +50,11 @@ def CS_MR(s: int, n: int, opt: list, memo: dict):
         opt2 = CS_MR(s + opt[1], n, opt, memo)
         memo[(s, n)] = opt1 + opt2
     elif n - s == 0:
-        opt1 = CS_MR(s + opt[0], n, opt, memo)
-        opt2 = CS_MR(s + opt[1], n, opt, memo)
-        memo[(s, n)] = 1 + opt1 + opt2
+        memo[(s, n)] = 1
     else:
         memo[(s, n)] = 0
     return memo[(s, n)]
+
 
 # Constant space DP [Fibonacci style only valid for opt={1,2}]
 def CS_DP(n: int):
