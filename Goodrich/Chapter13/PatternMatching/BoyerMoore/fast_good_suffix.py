@@ -46,22 +46,3 @@ def clPreBmGs(x):
     for i in range(mMinus2 + 1):
         bmGs[mMinus1 - suff[i]] = mMinus1 - i
     return bmGs
-
-# Sample patterns
-patterns = ("WOWWOW",       # 25333
-            "BAOBAB",       # 25555
-            "ABCBAB",       # 24444
-            "ANPANMAN",     # 8366666
-            "10000",        # 3215
-            "01010",        # 4422
-            "DRIDI",        # 2555
-            "TCCTATTCTT",
-            )
-
-# Test GST construction for collection of patterns
-for pattern in patterns:
-    bmGs_table = clPreBmGs(pattern)
-    print(f"\nGood-Suffix Table for {pattern}:")
-    print("Index\tShift Value")
-    for i, shift_value in enumerate(bmGs_table):
-        print(f"{i}\t\t{shift_value}")
