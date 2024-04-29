@@ -36,7 +36,7 @@ def CS_NR(s: int, n: int, opt: list[int, int]):
         return opt1 + opt2
     elif n - s == 0:    # s = n [We've found 1 way for now]
         return 1
-    else:               # s > n [invalid step, zero ways]
+    else:               # s > n [Invalid step, zero ways]
         return 0
 
 
