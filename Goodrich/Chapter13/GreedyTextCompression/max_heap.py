@@ -1,38 +1,57 @@
 """Hybrid (dual tree/array-based) Max-Heap implementation."""
-from typing import Union
-# from RDNecaise.Chapter14.Utilities.utils import print_pretty_tree
+from utils import print_tree
 
 
 class MaxHeap:
     """
     A binary tree such that the value of the root is greater than
-    the values of all subtrees rooted under it; recursively.
+    or equal to the values of all subtrees rooted under it; recursively.
 
     + insert(k,v)
     + remove_max()
-    + structurize()
+    + structurize(keys,index,parent)
     """
-    # Nested Binary Tree class ------------------------------------------
-    class _BinTree:
-        class _Node:
-            def __init__(self, k, v, p):
-                self._root: Union[MaxHeap._BinTree._Node, None] = None
-                self.key = k
-                self.value = v
-                self.parent = p
-                self.height = 0
-                self.left = None
-                self.right = None
+    class Node:
+        def __init__(self, key, value, parent):
+            self.key = key
+            self.value = value
+            self.parent = parent
+            self.left = None
+            self.right = None
+            self.height = 0
 
-        def __init__(self):
-            self._root = None
-            self._size = 0
-
-
-    # Max-Heap methods --------------------------------------------------
     def __init__(self):
         self._data = []
         self._size = len(self._data)
+
+    def __len__(self):
+        return self._size
+
+    def structurize(self, keys: list[tuple], index: int, parent):
+        if index < len(keys):
+            keyval = keys[index]
+            node = self.Node(key=keyval[0], value=keyval[1], parent=parent)
+            node.left = self.structurize(keys, 2 * index + 1, node)
+            node.right = self.structurize(keys, 2 * index + 2, node)
+            return node
+
+    # noinspection PyMethodMayBeStatic
+    def bfs(self, start: Node):
+        this_level = [start]
+        next_level = []
+        nodes = []
+        while len(this_level) > 0:
+            for node in this_level:
+                if node: nodes.append(node)
+                if node.left: next_level.append(node.left)
+                if node.right: next_level.append(node.right)
+            this_level = next_level
+            next_level = []
+        return nodes
+
+    def get_tree(self):
+        tree = self.structurize(self._data, 0, None)
+        return tree
 
     def insert(self, k, v):
         self._data.append((k, v))
@@ -53,13 +72,13 @@ class MaxHeap:
     def remove_max(self):
         """
         Let h be a heap of tuples with keys = 64 51 31 18 29 2
-        and values = <corresponding indices>;
-        h = [(64,0), (51,1), (31,2), (18,3), (29,4), (2,5)];
+        and corresponding indices as values.
+        h = [(64,0), (51,1), (31,2), (18,3), (29,4), (2,5)]
         For every left child L, and right child R of every subsequent root node,
         we define `COI(index)` as the `Child of Index` function that maps
-        a valid index to a left, and a right child when valid:
-        L = ((index + 1) * 2) - 1
-        R = ((index + 1) * 2)
+        valid indices to the left and right children when both/either are valid:
+        L = ((parent_index + 1) * 2) - 1
+        R = ((parent_index + 1) * 2)
         COI(i) = (L=NULL, R=NULL)  # Base case (singleton or empty heap)
         COI(0) = (L=1, R=2)
         COI(1) = (L=3, R=4)
@@ -92,6 +111,7 @@ class MaxHeap:
         return removed
 
 
+
 if __name__ == "__main__":
     A = [10, 51, 2, 18, 4, 31, 13, 5, 23, 64, 29]
     B = [4, 8, 15, 16, 23, 42]
@@ -100,6 +120,10 @@ if __name__ == "__main__":
     for data in A, B, C, D:
         heap = MaxHeap()
         for d in data: heap.insert(d,d)
+        heap_tree = heap.get_tree()
+        print([n.key for n in heap.bfs(heap_tree)])
+        print_tree(heap_tree)
+        print()
         for _ in range(len(data)):
             print(heap.remove_max())
         print()
