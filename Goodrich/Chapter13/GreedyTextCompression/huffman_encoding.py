@@ -26,9 +26,27 @@ def huffman(X: str):
     return T, f
 
 
-if __name__ == "__main__":
-    huff_tree, frequency = huffman(X = "a fast runner need never be afraid of the dark")
-    print("Frequency Table")
-    for k in frequency: print(f"{k}\t:\t{frequency[k]}")
+def test_huffman(x: str):
+    huff_tree, frequency = huffman(X=x)
+
+    print("\nFrequency Table")
+    maxpad = len(str(max(frequency.values())))
+    chars =  "| %-9s ||" % "Character"
+    counts = "| %-9s ||" % "Frequency"
+    for k, v in zip(frequency.keys(), frequency.values()):
+        top = " %-*c |" % (maxpad, k)
+        bottom = " %-*s |" % (maxpad, frequency[k])
+        chars += top
+        counts += bottom
+
+    print("_" * len(chars))
+    print(chars)
+    print("-" * len(chars))
+    print(counts)
+    print("=" * len(counts))
+
     print_tree(huff_tree)
 
+
+if __name__ == "__main__":
+    test_huffman(x = "a fast runner need never be afraid of the dark")
