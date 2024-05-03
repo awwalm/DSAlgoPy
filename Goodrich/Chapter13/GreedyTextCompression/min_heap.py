@@ -8,8 +8,9 @@ class MinHeap:
     equal to the values of all subtrees rooted under it; recursively.
 
     + insert(k,v)
-    + remove_max()
-    + structurize(keys,index,parent)
+    + remove_min()
+    + get_tree(node)
+    - _structurize(keys,index,parent)
     """
 
     class Node:
@@ -78,12 +79,12 @@ class MinHeap:
         return removed
 
 
-    def structurize(self, keys: list[tuple], index: int, parent):
+    def _structurize(self, keys: list[tuple], index: int, parent):
         if index < len(keys):
             keyval = keys[index]
             node = self.Node(key=keyval[0], value=keyval[1], parent=parent)
-            node.left = self.structurize(keys, 2 * index + 1, node)
-            node.right = self.structurize(keys, 2 * index + 2, node)
+            node.left = self._structurize(keys, 2 * index + 1, node)
+            node.right = self._structurize(keys, 2 * index + 2, node)
             return node
 
     # noinspection PyMethodMayBeStatic
@@ -101,7 +102,7 @@ class MinHeap:
         return nodes
 
     def get_tree(self):
-        tree = self.structurize(self._data, 0, None)
+        tree = self._structurize(self._data, 0, None)
         return tree
 
 

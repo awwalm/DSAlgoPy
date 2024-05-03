@@ -9,7 +9,8 @@ class MaxHeap:
 
     + insert(k,v)
     + remove_max()
-    + structurize(keys,index,parent)
+    + get_tree(node)
+    - _structurize(keys,index,parent)
     """
     class Node:
         def __init__(self, key, value, parent):
@@ -27,12 +28,12 @@ class MaxHeap:
     def __len__(self):
         return self._size
 
-    def structurize(self, keys: list[tuple], index: int, parent):
+    def _structurize(self, keys: list[tuple], index: int, parent):
         if index < len(keys):
             keyval = keys[index]
             node = self.Node(key=keyval[0], value=keyval[1], parent=parent)
-            node.left = self.structurize(keys, 2 * index + 1, node)
-            node.right = self.structurize(keys, 2 * index + 2, node)
+            node.left = self._structurize(keys, 2 * index + 1, node)
+            node.right = self._structurize(keys, 2 * index + 2, node)
             return node
 
     # noinspection PyMethodMayBeStatic
@@ -50,7 +51,7 @@ class MaxHeap:
         return nodes
 
     def get_tree(self):
-        tree = self.structurize(self._data, 0, None)
+        tree = self._structurize(self._data, 0, None)
         return tree
 
     def insert(self, k, v):
@@ -72,7 +73,7 @@ class MaxHeap:
     def remove_max(self):
         """
         Let h be a heap of tuples with keys = 64 51 31 18 29 2
-        and corresponding indices as values.
+        and corresponding indices as values:
         h = [(64,0), (51,1), (31,2), (18,3), (29,4), (2,5)]
         For every left child L, and right child R of every subsequent root node,
         we define `COI(index)` as the `Child of Index` function that maps
