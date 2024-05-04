@@ -1,5 +1,5 @@
 """Hybrid (dual tree/array-based) Min-Heap implementation."""
-from utils import print_tree
+from Goodrich.Chapter13.GreedyTextCompression.utils import print_tree
 
 
 class MinHeap:
