@@ -54,7 +54,22 @@ def plot_tree(tree, pos=None, parent=None, angle=0, depth=0, depth_step=math.pi/
         )
     return pos
 
+def get_parent(tree, value):
+    if tree is None:
+        return None
+    if (tree.left is not None and tree.left.value == value) or (tree.right is not None and tree.right.value == value):
+        return tree
+    left_parent = get_parent(tree.left, value)
+    if left_parent is not None:
+        return left_parent
+    return get_parent(tree.right, value)
+
 def draw_binary_tree(tree):
+    """
+    Example usage
+    >>> tree1 = build_tree()
+    >>> draw_binary_tree(tree1)
+    """
     pos = plot_tree(tree)
     plt.figure(figsize=(8, 6))
     G = nx.Graph()
@@ -76,19 +91,6 @@ def draw_binary_tree(tree):
     plt.title("Binary Tree")
     plt.show()
 
-def get_parent(tree, value):
-    if tree is None:
-        return None
-    if (tree.left is not None and tree.left.value == value) or (tree.right is not None and tree.right.value == value):
-        return tree
-    left_parent = get_parent(tree.left, value)
-    if left_parent is not None:
-        return left_parent
-    return get_parent(tree.right, value)
-
-# Example usage
-tree1 = build_tree()
-draw_binary_tree(tree1)
 
 
 if __name__ == "__main__":
