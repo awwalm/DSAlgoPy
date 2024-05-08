@@ -1,6 +1,6 @@
 """A basic Trie ADT."""
 
-from typing import List
+from typing import List, Union
 from collections import OrderedDict
 
 
@@ -15,13 +15,14 @@ class Trie:
 
     def __init__(self):
         self._size = 0
+        self._word_count = 0
         self._root = Trie.Node(str(), None)
 
     def __len__(self):
         return self._size
 
     def build(self, S: List[str]):
-        self._size = sum(len(X) for X in S)
+        self._word_count = sum(len(X) for X in S)
         cur = self._root
         for X in S:
             for x in X:
@@ -32,21 +33,21 @@ class Trie:
                     cur.fast_child_access[x] = Trie.Node(x, cur)
                     cur = cur.fast_child_access.get(x)
             cur = self._root
+        self._size = sum(len(l) for l in self.bfs())
         return self._root
 
     def find(self, X):
         cur = self._root
-        check = None
+        check: Union[Trie.Node, None] = None
         for x in X:
             check = cur.fast_child_access.get(x)
             if check is not None and check.value == x:
-                # print(check.value)
                 cur = check                                 # Character match; onto next level
             else:                                           # Mismatch! Return false
                 return False
-        if check and len(check.children) == 0:              # Search terminates at leaf node
+        if check and len(check.children) == 0:              # Search terminated at leaf node
             return True
-        else:                                               # Search terminates at internal node
+        else:                                               # Search terminated at internal node
             return False
 
     def bfs(self):
@@ -61,6 +62,7 @@ class Trie:
             this_level = next_level
             next_level = []
         return levels
+
 
 
 if __name__ == "__main__":
