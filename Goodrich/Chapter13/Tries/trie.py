@@ -15,14 +15,17 @@ class Trie:
 
     def __init__(self):
         self._size = 0
-        self._word_count = 0
+        self._char_count = 0
         self._root = Trie.Node(str(), None)
 
     def __len__(self):
         return self._size
 
+    def count(self):
+        return self._char_count
+
     def build(self, S: List[str]):
-        self._word_count = sum(len(X) for X in S)
+        self._char_count = sum(len(X) for X in S)
         cur = self._root
         for X in S:
             for x in X:
@@ -65,19 +68,33 @@ class Trie:
 
 
 
-if __name__ == "__main__":
+def test_compressed_trie(S, BS):
     t = Trie()
-    strings = ["bear", "bell", "bid", "bull", "buy", "sell", "stock", "stop"]
-    bad_strings = ["bo", "book", "animal", "bulls", "selling", "stoz", "bin", "sto"]
-    root = t.build(strings)
-    print(f"Good strings = {strings}\nBad strings = {bad_strings}")
-    print(f"Trie size: {len(t)}")
+    t.build(S)
+    print(f"\n\nGood strings = {S}\nBad strings = {BS}")
+    print(f"Trie size (nodes): {len(t)}")
+    print(f"Trie count (total characters): {t.count()}")
+
+    # Array representation of Compressed Trie
     print(f"Trie levels:")
     for i in [L for L in t.bfs()]:
-        print(i)                                        # Array representation of Trie
+        print(i)
     print()
-    for s in strings:
-        print(f"`{s}` in Trie: {t.find(s)}")            # True
+
+    # Successful searches for strings in Compressed Trie
+    for s in S:
+        print(f"`{s}` in Trie: {t.find(s)}")
     print()
-    for bs in bad_strings:
-        print(f"`{bs}` in Trie: {t.find(bs)} ")         # False
+
+    # Unsuccessful searches for strings not in Compressed Trie
+    for bs in BS:
+        print(f"`{bs}` in Trie: {t.find(bs)} ")
+
+
+if __name__ == "__main__":
+    strings1 = ["bear", "bell", "bid", "bull", "buy", "sell", "stock", "stop"]
+    bad_strings = ["bo", "book", "animal", "bul", "bulls", "selling", "stoz", "bin", "sto"]
+    strings2 = ["see", "bear", "sell", "stock", "see", "bull", "buy", "stock",
+                "bid", "stock", "bid", "stock", "hear", "the", "bell", "stop"]
+    test_compressed_trie(strings1, bad_strings)
+    test_compressed_trie(strings2, bad_strings)
