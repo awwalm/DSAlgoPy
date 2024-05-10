@@ -95,7 +95,10 @@ def test_trie(S, BS):
 
 
 if __name__ == "__main__":
+    gfk_data = ["facebook", "face", "this", "there", "then"]
+    gfk_bad_data = ["there", "therein", "fab", "th"]
     wiki_trie_data = ["test", "toaster", "toasting", "slow", "slowly"]
+    wiki_data_2 = ["romane", "romanus", "romulus", "rubens", "ruber", "rubicon", "rubicundus"]
     strings1 = ["bear", "bell", "bid", "bull", "buy", "sell", "stock", "stop"]
     bad_strings = ["bo", "book", "animal", "bul", "bulls", "selling", "stoz", "bin", "sto"]
     strings2 = ["see", "bear", "sell", "stock", "see", "bull", "buy", "stock",
@@ -103,3 +106,5 @@ if __name__ == "__main__":
     test_trie(strings1, bad_strings)
     test_trie(strings2, bad_strings)
     test_trie(wiki_trie_data, bad_strings)
+    test_trie(wiki_data_2, bad_strings)
+    test_trie(gfk_data, gfk_bad_data)
