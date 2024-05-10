@@ -1,6 +1,5 @@
-"""A Compressed Trie ADT."""
-# @FIXME: Had to allow partial matches to evaluate as successful search.
-# @FIXME [cont'd]: Mild character duplication occurs at some nodes for overlapping strings.
+"""A Compressed Trie ADT. Provides only insertion and search methods."""
+# @FIXME: Mild character duplication occurs at some nodes for overlapping strings.
 
 from collections import OrderedDict
 from typing import List, Union
@@ -9,7 +8,12 @@ from typing import List, Union
 class CompressedTrie:
     """
     Compresses a standard Trie using bottom-up compression from leaf nodes.
-    Provides only insertion and search methods.
+
+    Singleton leaf nodes are marked as 𝗧𝗘𝗥𝗠𝗜𝗡𝗔𝗟 for optimizing space and node reuse.\n
+    Terminal leaves/singletons are registered in the compressed record.\n
+    This preserves the terminal flag, and allows partial matching only for insrted strings.\n
+    Thusly, positive matches terminating at non-terminal nodes/characters are deemed unsuccessful.
+
     """
     class Node:
         def __init__(self, keys, parent):
@@ -37,6 +41,12 @@ class CompressedTrie:
         for node in leaves:
             while len(node.keys) > 0:
                 parent = node.parent
+                if not parent:  # If anomalous string causes root to be occupied; reset root
+                    self._root = CompressedTrie.Node(list(), None)
+                    self._root.children.append(node)
+                    self._root.fast_child_access[node.keys[-1]] = node
+                    # parent = self._root
+                    break
                 if len(parent.fast_child_access) == 1:          # Node has only one child?
                     parent.keys.extend(node.keys)               # Then compress child with parent
                     parent.fast_child_access = OrderedDict()
@@ -96,7 +106,10 @@ class CompressedTrie:
                         # return False
                         xslice = X[x: x + keylen]
                         if xslice in str().join(check.keys):
-                            return check.compressed[xslice[-1]].terminal
+                            if check.compressed.get(xslice[-1]):
+                                return check.compressed[xslice[-1]].terminal
+                            else:
+                                break
                         else:
                             return False
                 else:
@@ -143,16 +156,19 @@ def test_compressed_trie(S, BS):
 
     # Successful searches for strings in Compressed Trie
     for s in S:
-        print(f"`{s}` in Trie: {t.find(s)}")
+        print(f"`{s}` in Compressed Trie: {t.find(s)}")
     print()
 
     # Unsuccessful or partial searches for strings in (or not in) Compressed Trie
     for bs in BS:
-        print(f"`{bs}` in Trie: {t.find(bs)} ")
+        print(f"`{bs}` in Compressed Trie: {t.find(bs)} ")
 
 
 if __name__ == "__main__":
+    gfk_data = ["facebook", "face", "this", "there", "then"]
+    gfk_bad_data = ["there", "therein", "fab", "th"]
     wiki_trie_data = ["test", "toaster", "toasting", "slow", "slowly"]
+    wiki_data_2 = ["romane", "romanus", "romulus", "rubens", "ruber", "rubicon", "rubicundus"]
     strings1 = ["bear", "bell", "bid", "bull", "buy", "sell", "stock", "stop"]
     bad_strings = ["bo", "book", "animal", "bul", "bulls", "selling", "stoz", "bin", "sto"]
     strings2 = ["see", "bear", "sell", "stock", "see", "bull", "buy", "stock",
@@ -160,3 +176,5 @@ if __name__ == "__main__":
     test_compressed_trie(strings1, bad_strings)
     test_compressed_trie(strings2, bad_strings)
     test_compressed_trie(wiki_trie_data, bad_strings)
+    test_compressed_trie(wiki_data_2, bad_strings)
+    test_compressed_trie(gfk_data, gfk_bad_data)
