@@ -5,11 +5,13 @@ from collections import OrderedDict
 
 
 class Trie:
+    """Basic Trie ADT with only insertion and search implemented."""
 
     class Node:
         def __init__(self, value, parent):
             self.value = value
             self.parent = parent
+            self.terminal = False
             self.children: List[Trie.Node] = list()
             self.fast_child_access = OrderedDict()
 
@@ -29,12 +31,13 @@ class Trie:
         cur = self._root
         for X in S:
             for x in X:
-                if cur.fast_child_access.get(x):            # If charater/letter exists...
+                if cur.fast_child_access.get(x):            # If character/letter exists...
                     cur = cur.fast_child_access.get(x)      # Consider a reuse
                 else:                                       # Otherwise, create new branch
                     cur.children.append(Trie.Node(x, cur))
                     cur.fast_child_access[x] = Trie.Node(x, cur)
                     cur = cur.fast_child_access.get(x)
+            cur.terminal = True                             # Set as terminal for partial matching
             cur = self._root
         self._size = sum(len(l) for l in self.bfs())
         return self._root
@@ -51,7 +54,7 @@ class Trie:
         if check and len(check.children) == 0:              # Search terminated at leaf node
             return True
         else:                                               # Search terminated at internal node
-            return False
+            return cur.terminal                             # Check if this is a terminal node
 
     def bfs(self):
         this_level = [self._root]
@@ -68,7 +71,7 @@ class Trie:
 
 
 
-def test_compressed_trie(S, BS):
+def test_trie(S, BS):
     t = Trie()
     t.build(S)
     print(f"\n\nGood strings = {S}\nBad strings = {BS}")
@@ -92,9 +95,11 @@ def test_compressed_trie(S, BS):
 
 
 if __name__ == "__main__":
+    wiki_trie_data = ["test", "toaster", "toasting", "slow", "slowly"]
     strings1 = ["bear", "bell", "bid", "bull", "buy", "sell", "stock", "stop"]
     bad_strings = ["bo", "book", "animal", "bul", "bulls", "selling", "stoz", "bin", "sto"]
     strings2 = ["see", "bear", "sell", "stock", "see", "bull", "buy", "stock",
                 "bid", "stock", "bid", "stock", "hear", "the", "bell", "stop"]
-    test_compressed_trie(strings1, bad_strings)
-    test_compressed_trie(strings2, bad_strings)
+    test_trie(strings1, bad_strings)
+    test_trie(strings2, bad_strings)
+    test_trie(wiki_trie_data, bad_strings)
