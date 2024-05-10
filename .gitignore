@@ -1,6 +1,7 @@
 # Temporary
 linearset.py
 *.xlsx
+rotations.py
 
 *.sublime-project
 *.sublime-workspace
