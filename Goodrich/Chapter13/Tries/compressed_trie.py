@@ -1,4 +1,4 @@
-"""A Compressed Trie ADT. Provides only insertion and search methods."""
+"""A Compressed Trie ADT. Provides only construction and search methods."""
 # @FIXME: Mild character duplication occurs at some nodes for overlapping strings.
 
 from collections import OrderedDict
@@ -21,7 +21,6 @@ class CompressedTrie:
             self.terminal = False
             self.compressed = OrderedDict()
             self.parent: Union[CompressedTrie.Node, None] = parent
-            self.children: List[CompressedTrie.Node] = list()
             self.fast_child_access = OrderedDict()
 
     def __init__(self):
@@ -43,17 +42,13 @@ class CompressedTrie:
                 parent = node.parent
                 if not parent:  # If anomalous string causes root to be occupied; reset root
                     self._root = CompressedTrie.Node(list(), None)
-                    self._root.children.append(node)
                     self._root.fast_child_access[node.keys[-1]] = node
                     # parent = self._root
                     break
                 if len(parent.fast_child_access) == 1:          # Node has only one child?
                     parent.keys.extend(node.keys)               # Then compress child with parent
                     parent.fast_child_access = OrderedDict()
-                    parent.children = []
                     parent.compressed[node.keys[-1]] = node     # Register node as compressed
-                    if len(node.children) > 0:
-                        parent.children = node.children
                     if len(node.fast_child_access) > 0:
                         parent.fast_child_access = node.fast_child_access
                 node = parent
@@ -61,7 +56,6 @@ class CompressedTrie:
 
     # noinspection PyMethodMayBeStatic
     def _add_empty_node(self, node):
-        node.children.append(CompressedTrie.Node([str()], node))
         node.fast_child_access[str()] = CompressedTrie.Node([str()], node)
 
     def build(self, S: List[str]):
@@ -77,7 +71,6 @@ class CompressedTrie:
                     if cur.terminal:
                         self._add_empty_node(cur)
                 else:                                   # Otherwise, create new branch
-                    cur.children.append(CompressedTrie.Node([x], cur))
                     cur.fast_child_access[x] = CompressedTrie.Node([x], cur)
                     if cur.terminal:
                         self._add_empty_node(cur)
@@ -103,7 +96,6 @@ class CompressedTrie:
                         cur = check             # Compressed string chain matches slice of X
                         x += keylen
                     else:                       # Mismatch; or not enough keys in slice of X
-                        # return False
                         xslice = X[x: x + keylen]
                         if xslice in str().join(check.keys):
                             if check.compressed.get(xslice[-1]):
@@ -120,10 +112,9 @@ class CompressedTrie:
                         return False
             else:                               # Mismatch; character not found
                 return False
-        if check and (len(check.children) == 0 or check.fast_child_access.get(str())):
+        if check and (len(check.fast_child_access) == 0 or check.fast_child_access.get(str())):
             return True                         # Search terminated at leaf/terminal node
         else:                                   # Search terminated at internal node
-            # return False
             return cur.terminal
 
     def bfs(self):

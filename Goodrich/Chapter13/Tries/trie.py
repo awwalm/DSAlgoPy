@@ -1,18 +1,17 @@
-"""A basic Trie ADT."""
+"""A basic Trie ADT with construction and search implemented."""
 
 from typing import List, Union
 from collections import OrderedDict
 
 
 class Trie:
-    """Basic Trie ADT with only insertion and search implemented."""
+    """Constructs a simple Trie using a top-down approach."""
 
     class Node:
         def __init__(self, value, parent):
             self.value = value
             self.parent = parent
             self.terminal = False
-            self.children: List[Trie.Node] = list()
             self.fast_child_access = OrderedDict()
 
     def __init__(self):
@@ -34,7 +33,6 @@ class Trie:
                 if cur.fast_child_access.get(x):            # If character/letter exists...
                     cur = cur.fast_child_access.get(x)      # Consider a reuse
                 else:                                       # Otherwise, create new branch
-                    cur.children.append(Trie.Node(x, cur))
                     cur.fast_child_access[x] = Trie.Node(x, cur)
                     cur = cur.fast_child_access.get(x)
             cur.terminal = True                             # Set as terminal for partial matching
@@ -51,7 +49,7 @@ class Trie:
                 cur = check                                 # Character match; onto next level
             else:                                           # Mismatch! Return false
                 return False
-        if check and len(check.children) == 0:              # Search terminated at leaf node
+        if check and len(check.fast_child_access) == 0:              # Search terminated at leaf node
             return True
         else:                                               # Search terminated at internal node
             return cur.terminal                             # Check if this is a terminal node
@@ -78,18 +76,18 @@ def test_trie(S, BS):
     print(f"Trie size (nodes): {len(t)}")
     print(f"Trie count (total characters): {t.count()}")
 
-    # Array representation of Compressed Trie
+    # Array representation of Trie
     print(f"Trie levels:")
     for i in [L for L in t.bfs()]:
         print(i)
     print()
 
-    # Successful searches for strings in Compressed Trie
+    # Successful searches for strings in Trie
     for s in S:
         print(f"`{s}` in Trie: {t.find(s)}")
     print()
 
-    # Unsuccessful searches for strings not in Compressed Trie
+    # Unsuccessful searches for strings not in Trie
     for bs in BS:
         print(f"`{bs}` in Trie: {t.find(bs)} ")
 
