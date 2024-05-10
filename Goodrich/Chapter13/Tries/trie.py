@@ -1,18 +1,17 @@
-"""A basic Trie ADT."""
+"""A basic Trie ADT with construction and search implemented."""
 
 from typing import List, Union
 from collections import OrderedDict
 
 
 class Trie:
-    """Basic Trie ADT with only insertion and search implemented."""
+    """Constructs a simple Trie using a top-down approach."""
 
     class Node:
         def __init__(self, value, parent):
             self.value = value
             self.parent = parent
             self.terminal = False
-            self.children: List[Trie.Node] = list()
             self.fast_child_access = OrderedDict()
 
     def __init__(self):
@@ -34,7 +33,6 @@ class Trie:
                 if cur.fast_child_access.get(x):            # If character/letter exists...
                     cur = cur.fast_child_access.get(x)      # Consider a reuse
                 else:                                       # Otherwise, create new branch
-                    cur.children.append(Trie.Node(x, cur))
                     cur.fast_child_access[x] = Trie.Node(x, cur)
                     cur = cur.fast_child_access.get(x)
             cur.terminal = True                             # Set as terminal for partial matching
@@ -51,7 +49,7 @@ class Trie:
                 cur = check                                 # Character match; onto next level
             else:                                           # Mismatch! Return false
                 return False
-        if check and len(check.children) == 0:              # Search terminated at leaf node
+        if check and len(check.fast_child_access) == 0:              # Search terminated at leaf node
             return True
         else:                                               # Search terminated at internal node
             return cur.terminal                             # Check if this is a terminal node
