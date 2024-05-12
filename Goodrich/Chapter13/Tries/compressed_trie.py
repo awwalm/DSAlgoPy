@@ -88,29 +88,30 @@ class CompressedTrie:
         x = 0
         check: Union[CompressedTrie.Node, None] = None
         while x < len(X):
+            # Find (if it exists) node with key x
             check = cur.fast_child_access.get(X[x])
-            if check is not None:
+            if check is not None:               # Did we find the node?
                 keylen = len(check.keys)
-                if keylen > 1:
+                if keylen > 1:                  # Key belongs to a compressed node?
                     if list(X[x: x + keylen]) == check.keys:
                         cur = check             # Compressed string chain matches slice of X
                         x += keylen
                     else:                       # Mismatch; or not enough keys in slice of X
                         xslice = X[x: x + keylen]
-                        if xslice in str().join(check.keys):
+                        if str().join(check.keys).startswith(xslice):
                             if check.compressed.get(xslice[-1]):
                                 return check.compressed[xslice[-1]].terminal
                             else:
                                 break
                         else:
                             return False
-                else:
+                else:                           # Key belongs to singleton node
                     if check.keys[0] == X[x]:
                         cur = check             # Character match; onto next level
                         x += 1
                     else:                       # Mismatch; different character found
                         return False
-            else:                               # Mismatch; character not found
+            else:                               # Mismatch; character/key x not found
                 return False
         if check and (len(check.fast_child_access) == 0 or check.fast_child_access.get(str())):
             return True                         # Search terminated at leaf/terminal node
@@ -153,6 +154,11 @@ def test_compressed_trie(S, BS):
     # Unsuccessful or partial searches for strings in (or not in) Compressed Trie
     for bs in BS:
         print(f"`{bs}` in Compressed Trie: {t.find(bs)} ")
+
+    # Leaf nodes of Compressed Trie
+    print(f"\nLeaves:\n{[leaf.keys for leaf in t._leaves]}")
+
+    print("-" * 70)
 
 
 if __name__ == "__main__":
