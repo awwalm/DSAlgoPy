@@ -398,17 +398,17 @@ mismatched character by one step and then repeat.
   - Let _T_ := _A B A C A B_
   - Then _LOT_ := 
 
-    | _c_       | _A_ | _B_ | _C_ | _*_ |
-    |-----------|-----|-----|-----|-----|
-    | _last(c)_ | 4   | 5   | 3   | -1  |
+    | $c$              | _A_ | _B_ | _C_ | _*_ |
+    |------------------|-----|-----|-----|-----|
+    | $\text{last}(c)$ | 4   | 5   | 3   | -1  |
 
 - **Example 2:**
   - Let _T_ := _B A O B A B_
   - Then _LOT_ := 
 
-    | _c_       | _B_ | _A_ | _O_ | _*_ |
-    |-----------|-----|-----|-----|-----|
-    | _last(c)_ | 5   | 4   | 2   | -1  |
+    | $c$              | _B_ | _A_ | _O_ | _*_ |
+    |------------------|-----|-----|-----|-----|
+    | $\text{last}(c)$ | 5   | 4   | 2   | -1  |
 
 - **Resources:**
     - Main Reference (_DSA by Goodrich, Tamassia, and Goldwasser_)
@@ -511,31 +511,31 @@ is extremely and absolutely recommended for it, and mandatory for sound understa
   - Let _T_ := _B A O B A B_
   - Then _GST_ :=
 
-      | 𝒌 |                   |     |     |                   |     |               | 𝒅2            |
-      |----|-------------------|-----|-----|-------------------|-----|---------------|----------------|
-      |    | 0                 | 1   | 2   | 3                 | 4   | 5             |                |
-      |    | _B_               | _A_ | _O_ | _B_               | _A_ | _B_           |                |
-      |    |                   |     |     |                   |     |               |                |
-      | 1  |                   |     |     | _B_<sup> s*</sup> |     | <sup>s*</sup> | abs(5 - 3) = 2 |
-      | 2  | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
-      | 3  | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
-      | 4  | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
-      | 5  | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
+      | $k$ |                   |     |     |                   |     |               | $d2$           |
+      |-----|-------------------|-----|-----|-------------------|-----|---------------|----------------|
+      |     | 0                 | 1   | 2   | 3                 | 4   | 5             |                |
+      |     | _B_               | _A_ | _O_ | _B_               | _A_ | _B_           |                |
+      |     |                   |     |     |                   |     |               |                |
+      | 1   |                   |     |     | _B_<sup> s*</sup> |     | <sup>s*</sup> | abs(5 - 3) = 2 |
+      | 2   | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
+      | 3   | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
+      | 4   | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
+      | 5   | _B_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
 
 - **Example 2:**
   - Let _T_ := _W O W W O W_
   - Then _GST_ :=
 
-      | 𝒌 |                   |     |     |                   |     |               | 𝒅2            |
-      |----|-------------------|-----|-----|-------------------|-----|---------------|----------------|
-      |    | 0                 | 1   | 2   | 3                 | 4   | 5             |                |
-      |    | _W_               | _O_ | _W_ | _W_               | _O_ | _W_           |                |
-      |    |                   |     |     |                   |     |               |                |
-      | 1  |                   |     |     | _W_<sup> s*</sup> |     | <sup>s*</sup> | abs(5 - 3) = 2 |
-      | 2  | _W_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
-      | 3  | _W_<sup> s*</sup> |     |     | <sup>s*</sup>     |     |               | abs(3 - 0) = 3 |
-      | 4  | _W_<sup> *p</sup> |     |     | <sup>*p</sup>     |     |               | abs(3 - 0) = 3 |
-      | 5  | _W_<sup> *p</sup> |     |     | <sup>*p</sup>     |     |               | abs(3 - 0) = 3 |
+      | $k$ |                   |     |     |                   |     |               | $d2$           |
+      |-----|-------------------|-----|-----|-------------------|-----|---------------|----------------|
+      |     | 0                 | 1   | 2   | 3                 | 4   | 5             |                |
+      |     | _W_               | _O_ | _W_ | _W_               | _O_ | _W_           |                |
+      |     |                   |     |     |                   |     |               |                |
+      | 1   |                   |     |     | _W_<sup> s*</sup> |     | <sup>s*</sup> | abs(5 - 3) = 2 |
+      | 2   | _W_<sup> *p</sup> |     |     |                   |     | <sup>*p</sup> | abs(5 - 0) = 5 |
+      | 3   | _W_<sup> s*</sup> |     |     | <sup>s*</sup>     |     |               | abs(3 - 0) = 3 |
+      | 4   | _W_<sup> *p</sup> |     |     | <sup>*p</sup>     |     |               | abs(3 - 0) = 3 |
+      | 5   | _W_<sup> *p</sup> |     |     | <sup>*p</sup>     |     |               | abs(3 - 0) = 3 |
     
     See video explanation for this particular example [here](https://www.youtube.com/watch?v=GoDHFZUuVpY) 
 
@@ -544,3 +544,46 @@ is extremely and absolutely recommended for it, and mandatory for sound understa
   - _Introduction to the Design and Analysis of Algorithms by Anany Levitin (Chapter 7)_
   - _Concise [presentation slides](https://www.collegesidekick.com/study-docs/4797428) 
       by Houssain Kettani, based off Anany Levitin's book_
+
+## Tries
+
+### Standard Tries
+
+A trie is a tree-like data structure for storing the characters in a word/string and allowing a wide range
+of queries and matching operations. The root node always contain the empty string character,
+Other nodes contain a single character. 
+
+The leaf nodes in a standard trie represent the total number of words in that trie. The trie also aims 
+to encourage node reuse when possible, by adding _terminals_ (usually deleanated by empty ndoes) 
+along each path from the root, to indicate that a search query can correctly terminate 
+at that node without traversing until it arrives at a leaf.
+
+### Compressed Tries
+
+Ordinary tries are easy to comprehend. Compressed tries take things a bit further but complications
+only arise in the wake of linear time construction. A compressed trie reduces the number of nodes
+in a standard trie, but the overhead of the number of characters remain unchanged.
+This can be mitigated however, by storing indices instead of the characters themselves.
+
+Other extension of (compressed) tries are **suffix tries**, of which the linear time construction 
+can be produced by **Ukkonen Algorithm**, which adds **suffix links** to the resulting suffix trie.
+This addition allows complex queries such as containment, substring length, and frequency.
+The most interesting auxiliary heuristic data strcuture complementing the suffix array, is the
+**LCP Array**, which computes the length of the **longest common prefix** between every consecutive
+pair of suffixes sorted in the suffix array.
+
+Alternative to suffix trie is the **suffix array** which reduces complexity on the constant overhead
+and space usage. 
+
+### Ukkonen Algorithm
+...
+
+#### References/Resources
+
+- [Trie - Wikipedia](https://en.wikipedia.org/wiki/Trie)
+- [Suffix Tree - Wikipedia](https://en.wikipedia.org/wiki/Suffix_tree)
+- [Suffix Array - Wikipedia](https://en.wikipedia.org/wiki/Suffix_array)
+- [LCP Array - Wikipedia](https://en.wikipedia.org/wiki/LCP_array)
+- [(SAIS) Suffix Array Induced-Sorting - Nong, Zang & Chang (2009)](https://ieeexplore.ieee.org/document/4976463)
+- [(SAIPS) _Optimal In-Place Suffix Sorting_ - Li, Li & Huo (2016)](https://arxiv.org/abs/1610.08305)
+- [YouTube Video - _Linear Time Suffix Array Construction via SAIS_](https://www.youtube.com/watch?v=yb0Os_MTU_4)
