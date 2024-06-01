@@ -1,4 +1,5 @@
-# Notes on [_Data Structures & Algorithms in Python_](https://www.amazon.com/Structures-Algorithms-Python-Michael-Goodrich/dp/1118290275)
+# Notes on [_Data Structures & Algorithms in Python_](
+https://www.amazon.com/Structures-Algorithms-Python-Michael-Goodrich/dp/1118290275)
 
 ### Supporting Material (Similar Repos, Solved Problems, Tools)
 
@@ -38,29 +39,38 @@ instance members must be provided.
 # 2. Linked-Lists
 
 - **Implemening Stacks and Queues via Linked Lists**:
-Each `_Node` object [^1],[^2] used in structuring the linked list is unaware if it's the head or tail node. 
-Only the controller or linked list object knows the head and tail references.
+Each `_Node` object [^1],[^2] used in structuring the linked list is unaware if it's the head 
+or tail node. Only the controller or linked list object knows the head and tail references.
 
 
 - **The Positional List ADT**:
-As useless as it seems (this assumption proves to be ultimately true as the ADT serves no unique purpose), 
-this data structure is just a facility for inserting and removing at any location in a doubly linked list.
-It can be argued that the accessing a specific node (which at this time of writing) via a selected routine
-can be done in constant time, but I maintain the position that this is **NOT** $`O(1)`$ time, however.
-  >Consider continuously reassigning a node variable to the next node until the correct one is detected.
-  Is this any different from iterating until arriving at an item $`O(m \leq n)`$ ? Or perhaps, do we approximate 
-  this to "constant time instant retrieval" $`O(k \geq 1)`$ ?
+As useless as it seems (this assumption proves to be ultimately true as the ADT serves no 
+unique purpose), this data structure is just a facility for inserting and removing at any location 
+in a doubly linked list. It can be argued that the accessing of a specific node (which at this time
+of writing) via a selected routine can be done in constant time, but I maintain the position 
+that this is **NOT exactly** $`O(1)`$ time, however.
+
+  >Consider continuously reassigning a node variable to the next node until 
+   the correct one is detected. Is this any different from iterating until 
+   arriving at an item $`O(m \leq n)`$ ? Or perhaps, do we approximate 
+   this to "constant time instant retrieval" $`O(k \geq 1)`$ ?
 
 
 - **Implementing _Proper_ Linked Lists**:
-  - Most of the conceptual "linked list" programs (or classes) in the book are private **base** classes.
-  The use of a proper or standard (whichever term you prefer) linked list implies two things:
-  re-inventing the wheel (re-writing your own classes); extending an abstraction over the base classes.
-  - I've gone for a better and rigid approach - implementing the classes by reusing the patterns and structures
-  from the base classes provided in the book, starting with the singly linked list, and then extending 
-  all other variants (doubly, circular, etc.) cascadingly or non-sequentially as desired.
-  - This comes with several challenges such as dealing with dichotomies of Python's more obscure inheritance syntax.
-  Nothing that can't be handled by enforcing D.R.Y. principles (so far) and coverage tests.
+
+  - Most of the conceptual "linked list" programs (or classes) in the book are 
+  private **base** classes. The use of a proper or standard (whichever term you prefer) 
+  linked list implies two things: re-inventing the wheel (re-writing your own classes); 
+  extending an abstraction over the base classes.
+  
+  - I've gone for a better and rigid approach - implementing the classes by reusing 
+  the patterns and structures from the base classes provided in the book, starting with 
+  the singly linked list, and then extending all other variants (doubly, circular, etc.) 
+  cascadingly or non-sequentially as desired.
+  
+  - This comes with several challenges such as dealing with dichotomies of Python's
+  more obscure inheritance syntax. Nothing that can't be handled by enforcing D.R.Y. principles 
+  (so far) and coverage tests.
 
 [^1]: See class/method: [`linked_queue.LinkedQueue._Node`](Goodrich/Chapter7/linked_queue.py)
 
@@ -75,17 +85,19 @@ can be done in constant time, but I maintain the position that this is **NOT** $
 
 ### Introduction
 
-In the realm of computer science and low-level programming, bitwise operations play a crucial role 
-in data manipulation, encoding, and hashing. This section explores fundamental concepts such as 
-bitwise AND, OR, XOR operations, as well as the application of these operations in hash functions. 
+In the realm of computer science and low-level programming, bitwise operations 
+play a crucial role in data manipulation, encoding, and hashing. This section 
+explores fundamental concepts such as bitwise AND, OR, XOR operations, as well as 
+the application of these operations in hash functions. 
 Examples and explanations are provided to enhance understanding.
 
 ## Bitwise Operations
 
 ### AND Operation
 
-The bitwise AND operation (`&`) is a binary operation that results in a 1 only if both corresponding bits are 1. 
-It is often used for masking and isolating specific bits. The truth table is as follows:
+The bitwise AND operation (`&`) is a binary operation that results in a 1 only if both 
+corresponding bits are 1. It is often used for masking and isolating specific bits. 
+The truth table is as follows:
 
 ```plaintext
 | A | B | A & B |
@@ -208,9 +220,9 @@ The value of $`h(k)`$ is strictly an index that can be queried by $`A[h(k)=i]`$.
 When $`h(k)`$ and $`h({k}')`$ both map to the same value $`v`$, it indicates a collision.
 
 ### Hash Coding & Compression
-The 1st stage of hashing consists of **hash coding**, this entails mapping a key to an arbitray integer.
-The 2nd stage, known as **compression**, involves transformation of that hashcode to an integer
-limited to a range within the bucket $`A`$.
+The 1st stage of hashing consists of **hash coding**, this entails mapping a key 
+to an arbitray integer. The 2nd stage, known as **compression**, involves transformation 
+of that hashcode to an integer limited to a range within the bucket $`A`$.
 
 ### Polynomial Hashcodes
 Simply taking the Unicode values of characters during hash coding (see [Bitwise Hashing](#hashing-with-bitwise-operations))
@@ -278,40 +290,51 @@ By Horner's law, $`h(x)`$ can be further simplified as follows:
     </tbody>
 </table>
 
-Comparison of the running times of the methods of a map realized by means of an unsorted list or a hash table. 
-We let n denote the number of items in the map, and we assume that the bucket array supporting the hash table 
-is maintained such that its capacity is proportional to the number of items in the map.
+Comparison of the running times of the methods of a map realized by means of 
+an unsorted list or a hash table. We let n denote the number of items in the map, 
+and we assume that the bucket array supporting the hash table is maintained such that 
+its capacity is proportional to the number of items in the map.
 
 ## Exercises (more [here](Goodrich/Chapter10/Exercises))
 
-- R-10.6 Which of the hash table collision-handling scheme(s) (CHS) could tolerate a load factor above 1 and which could not?
-> We know that a lookup table having a load factor $`n/N`$ works best when kept to 1. If it exceeds this threshold,
-a bucket array with *separate-chaining* CHS could keep functioning with acceptable performance.
-An explicit storage lookup table on the other hand would have to resize every single time 
-as there are no buckets to handle a total number of items exceeding the length of the lookup table itself.
+- R-10.6 Which of the hash table collision-handling scheme(s) (CHS) could tolerate
+a load factor above 1 and which could not?
 
-- R-10.8 What would be a good hash code for a vehicle identification number that is a string of numbers 
-and letters of the form “9X9XX99X9XX999999,” where a “9” represents a digit and an “X” represents a letter?
+> We know that a lookup table having a load factor $`n/N`$ works best when kept to 1. 
+If it exceeds this threshold, a bucket array with *separate-chaining* CHS could keep 
+functioning with acceptable performance. An explicit storage lookup table on the other hand 
+would have to resize every single time as there are no buckets to handle a total number 
+of items exceeding the length of the lookup table itself.
+
+- R-10.8 What would be a good hash code for a vehicle identification number that is 
+a string of numbers and letters of the form “9X9XX99X9XX999999,” where a “9” represents 
+a digit and an “X” represents a letter?
+
 > We want to avoid XOR and OR operations on the bit values since there are repititive patterns.
 Polynomial hashcodes are suitable.
 
 - R-10.13 What is the worst-case time for putting n entries in an initially empty hash table, 
 with collisions resolved by chaining? What is the best case?
-> If the size of the table is n, the runtime is quadratic because 1 op is performed for first item,
-then 2 ops for second item, ..., then n ops for the nth item. This is due to prevention of duplicate keys.
-If there are certainly no duplicates, linear runtime is possible.
+> If the size of the table is n, the runtime is quadratic because 1 op is performed
+for first item, then 2 ops for second item, ..., then n ops for the nth item. 
+This is due to prevention of duplicate keys. If there are certainly no duplicates, 
+linear runtime is possible.
 
 - R-10.18 Explain why a hash table is not suited to implement a sorted map.
+
 > For the hash function (and *especially* the compression function) to be consistent,
 a leap of faith is required to let it determine the index it chooses for a value of a hashed key.
 Since the hash function is the index governor, sorting becomes unreasonable.
 
 - R-10.19 Describe how a sorted list implemented as a doubly linked list 
 could be used to implement the sorted map ADT.
+- 
 > Since no hashing is involved, simply determine the ranking criteria immediately before insertion.
 
 - R-10.20 What is the worst-case asymptotic running time for performing n deletions 
-from a [`SortedTableMap`](Goodrich/Chapter10/sorted_table_map.py) instance that initially contains 2n entries?
+from a [`SortedTableMap`](Goodrich/Chapter10/sorted_table_map.py) instance that initially
+contains 2n entries?
+
 > **Here's the breakdown, given a sorted table map $`M`$**:
 > 
 > - Deletion calls the binary search method to attempt to locate the items first.
@@ -545,7 +568,7 @@ is extremely and absolutely recommended for it, and mandatory for sound understa
   - _Concise [presentation slides](https://www.collegesidekick.com/study-docs/4797428) 
       by Houssain Kettani, based off Anany Levitin's book_
 
-## Tries
+# 6. Tries
 
 ### Standard Tries
 
@@ -553,10 +576,10 @@ A trie is a tree-like data structure for storing the characters in a word/string
 of queries and matching operations. The root node always contain the empty string character,
 Other nodes contain a single character. 
 
-The leaf nodes in a standard trie represent the total number of words in that trie. The trie also aims 
-to encourage node reuse when possible, by adding _terminals_ (usually deleanated by empty ndoes) 
-along each path from the root, to indicate that a search query can correctly terminate 
-at that node without traversing until it arrives at a leaf.
+The leaf nodes in a standard trie represent the total number of words in that trie. 
+The trie also aims to encourage node reuse when possible, by adding _terminals_ 
+(usually deleanated by empty ndoes) along each path from the root, to indicate that a search query 
+can correctly terminate at that node without traversing until it arrives at a leaf.
 
 ### Compressed Tries
 
@@ -568,15 +591,52 @@ This can be mitigated however, by storing indices instead of the characters them
 Other extension of (compressed) tries are **suffix tries**, of which the linear time construction 
 can be produced by **Ukkonen Algorithm**, which adds **suffix links** to the resulting suffix trie.
 This addition allows complex queries such as containment, substring length, and frequency.
+
+### Suffix Links
+
+Suffix link is a directed edge from a node $`i`$ to a node $`j`$ in a suffix tree such that, 
+if the total characters on an edge culminating in a node $`i`$ is $`x\alpha[...]`$, 
+then a suffix link can be extended from $`i`$ to some other node $`j`$ culminating with $`\alpha[...]`$.
+
+**Suffix links are particularly useful in determining the longest substring of a 
+query that exists in a text** ([see demonstration](https://www.youtube.com/watch?v=k6VJW6hzDZQ)).
+
+### Suffix Arrays
+
+Alternative to suffix trie is the **suffix array** which reduces complexity on the constant 
+overhead and space usage. Suffix arrays allow for quasi-binary search optimality during queries, 
+based on the fact that it is **_already_ lexicographically sorted**. We can recur either backwards
+(when we encounter a mismatched character that is lexicographically higher) or forwards 
+(when lexicographically lower).
+
+Once we recur and arrive at a new midpoint, the length of the longest common prefix (LCP) between
+the query and most recent match implies that the entry at the current position is also at least 
+the size of the LCP itself, which allows us to skip this number of comparisons upon the 
+next matching candidate.
+
 The most interesting auxiliary heuristic data strcuture complementing the suffix array, is the
-**LCP Array**, which computes the length of the **longest common prefix** between every consecutive
+**LCP Array**, which computes the length of the longest common prefix between every consecutive
 pair of suffixes sorted in the suffix array.
 
-Alternative to suffix trie is the **suffix array** which reduces complexity on the constant overhead
-and space usage. 
 
 ### Ukkonen Algorithm
-...
+
+**Rule 1:**
+
+If the path from the root labelled $`S[i... j]`$ ends at a leaf edge (i.e. $`S[j]`$ is the last
+character on leaf edge) then character $`S[j+1]`$ is just added to the end of the label.
+
+**Rule 2:**
+
+If the path from the root labelled $`S[i... j]`$ ends at a non-leaf edge (i.e. there are more
+characters after $`S[i+1]`$ on path), and next character is not $`S[j+1]`$, then a new leaf edge
+with label $`S[j+1]`$ and character $`j`$ is created starting from character $`S[j+1]`$.
+A new internal node will also be created if $`S[j+1]`$ ends inside (in-between) a non-leaf edge.
+
+**Rule 3:**
+
+If the path from the root labelled $`S[i... j]`$ ends at non-leaf edge (i.e. there are more
+characters after $`S[i]`$ on path), and next character is $`S[i+1]`$ (already in tree), do nothing.
 
 #### References/Resources
 
@@ -586,4 +646,8 @@ and space usage.
 - [LCP Array - Wikipedia](https://en.wikipedia.org/wiki/LCP_array)
 - [(SAIS) Suffix Array Induced-Sorting - Nong, Zang & Chang (2009)](https://ieeexplore.ieee.org/document/4976463)
 - [(SAIPS) _Optimal In-Place Suffix Sorting_ - Li, Li & Huo (2016)](https://arxiv.org/abs/1610.08305)
+- [YouTube Playlist by Ben Langmead - _Suffix Indexing_](https://www.youtube.com/playlist?list=PL2mpR0RYFQsDFNyRsTNcWkFTHTkxWREeb)
 - [YouTube Video - _Linear Time Suffix Array Construction via SAIS_](https://www.youtube.com/watch?v=yb0Os_MTU_4)
+- [Suffix Array and LCP Generator](https://visualgo.net/en/suffixarray)
+- [Ukkonen Visualizer](http://brenden.github.io/ukkonen-animation/)
+- [Applications of Suffix Array and LCPs](https://mediathek.hhu.de/watch/b4d092e2-06ba-4786-abe4-7ffc614b2244#)
