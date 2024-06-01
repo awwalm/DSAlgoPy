@@ -54,8 +54,7 @@ This project is licensed under the [GNU GPL v3](https://choosealicense.com/licen
 1. Necaise, R. D. (2011). <a id="Ran11" href="https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/0470618299">
 _Data Structures and Algorithms using Python_</a>. Hoboken, NJ, USA: Wiley.
 
-2. Goodrich, M. T., Tamassia, R., & Goldwasser, M. H. (2013). 
-<a id="Mic13" href="https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python-p-9781118290279">
+2. Goodrich, M. T., Tamassia, R., & Goldwasser, M. H. (2013). <a id="Mic13" href="https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python-p-9781118290279">
 _Data Structures and Algorithms in Python_.</a> (B. L. Golub, Ed.) Hoboken, NJ, USA: Wiley.
 
 3. <span id="Ofpy3">"**`__future__`** Statement Definitions. Retreived from the Official Python Documentation: </span> 
