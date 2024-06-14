@@ -651,3 +651,4 @@ characters after $`S[i]`$ on path), and next character is $`S[i+1]`$ (already in
 9. [Suffix Array and LCP Generator](https://visualgo.net/en/suffixarray)
 10. [Ukkonen Visualizer](http://brenden.github.io/ukkonen-animation/)
 11. [Applications of Suffix Array and LCPs](https://mediathek.hhu.de/watch/b4d092e2-06ba-4786-abe4-7ffc614b2244#)
+12. [Linear Time LCP Computation](https://www.youtube.com/watch?v=H2vGH_6p6GU)

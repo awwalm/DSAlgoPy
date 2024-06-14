@@ -57,7 +57,7 @@ _Data Structures and Algorithms using Python_</a>. Hoboken, NJ, USA: Wiley.
 2. Goodrich, M. T., Tamassia, R., & Goldwasser, M. H. (2013). <a id="Mic13" href="https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python-p-9781118290279">
 _Data Structures and Algorithms in Python_.</a> (B. L. Golub, Ed.) Hoboken, NJ, USA: Wiley.
 
-3. <span id="Ofpy3">"**`__future__`** Statement Definitions. Retreived from the Official Python Documentation: </span> 
+3. <span id="Ofpy3">**`__future__`** Statement Definitions. Retreived from the Official Python Documentation: </span> 
 https://docs.python.org/3.11/library/__future__.html
 
 4. <span id="Kor23">Korpela, M. (6 August 2023). `overrides`</span>. Retrieved from PyPI: https://pypi.org/project/overrides/
@@ -68,7 +68,7 @@ London, UK: Red Globe Press (Macmillian).
 
 6. Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). 
 [_Introduction to Algorithms_](https://dl.acm.org/doi/10.5555/1614191) 
-(3rd ed.). Massachussetts, USA: MIT Press.
+(3rd ed.). Massachusetts, USA: MIT Press.
 
 7. Lutz, M. (2013). [_Learning Python_](https://www.oreilly.com/library/view/learning-python-5th/9781449355722/) 
 (5th ed.). Sebastopol, CA, USA: O'Reilly Media, Inc.
@@ -110,16 +110,19 @@ Retrieved from YouTube: https://youtu.be/4Oj_ESzSNCk
 18. Harris, E. (27 March 2020). _SAIS (Suffix Array Induced Sorting) Part 1_.
 Retrieved from YouTube: https://www.youtube.com/watch?v=yb0Os_MTU_4
 
-19. [Trie - Wikipedia](https://en.wikipedia.org/wiki/Trie)
+19. Lu, F. (25 March 2024). _Longest Repeated Substring in Linear Time DC3 + LCP_.
+Retireved from YouTube: https://www.youtube.com/watch?v=H2vGH_6p6GU
 
-20. [Suffix Tree - Wikipedia](https://en.wikipedia.org/wiki/Suffix_tree)
+20. [Trie - Wikipedia](https://en.wikipedia.org/wiki/Trie)
 
-21. [Suffix Array - Wikipedia](https://en.wikipedia.org/wiki/Suffix_array)
+21. [Suffix Tree - Wikipedia](https://en.wikipedia.org/wiki/Suffix_tree)
 
-22. [LCP Array - Wikipedia](https://en.wikipedia.org/wiki/LCP_array)
+22. [Suffix Array - Wikipedia](https://en.wikipedia.org/wiki/Suffix_array)
 
-23. [Suffix Array and LCP Generator](https://visualgo.net/en/suffixarray)
+23. [LCP Array - Wikipedia](https://en.wikipedia.org/wiki/LCP_array)
 
-24. [Ukkonen Visualizer](http://brenden.github.io/ukkonen-animation/)
+24. [Suffix Array and LCP Generator](https://visualgo.net/en/suffixarray)
 
-25. [Applications of Suffix Array and LCPs](https://mediathek.hhu.de/watch/b4d092e2-06ba-4786-abe4-7ffc614b2244#)
+25. [Ukkonen Visualizer](http://brenden.github.io/ukkonen-animation/)
+
+26. [Applications of Suffix Array and LCPs](https://mediathek.hhu.de/watch/b4d092e2-06ba-4786-abe4-7ffc614b2244#)
