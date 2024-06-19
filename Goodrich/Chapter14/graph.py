@@ -4,6 +4,7 @@ Code Fragment 14.2: Graph class definition (continued in Code Fragment 14.3).
 Code Fragment 14.3: Graph class definition (continued from Code Fragment 14.2).
     We omit error-checking of parameters for brevity
 """
+from typing import Dict, Set
 
 
 class Graph:
@@ -32,8 +33,8 @@ class Graph:
 
         def __init__(self, u, v, x):
             """Do not call constructor directly. Use Graph's insert_edge(u,v,x)."""
-            self._origin = u
-            self._destination = v
+            self._origin: Graph.Vertex = u
+            self._destination: Graph.Vertex = v
             self._element = x
 
         def endpoints(self):
@@ -56,9 +57,21 @@ class Graph:
         """Create an empty graph (undirected by default.\n
         Graph is directed if optional parameter is set to True.
         """
-        self._outgoing = {}
+
+        self._outgoing: Dict[Graph.Vertex, Dict[Graph.Vertex, Graph.Edge]] = {}
+        """Maps every Vertex v (as keys) in Graph to corresponding sub-maps (values)
+                that therein maps all vertices U (sub-keys) that are adjacent to v,
+                to the corresponding OUTGOING edges E (sub-values) that reaches u from v.
+                e.g.: {v1: {u1:e1, u2:e2}, v2: {u1:e3}}
+                """
+
         # Only create second map for directed graph; use alias for undirected
-        self._incoming = {} if directed else self._outgoing
+        self._incoming: Dict[Graph.Vertex, Dict[Graph.Vertex, Graph.Edge]] = {} \
+            if directed else self._outgoing
+        """Maps every Vertex v (as keys) in Graph to corresponding sub-maps (values)
+                that therein maps all vertices U (sub-keys) that are adjacent to v,
+                to the corresponding INCOMING edges E (sub-values) that reaches v from u.
+                """
 
     def is_directed(self):
         """Return True if this is a directed graph; False if undirected.\n
@@ -82,18 +95,25 @@ class Graph:
 
     def edges(self):
         """Return a set of all edges of the graph."""
-        result = set()   # Avoid double-reporting edges of undirected  graph
+        result: Set[Graph.Edge] = set()   # Avoid double-reporting edges of undirected  graph
         for secondary_map in self._outgoing.values():
             result.update(secondary_map.values())   # Add edges to resulting set
         return result
 
-    def get_edge(self, u, v):
+    def get_edge(self, u: Vertex, v: Vertex):
         """Return the edge from u to v, or None if not adjacent."""
         return self._outgoing[u].get(v)     # Returns None if v not adjacent
 
     def degree(self, v, outgoing=True):
         """Return number of (outgoing) edges incident to vertex v in the graph.\n
         If graph is undirected, optional parameter used to count incoming edges.
+        """
+        adj = self._outgoing if outgoing else self._incoming
+        return len(adj[v])
+
+    def incident_edges(self, v: Vertex, outgoing=True):
+        """Return all (outgoing) edges incident to vertex v in the graoh.\n
+        If graph is directed, optional parameter used to request incoming edges.
         """
         adj = self._outgoing if outgoing else self._incoming
         for edge in adj[v].values():
@@ -107,8 +127,9 @@ class Graph:
             self._incoming[v] = {}  # Need distinct map for incoming edges
         return v
 
-    def insert_edge(self, u, v, x=None):
+    def insert_edge(self, u: Vertex, v: Vertex, x=None):
         """Insert and return a new Edge from u to v with auxiliary element x."""
         e = self.Edge(u, v, x)
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
+        return e
