@@ -1,12 +1,7 @@
-"""
-Code Fragment 14.1: Vertex and Edge classes (to be nested within Graph class).
-Code Fragment 14.2: Graph class definition (continued in Code Fragment 14.3).
-Code Fragment 14.3: Graph class definition (continued from Code Fragment 14.2).
-    We omit error-checking of parameters for brevity
-"""
 from typing import Dict, Set
 
 
+# Code Fragment 14.2-14.3: Graph class definition; we omit error-checking of parameters for brevity.
 class Graph:
     """Representation of a simple graph using an adjacency map."""
 
@@ -26,6 +21,7 @@ class Graph:
         def __hash__(self):  # Will allow vertex to be a map/set key
             return hash(id(self))
 
+    # Code Fragment 14.1: Vertex and Edge classes (to be nested within Graph class).
     # Nested Edge class ------------------------------------------------------------
     class Edge:
         """Lightweight edge structure for a graph."""
@@ -54,7 +50,7 @@ class Graph:
 
     # Graph utilities ------------------------------------------------------------
     def __init__(self, directed=False):
-        """Create an empty graph (undirected by default.\n
+        """Create an empty graph (undirected by default).\n
         Graph is directed if optional parameter is set to True.
         """
 
@@ -104,7 +100,7 @@ class Graph:
         """Return the edge from u to v, or None if not adjacent."""
         return self._outgoing[u].get(v)     # Returns None if v not adjacent
 
-    def degree(self, v, outgoing=True):
+    def degree(self, v: Vertex, outgoing=True):
         """Return number of (outgoing) edges incident to vertex v in the graph.\n
         If graph is undirected, optional parameter used to count incoming edges.
         """
@@ -112,7 +108,7 @@ class Graph:
         return len(adj[v])
 
     def incident_edges(self, v: Vertex, outgoing=True):
-        """Return all (outgoing) edges incident to vertex v in the graoh.\n
+        """Return all (outgoing) edges incident to vertex v in the graph.\n
         If graph is directed, optional parameter used to request incoming edges.
         """
         adj = self._outgoing if outgoing else self._incoming
