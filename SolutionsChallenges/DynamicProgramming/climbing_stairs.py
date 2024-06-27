@@ -24,7 +24,7 @@ Explanation: There are three ways to climb to the top.
 """
 
 # Naive recursive
-def CS_NR(s: int, n: int, opt: list[int, int]):
+def CS_NR(s: int, n: int, opt: list[int]):
     """
     s   - Initial step, ideally starts at 0.
     n   - Number of stairs to climb.
@@ -74,7 +74,7 @@ def CS_DP(n: int):
 if __name__ == "__main__":
     stairs = 2,3,4,5  # 2, 3, 5, 8
     for destination in stairs:
-        nr = CS_NR(0, destination, [1, 2])
+        nr = CS_NR(0, destination, [1,2])
         mr = CS_MR(0, destination, [1,2], dict())
         dp = CS_DP(destination)
         print(f"Naive CS({destination}) = {nr}")
