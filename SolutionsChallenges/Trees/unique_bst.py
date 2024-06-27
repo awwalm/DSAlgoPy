@@ -6,7 +6,7 @@ From Quora: https://qr.ae/psrOXE
 """
 import itertools
 from typing import Union, List
-from RDNecaise.Chapter14.Utilities.utils import print_pretty_tree
+from RDNecaise.Chapter14.Utilities.tree_printer import print_pretty_tree
 
 
 class BST:
