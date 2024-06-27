@@ -1,7 +1,8 @@
 import random
 from RDNecaise.Chapter14.avltree import AVLTree
 from RDNecaise.Chapter14.avltreev1 import AVLTree as AVLTreeV1
-from RDNecaise.Chapter14.Utilities.utils import *
+from RDNecaise.Chapter14.Utilities.tree_printer import *
+from RDNecaise.Chapter14.Utilities.traversals import *
 
 
 def test():
