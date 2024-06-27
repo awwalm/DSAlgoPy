@@ -1,23 +1,4 @@
-"""Helper functions for playgrounds testing."""
-
-def inorder_traversal(node):
-    if node.left:
-        inorder_traversal(node.left)
-    print(node.key)
-    if node.right:
-        inorder_traversal(node.right)
-
-def bfs(level):
-    if level.__len__() == 0:
-        return
-    next_level = []
-    for node in level:
-        if node:
-            print(node.value)
-            if node.left: next_level.append(node.left)
-            if node.right: next_level.append(node.right)
-    del level
-    bfs(next_level)
+"""Binary Tree printing heuristics."""
 
 def print_pretty_tree(start_node):
     """From GitHub: https://github.com/zinchse/AVLTree"""
@@ -62,7 +43,7 @@ def print_pretty_tree(start_node):
 
     return out_string
 
-def print_tree(root):
+def print_tree(root, show_height=False):
     """From StackOverflow: https://stackoverflow.com/a/72497198/13488161"""
     def height(__node):
         return 1 + max(height(__node.left), height(__node.right)) if __node else -1
@@ -86,7 +67,7 @@ def print_tree(root):
         pstr = ''
         seg = width // (pow(2, j + 1))
         for n in l:
-            valstr = str(f"{n[0].key}({n[0].height})")
+            valstr = str(f"{n[0].key}({n[0].height})") if show_height else str(n[0].key)
             if n[3] == 'r':
                 linestr += ' ' * (n[2] - preline - 1 - seg - seg // 2) + '¯' * (seg + seg // 2) + '\\'
                 preline = n[2]
