@@ -32,7 +32,7 @@ def klen_dfs(G: Graph, s: Graph.Vertex, k: int):
     path_array: List[List[Graph.Edge]] = [ ]
 
     def dfs(g: Graph, u: Graph.Vertex, discovered, klen, p):
-        """Traditional DFS with addtional params.
+        """Traditional DFS with additional params.
         u - A vertex in G
         p - Concurrent path array of less than k edges
         """
