@@ -41,7 +41,7 @@ class Graph:
             """Return the vertex that is opposite v on this edge."""
             return self._destination if v is self._origin else self._origin
 
-        def elements(self):
+        def element(self):
             """Return element associated with this edge."""
             return self._element
 
