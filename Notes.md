@@ -652,3 +652,13 @@ characters after $`S[i]`$ on path), and next character is $`S[i+1]`$ (already in
 10. [Ukkonen Visualizer](http://brenden.github.io/ukkonen-animation/)
 11. [Applications of Suffix Array and LCPs](https://mediathek.hhu.de/watch/b4d092e2-06ba-4786-abe4-7ffc614b2244#)
 12. [Linear Time LCP Computation](https://www.youtube.com/watch?v=H2vGH_6p6GU)
+
+# 7. Graph Algorithms
+
+### Dijkstra's Algorithm
+
+A simple algorithm but frequently bashed and demolished by poorly explained articles.
+Required storages:
+- Distance Table
+- Visited Nodes
+- Univisted Nodes
