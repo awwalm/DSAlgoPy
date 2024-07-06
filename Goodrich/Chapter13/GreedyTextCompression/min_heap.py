@@ -105,6 +105,10 @@ class MinHeap:
         tree = self._structurize(self._data, 0, None)
         return tree
 
+    def get_min(self):
+        """Return but do not remove root of the heap."""
+        return self._data[0]
+
 
 
 if __name__ == "__main__":

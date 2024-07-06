@@ -54,6 +54,10 @@ class MaxHeap:
         tree = self._structurize(self._data, 0, None)
         return tree
 
+    def get_max(self):
+        """Return but do not remove root of the heap."""
+        return self._data[0]
+
     def insert(self, k, v):
         self._data.append((k, v))
         if self._size == 0:
