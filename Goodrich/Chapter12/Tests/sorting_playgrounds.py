@@ -222,8 +222,8 @@ def bogo_bucket_sort(seq):  # Do not try this at home !!!
 
 def bucket_sort(seq):
     n = len(seq)
-    if n < 2: return
     lowest, highest = min(seq), max(seq)
+    if (n < 2) or lowest == highest: return  # Array already sorted
     num_buckets = int(math.sqrt(highest - lowest)) # math.ceil((highest - lowest) / (n//2))
     buckets: Mapping[SupportsInt: Sequence] = { i: [] for i in range(num_buckets) }
 
