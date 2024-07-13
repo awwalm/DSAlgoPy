@@ -91,3 +91,29 @@ def init_undirected_graph3():
     G.insert_edge(b, d, 8)
     G.insert_edge(f, e, 6)
     return G, c
+
+
+# https://www.freecodecamp.org/news/prims-algorithm-explained-with-pseudocode/
+def init_undirected_graph4():
+    G = Graph()
+    a = G.insert_vertex("A")
+    b = G.insert_vertex("B")
+    c = G.insert_vertex("C")
+    d = G.insert_vertex("D")
+    e = G.insert_vertex("E")
+    f = G.insert_vertex("F")
+    g = G.insert_vertex("G")
+    G.insert_edge(a, b, 2)
+    G.insert_edge(a, c, 1)
+    G.insert_edge(a, d, 4)
+    G.insert_edge(b, c, 3)
+    G.insert_edge(b, e, 7)
+    G.insert_edge(c, e, 9)
+    G.insert_edge(c, g, 4)
+    G.insert_edge(d, c, 2)
+    G.insert_edge(d, f, 6)
+    G.insert_edge(e, g, 3)
+    G.insert_edge(f, g, 1)
+    G.insert_edge(f, c, 8)
+    return G, d
+
