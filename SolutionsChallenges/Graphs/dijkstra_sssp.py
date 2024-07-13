@@ -1,6 +1,7 @@
 """Dijkstra's Single Source Shortest Path Algorithm."""
 
 import math
+import time
 from dataclasses import dataclass
 from typing import Dict
 from Goodrich.Chapter13.GreedyTextCompression.min_heap import MinHeap
@@ -24,14 +25,13 @@ def dijkstra(G: Graph, s: Vertex):
     unvisited = MinHeap()
     """Priority Queue for ranking the distance of a vertex (key) and said vertex (value)."""
 
+    # Declare distance records for other nodes
+    for vert in G.vertices():
+        distance[vert] = DistanceEntry(math.inf, None, False)
+
     # Insert starting vertex in unvisited heap and declare distance properties
     unvisited.insert(k=0, v=s)
     distance[s] = DistanceEntry(cost=0, predecessor=None, visited=False)
-
-    # Declare distance records for other nodes
-    for vert in G.vertices():
-        if vert is not s:
-            distance[vert] = DistanceEntry(math.inf, None, False)
 
     # Begin iterative relaxation and distance updating process
     cur_vert = s
@@ -44,19 +44,29 @@ def dijkstra(G: Graph, s: Vertex):
                     distance[neighbor].cost = (                 # Relax/update distance
                             distance[cur_vert].cost + weight)
                     distance[neighbor].predecessor = cur_vert   # Update predecessor
-                if not distance[neighbor].visited:              # If vertex has not been visited...
+                if not distance[neighbor].visited:              # If neighbor has not been visited...
                     unvisited.insert(                           # Insert into univisted heap
                         k=distance[neighbor].cost, v=neighbor)
         distance[cur_vert].visited = True                       # Mark as visited
-        cur_vert = unvisited.remove_min()[1]                    # Choose next minimum
+        cur_vert = unvisited.remove_min()[1]                    # Choose next minimum-edge vertex
+
+    # Marks last-reachable vertex as visited when it has no outgoing edges (see init_directed_graph2())
+    if len(unvisited) == 0 and not distance[cur_vert].visited:
+        distance[cur_vert].visited = True
 
     return distance
 
 
 if __name__ == "__main__":
+    t1 = time.perf_counter()
     path1 = dijkstra(*init_undirected_graph2())
-    path2 = dijkstra(*init_undirected_graph3())
-    path3 = dijkstra(*init_directed_graph2())
+    t2 = f"{abs(t1 - time.perf_counter()):.3e}"
+    t3 = time.perf_counter()
+    path2 = dijkstra(*init_directed_graph2())
+    t4 = f"{abs(t3 - time.perf_counter()):.3e}"
+    print(f"Time taken\nUG2: {t2}\nDG2: {t4}")
+
+    path3 = dijkstra(*init_undirected_graph3())
     for paths in path1, path2, path3:
         print("\nNode | Dist | Pred | Visited")
         for k in paths:
