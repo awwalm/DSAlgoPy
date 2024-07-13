@@ -20,6 +20,10 @@ class AdaptableHeapPriorityQueue(HeapPriorityQueue):
         def index_(self):
             return self._index
 
+        @index_.setter
+        def index_(self, i):
+            self._index = i
+
         @property
         def key_(self):
             return self._key
