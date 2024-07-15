@@ -655,10 +655,40 @@ characters after $`S[i]`$ on path), and next character is $`S[i+1]`$ (already in
 
 # 7. Graph Algorithms
 
+### Graph Representations
+
+- In an **edge list**, we maintain an unordered list of all edges. 
+This minimally suffices, but there is no efficient way to locate 
+a particular edge (u,v), or the set of all edges incident to a vertex v.
+<br><br>
+
+- In an **adjacency list**, we maintain, for each vertex, a separate list 
+containing those edges that are incident to the vertex. The complete set of edges 
+can be determined by taking the union of the smaller sets, while the organization 
+allows us to more efficiently find all edges incident to a given vertex.
+<br><br>
+
+- An **adjacency map** is very similar to an adjacency list, but the secondary container 
+of all edges incident to a vertex is organized as a map, rather than as a list, with the adjacent 
+vertex serving as a key. This allows for access to a specific edge (u,v) in O(1) expected time.
+<br><br>
+
+- An **adjacency matrix** provides worst-case O(1) access to a specific edge (u,v) by maintaining 
+an n ×n matrix, for a graph with n vertices. Each entry is dedicated to storing a reference 
+to the edge (u,v) for a particular pair of vertices u and v; if no such edge exists, the entry will be None.
+
 ### Dijkstra's Algorithm
+
+Solution to the ***single-source shortest path problem.***
 
 A simple algorithm but frequently bashed and demolished by poorly explained articles.
 Required storages:
 - Distance Table
 - Visited Nodes
 - Univisted Nodes
+
+### Prim's (or Prim-Jarnik) Algorithm
+
+Solution to the ***minimum spanning tree (MST)problem.***
+
+
