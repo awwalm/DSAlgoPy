@@ -1,5 +1,6 @@
 """Prim-Jarnik Minimum Spanning Tree algorithm."""
-
+import random
+import time
 from typing import Set, List
 
 from Goodrich.Chapter14.Tests.init_graph import *
@@ -49,7 +50,12 @@ def prim(G: Graph, s: Graph.Vertex):
 
 if __name__ == "__main__":
     UG4 = init_undirected_graph4()
-    mst = prim(*UG4)
+    start = random.choice(list(UG4[0].vertices()))
+    t1 = time.perf_counter()
+    # mst = prim(*UG4)          # Fixed starting point
+    mst = prim(UG4[0], start)   # Randomnized starting point
+    t2 = abs(t1 - time.perf_counter())
     for tree_edge in mst:
         endpoints = tree_edge.endpoints()
         print(f"{endpoints[0].element(), endpoints[1].element(), tree_edge.element()}")
+    print(f"\nTime taken: {t2:.3e}")    # Faster than Goodrich textbook implementation
