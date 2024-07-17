@@ -1,15 +1,18 @@
-"""
-Code Fragment 14.16: Python implementation of the Prim-Jarnik algorithm for the minimum spanning tree problem.
-"""
+
 import time
-from typing import Dict, List
+from typing import Dict, List, Callable
 
 from Goodrich.Chapter14.Tests.init_graph import init_undirected_graph4
 from Goodrich.Chapter14.graph import Graph
+from Goodrich.Chapter14.partition import Partition
 from Goodrich.Chapter9.ahpq import AdaptableHeapPriorityQueue
+from Goodrich.Chapter9.heap_priority_queue import HeapPriorityQueue
+
 Locator = AdaptableHeapPriorityQueue.Locator
 
 
+# Code Fragment 14.16: Python implementation of the Prim-Jarnik algorithm
+# for the minimum spanning tree problem.
 def MST_Prim_Jarnik(g: Graph):
     """Compute a minimum spanning tree of weighted graph G.\n
     Return a list of edges that comprise the MST (in arbitrary order).
@@ -49,12 +52,50 @@ def MST_Prim_Jarnik(g: Graph):
 
 
 
+# Code Fragment 14.18: Python implementation of Kruskal’s algorithm
+# for the minimum spanning tree problem.
+def MST_Kruskal(g: Graph):
+    """Compute a minimum spanning tree of a graph using Kruskal's algorithm.
+
+    Return a list of edges that comprise the MST.
+    The elements of the graph's edges are assumed to be weights.
+    """
+    tree: List[Graph.Edge] = [ ]                    # List of edges in spanning tree
+    pq = HeapPriorityQueue()                        # Entries are edges in G, with weihts as key
+    forest = Partition()                            # Keeps track of forest clusters
+    position: Dict[Graph.Vertex, Partition] = { }   # Map each node to its Partition entry
+
+    for v in g.vertices():
+        position[v] = forest.make_group(v)
+
+    for e in g.edges():
+        pq.add(e.element(), e)                      # Edge's element is assumed to be its weight
+
+    size = g.vertex_count()
+    while len(tree) != size - 1 and not pq.is_empty():
+        # Tree not spanning and unprocessed edges remain
+        weight, edge = pq.remove_min()
+        u, v = edge.endpoints()
+        a = forest.find(position[u])
+        b = forest.find(position[v])
+        if a != b:
+            tree.append(edge)
+            forest.union(a,b)
+
+    return tree
+
+
+
 if __name__ == "__main__":
-    UG4 = init_undirected_graph4()
-    t1 = time.perf_counter()
-    mst = MST_Prim_Jarnik(UG4[0])
-    t2 = abs(t1 - time.perf_counter())
-    for tree_edge in mst:
-        endpoints = tree_edge.endpoints()
-        print(f"{endpoints[0].element(), endpoints[1].element(), tree_edge.element()}")
-    print(f"\nTime taken: {t2:.3e}")
+    def test_mst(mst_func: Callable):
+        UG4 = init_undirected_graph4()
+        t1 = time.perf_counter()
+        mst = mst_func(UG4[0])
+        t2 = abs(t1 - time.perf_counter())
+        for tree_edge in mst:
+            endpoints = tree_edge.endpoints()
+            print(f"{endpoints[0].element(), endpoints[1].element(), tree_edge.element()}")
+        print(f"\nTime taken [{mst_func.__name__}]: {t2:.3e}\n")
+
+    test_mst(MST_Kruskal)
+    test_mst(MST_Prim_Jarnik)
