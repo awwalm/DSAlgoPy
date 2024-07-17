@@ -21,7 +21,7 @@ Rance D. Necaise<sup>[^1](#Ran11)</sup> and Michael T. Goodrich et al.<sup>[^2](
 | Chapter 12 | [Advanced Sorting](RDNecaise/Chapter12)           | [Sorting and Selection](Goodrich/Chapter12)             |
 | Chapter 13 | [Binary Trees](RDNecaise/Chapter13)               | [Text Processing](Goodrich/Chapter13)                   |
 | Chapter 14 | [Search Trees](RDNecaise/Chapter14)               | [Graph Algorithms](Goodrich/Chapter14)                  |
-| Chapter 15 |                                                   | Memory Management and B-Trees                           |
+| Chapter 15 |                                                   | [Memory Management and B-Trees](Goodrich/Chapter15)     |
 
 ## Getting Started
 
