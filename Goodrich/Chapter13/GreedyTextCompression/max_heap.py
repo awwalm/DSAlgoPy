@@ -1,8 +1,10 @@
 """Hybrid (dual tree/array-based) Max-Heap implementation."""
+from typing import Generic, TypeVar, List, Tuple
 from Goodrich.Chapter13.GreedyTextCompression.utils import print_tree
 
-
-class MaxHeap:
+K = TypeVar('K')
+V = TypeVar('V')
+class MaxHeap(Generic[K, V]):
     """
     A binary tree such that the value of the root is greater than
     or equal to the values of all subtrees rooted under it; recursively.
@@ -22,7 +24,7 @@ class MaxHeap:
             self.height = 0
 
     def __init__(self):
-        self._data = []
+        self._data: List[Tuple[K, V]] = []
         self._size = len(self._data)
 
     def __len__(self):
@@ -58,7 +60,7 @@ class MaxHeap:
         """Return but do not remove root of the heap."""
         return self._data[0]
 
-    def insert(self, k, v):
+    def insert(self, k: K, v: V):
         self._data.append((k, v))
         if self._size == 0:
             pass
