@@ -1,4 +1,7 @@
 """Canned examples of directed and undirected Adjacency Map graph instance generators."""
+import random
+import networkx as nx
+NXGraph = nx.classes.graph.Graph
 
 from Goodrich.Chapter14.graph import Graph
 Vertex = Graph.Vertex
@@ -116,4 +119,16 @@ def init_undirected_graph4():
     G.insert_edge(f, g, 1)
     G.insert_edge(f, c, 8)
     return G, d
+
+
+# https://www.youtube.com/watch?v=r9lzHs2rZDc
+def init_complete_graph(n=random.randint(4,10), weight_range=(1,100)):
+    G: NXGraph = nx.complete_graph(n)
+    for u,v in G.edges():
+        G.edges[u,v]["weight"] = random.randint(*weight_range)
+        # print(f"type(u) = {type(u)}")
+        # print(f"type(G.edges[u,v]) = {type(G.edges[u,v])}")
+        # print(f"type(G.edges[u,v][`weight`]) = {type(G.edges[u,v]['weight'])}\n")
+
+    return G
 
