@@ -14,6 +14,7 @@ from typing import List
 class Vector: x: int; y: int
 
 # Trutle configuration
+turtle.title("Traveling Salesman Simulation")
 screen = turtle.Screen()
 screen.setup(width=720, height=480)
 screen.bgcolor("black")
@@ -28,28 +29,45 @@ text_pen.hideturtle()  # Hide the turtle pointer
 text_pen.penup()  # Lift the pen to avoid drawing lines
 text_pen.color("white")
 
+# Separate turtle object for progress
+prog_pen = turtle.Turtle()
+prog_pen.hideturtle()  # Hide the turtle pointer
+prog_pen.penup()  # Lift the pen to avoid drawing lines
+prog_pen.color("white")
+
 # Turtle object for drawing edge distance/weights
 dist_pen = turtle.Turtle()
 dist_pen.color("white")
 dist_pen.hideturtle()
 
 
-def add_desc(desc):
-    """Add description to the top-left of render."""
+def add_info(desc):
+    """Display info on the top-right portion of the window."""
     text_pen.penup()
     text_pen.goto(
-        (-1 * screen.window_width() // 2 + 10), (screen.window_height() // 2 - 30))
+        (screen.window_width() // 2 - 130), (screen.window_height() // 2 - 25 ))
     text_pen.pendown()
     text_pen.clear()
     text_pen.write(desc, align="left", font=("Arial", 14, "normal"))
 
 
+def update_progress(r, n):
+    """Indicate concurrent progress on the top-left portion of the window."""
+    progress = "Processing: " + str(round((r/n) * 100, 4))
+    prog_pen.penup()
+    prog_pen.goto(
+        (-1 * screen.window_width() // 2 + 10), (screen.window_height() // 2 - 25))
+    prog_pen.pendown()
+    prog_pen.clear()
+    prog_pen.write(progress + "%", align="left", font=("Arial", 14, "normal"))
+
+
 def setup(cities: List[Vector]):
     """Setup simulation demo of cities in implicit graph."""
-    x_min_lim = -1 * screen.window_width() // 3 + 20
-    x_max_lim = 1 * screen.window_width() // 3 - 20
-    y_min_lim = -1 * screen.window_width() // 3 + 20
-    y_max_lim = 1 * screen.window_width() // 3 - 20
+    x_min_lim = -1 * screen.window_width() // 2 + 20
+    x_max_lim = 1 * screen.window_width() // 2 - 20
+    y_min_lim = -1 * screen.window_width() // 4 + 20
+    y_max_lim = 1 * screen.window_width() // 4 - 20
     for i in range(len(cities)):
         cities[i] = Vector(
             random.randint(x_min_lim, x_max_lim), random.randint(y_min_lim, y_max_lim))
@@ -67,7 +85,7 @@ def draw(cities: List[Vector]):
 
 
 def swap(cities: List[Vector]):
-    """Randomly swap two vectors and redraw cities."""
+    """Randomly swap two vectors and redraw cities/paths."""
     a = random.randint(0, len(cities)-1)
     b = random.randint(0, len(cities)-1)
     cities[a], cities[b] = cities[b], cities[a]
@@ -80,7 +98,7 @@ def swap(cities: List[Vector]):
 
 
 def draw_finally(cities: List[Vector]):
-    """Draw final most optimal TSP tour."""
+    """Draw final, most optimal TSP tour."""
     pen.clear()
     pen.color("purple")
     pen.pensize(5)
@@ -135,9 +153,9 @@ def calc_distance(a: Vector, b: Vector):
     return round(hyp, 2)
 
 
-def join_vertex(a: Vector, b: Vector):
+def join_vertex(a: Vector, b: Vector, debug=False):
     """Draw an edge between vertices (Vectors) a and b."""
-    add_desc("Rendering...")
+    if debug: add_info("Rendering...")
 
     # Vertex A
     pen.penup()
@@ -154,31 +172,26 @@ def join_vertex(a: Vector, b: Vector):
     # Edge
     pen.penup()
     pen.goto(a.x, a.y)
-    pen.pensize(1)
+    pen.pensize(2)
     pen.pendown()
     pen.goto(b.x, b.y)
     pen.penup()
 
     distance = show_distance(a, b)
-    add_desc("Rendered")
+    if debug: add_info("Rendered")
     screen.update()
     return distance
 
 
-def test_sim():
-    """Basic test: connect two points."""
-    v1 = Vector(0,0)
-    v2 = Vector(100, 100)
-    join_vertex(v1, v2)
-
-
-if __name__ == "__main__":
-    # test_sim()
-    total_cities = create_vector(5)
+def simulate(c):
+    """Simulate TSP based on given configurations above."""
+    total_cities = create_vector(c)
     best_tour = total_cities[:]
     tsp = draw(total_cities)
-    for k in range(math.factorial(len(total_cities))):
+    trials = math.factorial(c)
+    for k in range(1, trials+1):
         cur_tsp = swap(total_cities)
+        update_progress(k, trials)
         if cur_tsp < tsp:
             tsp = cur_tsp
             best_tour = total_cities[:]
@@ -186,3 +199,17 @@ if __name__ == "__main__":
     print(f"Best TSP tour = {tsp}")
     pen.hideturtle()
     turtle.done()
+
+
+def test_sim():
+    """Basic test: connect two points."""
+    v1 = Vector(0,0)
+    v2 = Vector(100, 100)
+    join_vertex(v1, v2, debug=True)
+    pen.hideturtle()
+    turtle.done()
+
+
+if __name__ == "__main__":
+    # test_sim()
+    simulate(6)
