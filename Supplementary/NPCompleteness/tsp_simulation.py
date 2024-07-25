@@ -1,4 +1,5 @@
-"""Visual simulation of TSP using Turtle graphics.
+"""
+Visual simulation of TSP using Turtle graphics.
 Adapted from: https://www.youtube.com/watch?v=BAejnwN4Ccw
 """
 
@@ -183,12 +184,12 @@ def join_vertex(a: Vector, b: Vector, debug=False):
     return distance
 
 
-def simulate(c):
+def simulate(nodes):
     """Simulate TSP based on given configurations above."""
-    total_cities = create_vector(c)
+    total_cities = create_vector(nodes)
     best_tour = total_cities[:]
     tsp = draw(total_cities)
-    trials = math.factorial(c)
+    trials = math.factorial(nodes)
     for k in range(1, trials+1):
         cur_tsp = swap(total_cities)
         update_progress(k, trials)
@@ -212,4 +213,4 @@ def test_sim():
 
 if __name__ == "__main__":
     # test_sim()
-    simulate(6)
+    simulate(nodes=6)

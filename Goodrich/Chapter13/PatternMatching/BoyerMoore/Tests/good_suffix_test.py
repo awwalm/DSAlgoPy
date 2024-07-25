@@ -1,6 +1,6 @@
 """Tests for the Good Suffix table heuristic for Boyer-Moore string matching."""
 
-from Goodrich.Chapter13.PatternMatching.BoyerMoore.fast_good_suffix import clPreBmGs
+from Supplementary.StringProcessing.BoyerMoore.fast_good_suffix import clPreBmGs
 
 if __name__ == "__main__":
     # Sample patterns
