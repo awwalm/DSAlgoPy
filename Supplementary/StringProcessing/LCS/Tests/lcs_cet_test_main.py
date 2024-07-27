@@ -1,4 +1,4 @@
-from Goodrich.Chapter13.DynamicProgramming.LCS.lcs_cet import *
+from Supplementary.StringProcessing.LCS.lcs_cet import *
 
 if __name__ == "__main__":
     pairs = [

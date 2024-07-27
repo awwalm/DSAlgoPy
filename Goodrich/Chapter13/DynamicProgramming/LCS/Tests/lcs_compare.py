@@ -1,8 +1,8 @@
 """Comparison tests between textbook and custom Longest Common Subsequence solutions."""
 
-from Goodrich.Chapter13.DynamicProgramming.LCS.lcs_rec import *
-from Goodrich.Chapter13.DynamicProgramming.LCS.lcs_dp import *
-from Goodrich.Chapter13.DynamicProgramming.LCS.lcs_textbook import *
+from Supplementary.StringProcessing.LCS.lcs_rec import *
+from Supplementary.StringProcessing.LCS.lcs_dp import *
+from Goodrich.Chapter13.DynamicProgramming.LCS.lcs import *
 
 pairs = [
         ("ABCBDAB", "BDCAB"),               # BDAB (n=4)

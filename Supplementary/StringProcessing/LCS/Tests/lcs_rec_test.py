@@ -1,6 +1,6 @@
 """Tests for recursive Longest Common Subsequence solution."""
 
-from Goodrich.Chapter13.DynamicProgramming.LCS.lcs_rec import *
+from Supplementary.StringProcessing.LCS.lcs_rec import *
 
 pairs = [
         ("ABCBDAB", "BDCAB"),               # BDAB (n=4)
