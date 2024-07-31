@@ -1,9 +1,10 @@
 """Prim-Jarnik Minimum Spanning Tree algorithm."""
+
 import random
 import time
 from typing import Set, List
 
-from Goodrich.Chapter14.Tests.init_graph import *
+from Goodrich.Chapter14.Tests.init_graph import init_undirected_graph4
 from Goodrich.Chapter14.graph import Graph
 from Goodrich.Chapter13.GreedyTextCompression.min_heap import MinHeap
 
@@ -13,8 +14,8 @@ def prim(G: Graph, s: Graph.Vertex):
     spanning tree of a CONNECTED undirected graph G.
     """
     visited_vertices: Set[Graph.Vertex] = set()
-    inserted_edges: Set[Graph.Edge] = set()
-    edge_heap = MinHeap()
+    inserted_edges: Set[Graph.Edge] = set()  # To test Heap membership in O(1) time
+    edge_heap: MinHeap[int, Graph.Edge] = MinHeap()
     MST: List[Graph.Edge] = list()
 
     # Initialize the heap with edges from the start vertex (and mark it as visited)
