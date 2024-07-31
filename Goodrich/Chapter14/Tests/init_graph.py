@@ -39,6 +39,39 @@ def init_directed_graph2():
     return G, v0
 
 
+# https://www.youtube.com/watch?v=dRMvK76xQJI
+def init_directed_graph3():
+    """For testing Uniform Cost Search."""
+    G = Graph(directed=True)
+    s = G.insert_vertex("S")
+    a = G.insert_vertex("A")
+    b = G.insert_vertex("B")
+    c = G.insert_vertex("C")
+    d = G.insert_vertex("D")
+    e = G.insert_vertex("E")
+    f = G.insert_vertex("F")
+    g1 = G.insert_vertex("G1")
+    g2 = G.insert_vertex("G2")
+    g3 = G.insert_vertex("G3")
+    G.insert_edge(s, a, 5)
+    G.insert_edge(s, b, 9)
+    G.insert_edge(s, d, 6)
+    G.insert_edge(a, g1, 9)
+    G.insert_edge(a, b, 3)
+    G.insert_edge(b, a, 2)
+    G.insert_edge(b, c, 1)
+    G.insert_edge(c, s, 6)
+    G.insert_edge(c, g2, 5)
+    G.insert_edge(c, f, 7)
+    G.insert_edge(d, s, 1)
+    G.insert_edge(d, c, 2)
+    G.insert_edge(d, e, 2)
+    G.insert_edge(e, g3, 7)
+    G.insert_edge(f, d, 2)
+    G.insert_edge(f, g3, 8)
+    return G, s, {g1, g2, g3}
+
+
 # https://porkostomus.gitlab.io/img/tc.jpg
 def init_undirected_graph1():
     G = Graph()
