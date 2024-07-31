@@ -22,7 +22,7 @@ def dijkstra(G: Graph, s: Vertex):
     distance: Dict[Vertex, DistanceEntry] = dict()
     """Maps each vertex in G to distance properties (cost, predecessor, visited)."""
 
-    unvisited = MinHeap()
+    unvisited: MinHeap[Int, Vertex] = MinHeap()
     """Priority Queue for ranking the distance of a vertex (key) and said vertex (value)."""
 
     # Declare distance records for other nodes
@@ -57,6 +57,7 @@ def dijkstra(G: Graph, s: Vertex):
     return distance
 
 
+
 if __name__ == "__main__":
     t1 = time.perf_counter()
     path1 = dijkstra(*init_undirected_graph2())
@@ -65,10 +66,11 @@ if __name__ == "__main__":
     path2 = dijkstra(*init_directed_graph2())
     t4 = f"{abs(t3 - time.perf_counter()):.3e}"
     print(f"Time taken\nUG2: {t2}\nDG2: {t4}")
-
     path3 = dijkstra(*init_undirected_graph3())
-    for paths in path1, path2, path3:
-        print("\nNode | Dist | Pred | Visited")
+    path4 = dijkstra(*init_directed_graph3()[:2])
+
+    for paths in path1, path2, path3, path4:
+        print("\nNode | Dist | Pred  | Visited\t|")
         for k in paths:
             path = paths[k]
             print(f"{k.element()}\t|\t"
