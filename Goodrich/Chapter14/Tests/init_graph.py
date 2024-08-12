@@ -1,4 +1,4 @@
-"""Canned examples of directed and undirected Adjacency Map graph instance generators."""
+"""Canned examples of directed and undirected graph instance generators."""
 import random
 import networkx as nx
 NXGraph = nx.classes.graph.Graph

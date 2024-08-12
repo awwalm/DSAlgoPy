@@ -47,7 +47,7 @@ def dijkstra(G: Graph, s: Vertex):
                 if not distance[neighbor].visited:              # If neighbor has not been visited...
                     unvisited.insert(                           # Insert into univisted heap
                         k=distance[neighbor].cost, v=neighbor)
-        distance[cur_vert].visited = True                       # Mark as visited
+            distance[cur_vert].visited = True                   # Mark as visited
         cur_vert = unvisited.remove_min()[1]                    # Choose next minimum-edge vertex
 
     # Marks last-reachable vertex as visited when it has no outgoing edges (see init_directed_graph2())
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     path4 = dijkstra(*init_directed_graph3()[:2])
 
     for paths in path1, path2, path3, path4:
-        print("\nNode | Dist | Pred  | Visited\t|")
+        print("\nNode|  Dist | Pred  | Visited\t|")
         for k in paths:
             path = paths[k]
             print(f"{k.element()}\t|\t"
