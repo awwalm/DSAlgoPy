@@ -53,12 +53,24 @@ def find_path_in_tree(G: Graph, start: Graph.Vertex, goal: Graph.Vertex) -> Tupl
 
 
 if __name__ == "__main__":
-    tree1 = init_tree_graph()
-    tree2 = init_bin_tree_graph()
+    tree1 = init_bin_tree_graph()
+    p1, q1 = None, None
+    p2, q2 = None, None
+    for vert in tree1.vertices():  # [S,A,B,C,D,E,F,G1,G2,G3]
+        if vert.element() == "A": p1 = vert
+        elif vert.element() == "E": q1 = vert
+        elif vert.element() == "S": p2 = vert
+        elif vert.element() == "G3": q2 = vert
 
-    for tree in tree1, tree2:
+    tree2 = init_tree_graph()
+    p3, q3 = None, None
+    for vert in tree2.vertices():  # [S,A,B,C,D,E,F,G,H,I,J,K,L,M]
+        if vert.element() == "K": p3 = vert
+        elif vert.element() == "F": q3 = vert
+
+    for example in (tree1, p1, q1), (tree1, p2, q2), (tree2, p3, q3):
         t1 = time.perf_counter()
-        ucs_table, ucs_path = find_path_in_tree(*tree)
+        ucs_table, ucs_path = find_path_in_tree(*example)
         t2 = f"{abs(t1 - time.perf_counter()):.3e}"
         print(f"\nTime taken: {t2}")
 
@@ -69,6 +81,8 @@ if __name__ == "__main__":
         print("\nNode | Pred | Visited\t|")
         for u in ucs_table:
             path = ucs_table[u]
-            print(f"{u.element()}\t | "
+            print(f" {u.element()}\t | "
                   f"\t{path.predecessor.element() if path.predecessor else '$'}\t| "
                   f"\t{path.visited}\t|")
+
+        print("\n", "="*60)

@@ -192,7 +192,7 @@ def init_bin_tree_graph():
     G.insert_edge(f, g3)  # F - G3
 
     # return G, s, {g1, g2, g3}
-    return G, s, g3
+    return G
 
 
 def init_tree_graph():
@@ -231,6 +231,6 @@ def init_tree_graph():
     G.insert_edge(j, m)  # J - M
 
     # return G, s, {d, k, m}  # Mark some nodes as goals (you can change this)
-    return G, k, f
+    return G
 
 
