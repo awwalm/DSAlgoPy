@@ -18,12 +18,13 @@ def prim(G: Graph, s: Graph.Vertex):
     edge_heap: MinHeap[int, Graph.Edge] = MinHeap()
     MST: List[Graph.Edge] = list()
 
-    # Initialize the heap with edges from the start vertex (and mark it as visited)
+    # Mark start vertex as visited and insert every edge into heap
     visited_vertices.add(s)
     for e in G.incident_edges(s):
         edge_heap.insert(k=e.element(), v=e)
         inserted_edges.add(e)
 
+    # Main loop: choose minimum-weight edge from heap, and add new vertices to MST
     while len(visited_vertices) < len(G.vertices()) and len(edge_heap) > 0:
         min_edge = edge_heap.remove_min()[1]
         u, v = min_edge.endpoints()

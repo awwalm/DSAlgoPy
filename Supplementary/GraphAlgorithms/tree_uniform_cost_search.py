@@ -1,6 +1,7 @@
 """
-Modified Uniform Cost Search (UCS), also known as 'Uninformed A* (A-star) Search'.
-Based on Prof. John Levine: https://www.youtube.com/watch?v=dRMvK76xQJI
+Uniform-Cost Search (UCS) adapted for tree-like graphs.
+Based on UCS by Prof. John Levine: https://www.youtube.com/watch?v=dRMvK76xQJI
+Full explanation: https://stackoverflow.com/a/78889797/13488161
 """
 
 import time
@@ -53,18 +54,18 @@ def find_path_in_tree(G: Graph, start: Graph.Vertex, goal: Graph.Vertex) -> Tupl
 
 
 if __name__ == "__main__":
-    tree1 = init_bin_tree_graph()
-    p1, q1 = None, None
-    p2, q2 = None, None
-    for vert in tree1.vertices():  # [S,A,B,C,D,E,F,G1,G2,G3]
+    p1, p2, p3 = None, None, None   # Start states
+    q1, q2, q3 = None, None, None   # Goal states
+
+    tree1 = init_bin_tree_graph()   # Example 1
+    for vert in tree1.vertices():   # [S,A,B,C,D,E,F,G1,G2,G3]
         if vert.element() == "A": p1 = vert
         elif vert.element() == "E": q1 = vert
         elif vert.element() == "S": p2 = vert
         elif vert.element() == "G3": q2 = vert
 
-    tree2 = init_tree_graph()
-    p3, q3 = None, None
-    for vert in tree2.vertices():  # [S,A,B,C,D,E,F,G,H,I,J,K,L,M]
+    tree2 = init_tree_graph()       # Example 2
+    for vert in tree2.vertices():   # [S,A,B,C,D,E,F,G,H,I,J,K,L,M]
         if vert.element() == "K": p3 = vert
         elif vert.element() == "F": q3 = vert
 
@@ -85,4 +86,4 @@ if __name__ == "__main__":
                   f"\t{path.predecessor.element() if path.predecessor else '$'}\t| "
                   f"\t{path.visited}\t|")
 
-        print("\n", "="*60)
+        print("="*60)
