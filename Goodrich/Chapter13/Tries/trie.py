@@ -49,7 +49,7 @@ class Trie:
                 cur = check                                 # Character match; onto next level
             else:                                           # Mismatch! Return false
                 return False
-        if check and len(check.fast_child_access) == 0:              # Search terminated at leaf node
+        if check and len(check.fast_child_access) == 0:     # Search terminated at leaf node
             return True
         else:                                               # Search terminated at internal node
             return cur.terminal                             # Check if this is a terminal node
