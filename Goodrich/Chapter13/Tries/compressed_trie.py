@@ -4,12 +4,12 @@
 from collections import OrderedDict
 from typing import List, Union
 
-
+# @FIXME: THIS IS AN INEFFICIENT IMMPLEMENTATION THAT STILL RESULTS IN QUADRATIC TIME !!!
 class CompressedTrie:
     """
     Compresses a standard Trie using bottom-up compression from leaf nodes.
 
-    Singleton leaf nodes are marked as 𝗧𝗘𝗥𝗠𝗜𝗡𝗔𝗟 for optimizing space and node reuse.\n
+    Singleton leaf nodes are marked as TERMINAL for optimizing space and node reuse.\n
     Terminal leaves/singletons are registered in the compressed record.\n
     This preserves the terminal flag, and allows partial matching only for insrted strings.\n
     Thusly, positive matches terminating at non-terminal nodes/characters are deemed unsuccessful.
