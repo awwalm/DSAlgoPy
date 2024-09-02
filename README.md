@@ -51,6 +51,8 @@ This project is licensed under the [GNU GPL v3](https://choosealicense.com/licen
 
 ## References
 
+<sub>
+
 1. Necaise, R. D. (2011). <a id="Ran11" href="https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/0470618299">
 _Data Structures and Algorithms using Python_</a>. Hoboken, NJ, USA: Wiley.
 
@@ -126,3 +128,5 @@ Retireved from YouTube: https://www.youtube.com/watch?v=H2vGH_6p6GU
 25. [Ukkonen Visualizer](http://brenden.github.io/ukkonen-animation/)
 
 26. [Applications of Suffix Array and LCPs](https://mediathek.hhu.de/watch/b4d092e2-06ba-4786-abe4-7ffc614b2244#)
+
+</sub>
