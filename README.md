@@ -53,32 +53,32 @@ This project is licensed under the [GNU GPL v3](https://choosealicense.com/licen
 
 <code>
 
-  1.) Necaise, R. D. (2011). <a id="Ran11" href="https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/0470618299">_Data Structures and Algorithms using Python_</a>. Hoboken, NJ, USA: Wiley.
-  2.) Goodrich, M. T., Tamassia, R., & Goldwasser, M. H. (2013). <a id="Mic13" href="https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python-p-9781118290279">_Data Structures and Algorithms in Python_.</a> (B. L. Golub, Ed.) Hoboken, NJ, USA: Wiley.
-  3.) <span id="Ofpy3">**`__future__`** Statement Definitions. Retreived from the Official Python Documentation: </span> https://docs.python.org/3.11/library/__future__.html
-  4.) <span id="Kor23">Korpela, M. (6 August 2023). `overrides`</span>. Retrieved from PyPI: https://pypi.org/project/overrides/
-  5.) Stroud, K. A., & Booth, D. J. (2020). [_Engineering Mathematics_](https://www.amazon.com/Engineering-Mathematics-K-Stroud/dp/1352010275) (8th ed.). London, UK: Red Globe Press (Macmillian).
-  6.) Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). [_Introduction to Algorithms_](https://dl.acm.org/doi/10.5555/1614191) (3rd ed.). Massachusetts, USA: MIT Press.
-  7.) Lutz, M. (2013). [_Learning Python_](https://www.oreilly.com/library/view/learning-python-5th/9781449355722/) (5th ed.). Sebastopol, CA, USA: O'Reilly Media, Inc.
-  8.) Levitin, A. (2012). [_Introduction To The Design & Analysis of Algorithms_](https://www.amazon.com/Introduction-Design-Analysis-Algorithms-3rd/dp/0132316811) (3rd ed.). Essex, UK: Pearson Education.
-  9.) Gusfield, D. (1997). [_Algorithms on Strings, Trees and Sequences: Computer Science and Computational Biology_](https://doi.org/10.1017/CBO9780511574931). Cambridge University Press.
-  10.) Tustumi, W. H. A., Gog, S., Telles, G. P., & Louza, F. A. (2016). [_An improved algorithm for the all-pairs suffixprefix problem_](https://dx.doi.org/10.1016/j.jda.2016.04.002). Journal of Discrete Algorithms, 37(C), 34–43.
-  11.) Kim, D.K., Kim, M. & Park, H. [_Linearized Suffix Tree: an Efficient Index Data Structure with the Capabilities of Suffix Trees and Suffix Arrays_](https://doi.org/10.1007/s00453-007-9061-2). Algorithmica 52, 350–377 (2008).
-  12.) Nong, G., Zhang, S., & Chan, W. H. (2009). _Linear SAIS (Suffix Array Construction by Almost Pure Induced-Sorting)_. 2009 Data Compression Conference (pp. 193-202). Snowbird, UT, USA: IEEE. [doi:10.1109/DCC.2009.42](https://ieeexplore.ieee.org/document/4976463)
-  13.) Li, Z., Li, J., & Huo, H. (2018). _Optimal In-Place Suffix Sorting._ Tsinghua University, IIIS. Beijing: arXiv. [arXiv:1610.08305v6](https://arxiv.org/abs/1610.08305)
-  14.) Guruprasad, H. S. (25 June 2020). _Horspool Algorithm_. Retrieved from YouTube: https://www.youtube.com/watch?v=W4h6555g5qo
-  15.) Kettani, H. (2024). [Space & Time Tradeoffs: Boyer-Moore Algorithm](https://www.collegesidekick.com/study-docs/4797428). _CSC 3323 Analysis of Algorithms_. Morocco.
-  16.) Ramesh, B. (21 April 2020). _Boyer-Moore-Horspool Algorithm_. Retrieved from YouTube: https://youtu.be/4Oj_ESzSNCk
-  17.) Langmead, Ben. (2024). Suffix-based indexing data structures: learning materials. figshare. Collection. [https://doi.org/10.6084/m9.figshare.c.7205547](https://www.youtube.com/playlist?list=PL2mpR0RYFQsDFNyRsTNcWkFTHTkxWREeb)
-  18.) Harris, E. (27 March 2020). _SAIS (Suffix Array Induced Sorting) Part 1_. Retrieved from YouTube: https://www.youtube.com/watch?v=yb0Os_MTU_4
-  19.) Lu, F. (25 March 2024). _Longest Repeated Substring in Linear Time DC3 + LCP_. Retireved from YouTube: https://www.youtube.com/watch?v=H2vGH_6p6GU
-  20.) [Trie - Wikipedia](https://en.wikipedia.org/wiki/Trie)
-  21.) [Suffix Tree - Wikipedia](https://en.wikipedia.org/wiki/Suffix_tree)
-  22.) [Suffix Array - Wikipedia](https://en.wikipedia.org/wiki/Suffix_array)
-  23.) [LCP Array - Wikipedia](https://en.wikipedia.org/wiki/LCP_array)
-  24.) [Suffix Array and LCP Generator](https://visualgo.net/en/suffixarray)
-  25.) [Ukkonen Visualizer](http://brenden.github.io/ukkonen-animation/)
-  26.) [Applications of Suffix Array and LCPs](https://mediathek.hhu.de/watch/b4d092e2-06ba-4786-abe4-7ffc614b2244#)
+  1.) Necaise, R. D. (2011). <a id="Ran11" href="https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/0470618299">_Data Structures and Algorithms using Python_</a>. Hoboken, NJ, USA: Wiley.<br>
+  2.) Goodrich, M. T., Tamassia, R., & Goldwasser, M. H. (2013). <a id="Mic13" href="https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python-p-9781118290279">_Data Structures and Algorithms in Python_.</a> (B. L. Golub, Ed.) Hoboken, NJ, USA: Wiley.<br>
+  3.) <span id="Ofpy3">**`__future__`** Statement Definitions. Retreived from the Official Python Documentation: </span> https://docs.python.org/3.11/library/__future__.html <br>
+  4.) <span id="Kor23">Korpela, M. (6 August 2023). `overrides`</span>. Retrieved from PyPI: https://pypi.org/project/overrides/ <br>
+  5.) Stroud, K. A., & Booth, D. J. (2020). [_Engineering Mathematics_](https://www.amazon.com/Engineering-Mathematics-K-Stroud/dp/1352010275) (8th ed.). London, UK: Red Globe Press (Macmillian). <br>
+  6.) Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). [_Introduction to Algorithms_](https://dl.acm.org/doi/10.5555/1614191) (3rd ed.). Massachusetts, USA: MIT Press. <br>
+  7.) Lutz, M. (2013). [_Learning Python_](https://www.oreilly.com/library/view/learning-python-5th/9781449355722/) (5th ed.). Sebastopol, CA, USA: O'Reilly Media, Inc. <br>
+  8.) Levitin, A. (2012). [_Introduction To The Design & Analysis of Algorithms_](https://www.amazon.com/Introduction-Design-Analysis-Algorithms-3rd/dp/0132316811) (3rd ed.). Essex, UK: Pearson Education. <br>
+  9.) Gusfield, D. (1997). [_Algorithms on Strings, Trees and Sequences: Computer Science and Computational Biology_](https://doi.org/10.1017/CBO9780511574931). Cambridge University Press. <br>
+  10.) Tustumi, W. H. A., Gog, S., Telles, G. P., & Louza, F. A. (2016). [_An improved algorithm for the all-pairs suffixprefix problem_](https://dx.doi.org/10.1016/j.jda.2016.04.002). Journal of Discrete Algorithms, 37(C), 34–43. <br>
+  11.) Kim, D.K., Kim, M. & Park, H. [_Linearized Suffix Tree: an Efficient Index Data Structure with the Capabilities of Suffix Trees and Suffix Arrays_](https://doi.org/10.1007/s00453-007-9061-2). Algorithmica 52, 350–377 (2008). <br>
+  12.) Nong, G., Zhang, S., & Chan, W. H. (2009). _Linear SAIS (Suffix Array Construction by Almost Pure Induced-Sorting)_. 2009 Data Compression Conference (pp. 193-202). Snowbird, UT, USA: IEEE. [doi:10.1109/DCC.2009.42](https://ieeexplore.ieee.org/document/4976463) <br>
+  13.) Li, Z., Li, J., & Huo, H. (2018). _Optimal In-Place Suffix Sorting._ Tsinghua University, IIIS. Beijing: arXiv. [arXiv:1610.08305v6](https://arxiv.org/abs/1610.08305) <br>
+  14.) Guruprasad, H. S. (25 June 2020). _Horspool Algorithm_. Retrieved from YouTube: https://www.youtube.com/watch?v=W4h6555g5qo <br>
+  15.) Kettani, H. (2024). [Space & Time Tradeoffs: Boyer-Moore Algorithm](https://www.collegesidekick.com/study-docs/4797428). _CSC 3323 Analysis of Algorithms_. Morocco. <br>
+  16.) Ramesh, B. (21 April 2020). _Boyer-Moore-Horspool Algorithm_. Retrieved from YouTube: https://youtu.be/4Oj_ESzSNCk <br>
+  17.) Langmead, Ben. (2024). Suffix-based indexing data structures: learning materials. figshare. Collection. [https://doi.org/10.6084/m9.figshare.c.7205547](https://www.youtube.com/playlist?list=PL2mpR0RYFQsDFNyRsTNcWkFTHTkxWREeb) <br>
+  18.) Harris, E. (27 March 2020). _SAIS (Suffix Array Induced Sorting) Part 1_. Retrieved from YouTube: https://www.youtube.com/watch?v=yb0Os_MTU_4 <br>
+  19.) Lu, F. (25 March 2024). _Longest Repeated Substring in Linear Time DC3 + LCP_. Retireved from YouTube: https://www.youtube.com/watch?v=H2vGH_6p6GU <br>
+  20.) [Trie - Wikipedia](https://en.wikipedia.org/wiki/Trie) <br>
+  21.) [Suffix Tree - Wikipedia](https://en.wikipedia.org/wiki/Suffix_tree) <br>
+  22.) [Suffix Array - Wikipedia](https://en.wikipedia.org/wiki/Suffix_array) <br>
+  23.) [LCP Array - Wikipedia](https://en.wikipedia.org/wiki/LCP_array) <br>
+  24.) [Suffix Array and LCP Generator](https://visualgo.net/en/suffixarray) <br>
+  25.) [Ukkonen Visualizer](http://brenden.github.io/ukkonen-animation/) <br>
+  26.) [Applications of Suffix Array and LCPs](https://mediathek.hhu.de/watch/b4d092e2-06ba-4786-abe4-7ffc614b2244#) <br>
 
 </code>
 
