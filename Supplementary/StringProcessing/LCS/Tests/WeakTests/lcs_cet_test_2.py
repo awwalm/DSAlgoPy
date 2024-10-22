@@ -24,7 +24,7 @@ def TP_LCS(A: str, B: str):
 
 # Common Element Tabulation component
 def CET_LCS(A: str, B: str):
-    CET : list[list, list] = [              # Common Element Table
+    CET : list[list | list] = [              # Common Element Table
         [j for j in range(len(A))], [deque() for _ in range(len(A))] ]
     PM : list[int] = []                     # Partial/Potential Matches
 
