@@ -8,8 +8,8 @@ class MyTestCase(unittest.TestCase):
     def setUp(self):
         self.pairs = [
             ("ABCBDAB", "BDCAB"),  # BDAB (n=4)
-            ("GTTCCTAATA", "CGATAATTGAGA"),  # GTTTAA (6)
-            ("GTTCCTAAT", "CGATAATTGAG"),  # GTTTA (5)
+            ("GTTCCTAATA", "CGATAATTGAGA"),  # GTTTAA or GTAATA (6)
+            ("GTTCCTAAT", "CGATAATTGAG"),  # GTTTA or GTAAT (5)
             ("12345", "23415"),  # 2345 (4)
             ("123", "1323"),  # 123 (3)
             ("126548", "216544"),  # 2654 or 1654 (4)
@@ -18,7 +18,7 @@ class MyTestCase(unittest.TestCase):
             ("ABCDGH", "AEDFHR"),  # ADH (3)
             ("ABCDE", "ACE"),  # ACE (3)
             ("hofubmnylkra", "pqhgxgdofcvmr"),  # hofmr (5)
-            ("oxcpqrsvwf", "shmtulqrypy"),  # Currently unable to detect subsequence "qr"
+            ("oxcpqrsvwf", "shmtulqrypy"),  # "qr"
             ("ABC", "DEF"),  # ∅ (0)
         ]
 
@@ -34,7 +34,7 @@ class MyTestCase(unittest.TestCase):
             (3, "ADH"),
             (3, "ACE"),
             (5, "hofmr"),
-            (2, "qr"),  # edge case
+            (2, "qr"),  # crucial edge case
             (0, ""),
         ]
 
